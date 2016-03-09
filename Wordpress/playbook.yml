@@ -39,7 +39,7 @@
         groupname="Servers"
       with_flattened: provisioned.servers
 
-    - name: Install Wordpress
-      host: Servers
-      roles:
-        - wordpress
+- name: Install Wordpress
+  hosts: Servers
+  roles:
+    - wordpress
