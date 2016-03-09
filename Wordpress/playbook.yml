@@ -18,13 +18,15 @@
   hosts: localhost
   connection: local
   gather_facts: true
+  vars:
+    pswd: C35vqNvmkIuQ
   tasks:
 
     - name: Provision a Ubuntu Server
       clc_server:
         name: "{{server_name}}"
         template: ubuntu-14-64
-        password: 'C35vqNvmkIuQ'
+        password: "{{pswd}}"
         count: 1
         location: 'UC1'
         cpu: 1 # Default -- not necessary
@@ -37,6 +39,7 @@
         name={{ item.name }}
         ansible_ssh_host={{ item.ipaddress }}
         ansible_ssh_user=root
+        ansible_ssh_pass="{{pswd}}"
         groupname="Servers"
       with_flattened: provisioned.servers
 
