@@ -1,0 +1,89 @@
+name: Wordpress
+description: Most popular blogging software WordPress can be built in your CenturyLink cloud within minutes. WordPress is most extensively used software to host blogs and even applications. With the high contribution by open source community, it provides a wide range of free themes and plugins to suit your blog or app and can help you host your business pretty quickly. <a href="https://wordpress.org/" target="_blank">Know more about WordPress.</a>
+imagePath: https://s.w.org/style/images/wp-header-logo.png?1
+version: 1.2.3
+updateDate: Jan 1, 2016
+public: true
+
+# Allow for single panel fact collection.
+fields:
+
+  # Sample text field
+  - name: instance_name
+    displayName: Instance Name
+    type: text
+    required: true
+    minLength: 1
+    maxLength: 35
+
+  # Sample password field
+  - name: root_password
+    displayName: Root Password
+    type: password
+    required: true
+
+  # Sample numeric field
+  - name: node_count
+    displayName: Cluster Nodes
+    type: number
+    required: true
+    min: 6
+    max: 99
+    step: 3
+
+  # Sample text area field
+  - name: license
+    displayName: License
+    type: textarea
+    required: true
+
+  # Sample server, should load servers based on account alias.
+  - name: master_server
+    displayName: Master Server
+    type: servers
+    required: true
+
+  # Sample servers, should load servers based on account alias.
+  - name: node_servers
+    displayName: Node Servers
+    type: servers
+    multiple: true
+    required: true
+
+  # Sample network, should load networks based on account alias.
+  - name: master_network
+    displayName: Master Network
+    type: networks
+    required: true
+
+  # Sample network, should load networks based on account alias.
+  - name: networks
+    displayName: Networks
+    type: networks
+    multiple: true
+    required: true
+
+# Allow for multi-panel fact collection.
+panels:
+
+  - name: Panel 1 Description
+    fields:
+      - name: instance_name
+        displayName: Instance Name
+        type: text
+        required: true
+        minLength: 1
+        maxLength: 35
+
+  - name: Panel 2 Description
+    fields:
+      - name: root_password
+        displayName: Root Password
+        type: password
+        required: true
+
+tags:
+  - cloud
+  - storage
+  - block
+  - seph
