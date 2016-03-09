@@ -1,0 +1,45 @@
+
+# Copyright 2015 CenturyLink
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+- name: Wordpress Server
+  hosts: localhost
+  gather_facts: true
+  tasks:
+
+    - name: Provision a Ubuntu Server
+      clc_server:
+        name: "{{server_name}}"
+        template: ubuntu-14-64
+        password: 'C35vqNvmkIuQ'
+        count: 1
+        location: 'UC1'
+        cpu: 1 # Default -- not necessary
+        memory: 2 # Default -- not necessary
+        #ttl: 3700
+      register: provisioned
+
+    - name: "Add {{ server_name }} to in-memory Group"
+      add_host:
+        name={{ item.name }}
+        ansible_ssh_host={{ item.ipaddress }}
+        ansible_ssh_user=root
+        groupname="Servers"
+      with_flattened: provisioned.servers
+
+    - name: Install Wordpress
+      host: Servers
+      roles:
+        - wordpress
