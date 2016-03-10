@@ -34,12 +34,12 @@
         #ttl: 3700
       register: provisioned
 
-    - name: wait for ssh to come up on the server
+    - name: Wait for ssh to come up on the server
       wait_for: host={{ item.ipaddress }} port=22 delay=5 timeout=320 state=started
       with_flattened: provisioned.servers
 
 
-    - name: "Add {{ server_name }} to in-memory Group"
+    - name: "Add server to in-memory Group"
       add_host:
         name={{ item.name }}
         ansible_ssh_host={{ item.ipaddress }}
@@ -49,7 +49,7 @@
       with_flattened: provisioned.servers
 
 
-- name: Install Wordpress
+- name: Install Wordpress on server
   hosts: Servers
   roles:
     - wordpress
