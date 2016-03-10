@@ -10,14 +10,14 @@
     - python-mysqldb
     - libmysqlclient-dev
 
-- name: Update MySQL root password for all root accounts 
+- name: Update MySQL root password for all root accounts
   mysql_user:
     name: root
     host: "{{ item }}"
     password: "{{ mysql_root_pass }}"
     state: present
   with_items:
-    - "{{ ansible_hostname }}"
+    #- "{{ ansible_hostname }}"
     - 127.0.0.1
     - ::1
     - localhost
@@ -26,8 +26,8 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    owner: root 
-    group: root 
+    owner: root
+    group: root
     mode: "{{ item.mode | default(644) }}"
   with_items:
     - { src: 'my.cnf.j2', dest: '/etc/mysql/my.cnf' }
@@ -43,7 +43,7 @@
   with_items:
     - localhost
     - "{{ ansible_hostname }}"
- 
+
 - name: Remove the test database
   mysql_db:
     name: test
