@@ -15,6 +15,6 @@
 
 ---
 - name: Install Wordpress
-  hosts: 10.141.19.22
+  hosts: UC1WFADWPTEST03
   roles:
     - wordpress
