@@ -1,0 +1,6 @@
+---
+- name: Build Minecraft Server
+  hosts: localhost
+  connection: local
+  roles:
+     - build_clc_server

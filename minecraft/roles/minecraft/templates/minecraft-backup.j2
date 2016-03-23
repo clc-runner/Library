@@ -1,0 +1,50 @@
+#!/bin/bash
+# vim:filetype=sh
+# {{ ansible_managed }}
+
+set -e
+
+source /etc/default/minecraft
+source "$MINECRAFT_ROOT_DIR/functions"
+
+__full_backup_world(){
+  echo 'Backing up (full)'
+  minecraft_disable_save
+  minecraft_send_command 'save-all'
+  sync
+  sleep 2
+  set +e
+  rsync -avz "${MINECRAFT_RUN_DIR}/${MINECRAFT_LEVEL_NAME}/" "$MINECRAFT_FULL_BACKUP_DIR"
+  if [[ $? -ne 0 ]] ; then
+    minecraft_send_command say 'Backup failed!'
+  fi
+  set -e
+  minecraft_enable_save
+  echo 'Success'
+}
+
+__diff_backup_world(){
+  echo 'Backing up (diff)'
+  minecraft_disable_save
+  minecraft_send_command 'save-all'
+  set +e
+  rdiff-backup -v 9 "${MINECRAFT_RUN_DIR}/${MINECRAFT_LEVEL_NAME}/" "$MINECRAFT_DIFF_BACKUP_DIR"
+  if [[ $? -ne 0 ]] ; then
+    minecraft_send_command say 'Backup failed!'
+  fi
+  set -e
+  minecraft_enable_save
+  echo 'Success'
+}
+
+case "$1" in
+  -h|-?|--help|help)
+    echo "Usage: $(basename $0) (full|diff)"
+    echo
+    echo "run a full or diff backup of minecraft bits"
+    exit 0
+    ;;
+esac
+
+date -u
+__${1:-full}_backup_world

@@ -1,0 +1,18 @@
+---
+- name: "Check if Java is installed"
+  shell: which java
+  register: check_java
+  ignore_errors: true
+  tags:
+    - java
+
+- name: "Add java repo if Java isn't installed"
+  apt_repository: repo='ppa:webupd8team/java' state=present
+  when: check_java.rc != 0
+
+- name: "Install OpenJDK because it's not installed"
+  apt: name=openjdk-7-jre-headless state=present
+  sudo: yes
+  when: check_java.rc != 0
+  tags:
+    - java

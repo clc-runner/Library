@@ -1,0 +1,4 @@
+- hosts: MINECRAFT 
+  gather_facts: true
+  roles:
+    - java

@@ -1,0 +1,16 @@
+---
+- name: restart minecraft
+  debug: msg="simulating restart with stop and start"
+  notify:
+  - stop minecraft
+  - start minecraft
+
+- name: stop minecraft
+  service: 
+    name: minecraft 
+    state: stopped
+
+- name: start minecraft
+  service: 
+    name: minecraft
+    state: started

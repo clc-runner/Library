@@ -1,0 +1,20 @@
+#!/bin/bash
+# {{ ansible_managed }}
+
+set -o allexport
+source /etc/default/minecraft
+set +o allexport
+
+minecraft_send_command(){
+  tmux send -t "$MINECRAFT_TMUX_SESSION" "$1" ENTER
+}
+
+minecraft_disable_save(){
+  minecraft_send_command 'say About to run a backup!'
+  minecraft_send_command 'save-off'
+}
+
+minecraft_enable_save(){
+  minecraft_send_command 'save-on'
+  minecraft_send_command 'say Backup complete!'
+}

@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+# vim:filetype=sh
+JAVA_OPTS="{{ minecraft_java_opts }}"
+MINECRAFT_DEFAULTS="{{ minecraft_server_defaults }}"
+MINECRAFT_JAR="minecraft_server.{{ minecraft_server_version }}.jar"
+MINECRAFT_ROOT_DIR="{{ minecraft_root_dir }}"
+MINECRAFT_TMUX_SESSION='{{ minecraft_tmux_session_name }}'
+MINECRAFT_LEVEL_NAME='{{ minecraft_server_properties.level_name | default("world") }}'
+MINECRAFT_RUN_DIR="{{ minecraft_root_dir }}/run"
+MINECRAFT_FULL_BACKUP_DIR="{{ minecraft_root_dir }}/backup/full"
+MINECRAFT_DIFF_BACKUP_DIR="{{ minecraft_root_dir }}/backup/diff"

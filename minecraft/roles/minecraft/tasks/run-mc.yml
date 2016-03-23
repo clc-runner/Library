@@ -1,0 +1,16 @@
+---
+
+- name: create minecraft upstart script
+  template:
+    src: minecraft-upstart.conf.j2
+    dest: /etc/init/minecraft.conf
+    owner: "{{ minecraft_user}}"
+    group: "{{ minecraft_group }}"
+    mode: 0644
+  notify: restart minecraft
+
+- name: ensure minecraft is up
+  service:
+    name: minecraft
+    state: started
+    enabled: yes

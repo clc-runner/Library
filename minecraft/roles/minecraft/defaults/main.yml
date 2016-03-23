@@ -1,0 +1,64 @@
+---
+minecraft_user: minecraft
+minecraft_group: minecraft
+minecraft_root_dir: /opt/minecraft
+minecraft_server_version: 1.8.7
+minecraft_jar: https://s3.amazonaws.com/Minecraft.Download/versions/{{ minecraft_server_version }}/minecraft_server.{{ minecraft_server_version }}.jar
+# Name of the tmux session
+minecraft_tmux_session_name: "default"
+
+# JAVA_OPTS passed when running the server
+minecraft_java_opts: "-Xmx1G -Xms1G -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalPacing -XX:ParallelGCThreads=2"
+
+# Server default options
+minecraft_server_defaults: "-o true"
+
+# The user with all the powers, included in ops.txt
+minecraft_overlord_user: ""
+
+# Effectively the content of ops.txt
+minecraft_ops: []
+
+# All of the server properties wheee
+minecraft_server_properties: {}
+# e.g.:
+#  motd: Best Minecraft Server 200 Points
+#  "level-name": amaze
+
+# Upstart-specific settings
+minecraft_upstart_kill_timeout: 120
+minecraft_upstart_respawn_limit: 3 120
+
+# server.properties
+allow-flight: false
+allow-nether: true
+announce-player-achievements: true
+difficulty: 1
+enable-command-block: false
+enbale-query: false
+enable-rcon: false
+force-gamemode: false
+gamemode: 0
+generate-structures: true
+generator-settings:
+hardcore: false
+level-seed:
+level-name: ChocolateCremePies
+level-type: DEFAULT
+max-build-height: 256
+max-players: 20
+motd: Welcome to Thunderdome!
+online-mode: true
+op-permission-level: 2
+player-idle-timeout: 0
+pvp: true
+resource-pack:
+server-ip: "{{ hostvars[groups['MINECRAFT'][0]]['ansible_eth0']['ipv4']['address'] }}"
+server-port: 25565
+snooper-enabled: true
+spawn-animals: true
+spawn-monsters: true
+spawn-npcs: true
+spawn-protection: 16
+view-distance: 8
+white-list: false

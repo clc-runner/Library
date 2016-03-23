@@ -1,0 +1,34 @@
+---
+- name: Create a minecraft group
+  group:
+    name: "{{ minecraft_group }}"
+
+- name: Create a minecraft user
+  user:
+    name: "{{ minecraft_user }}"
+    group: "{{ minecraft_group }}"
+
+- name: Create minecraft directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ minecraft_user}}"
+    group: "{{ minecraft_group }}"
+    mode: 0755
+  with_items:
+  - "{{ minecraft_root_dir }}"
+  - "{{ minecraft_root_dir }}/jars"
+  - "{{ minecraft_root_dir }}/bin"
+  - "{{ minecraft_root_dir }}/run"
+  - "{{ minecraft_root_dir }}/run/world"
+  - "{{ minecraft_root_dir }}/backup"
+  - "{{ minecraft_root_dir }}/backup/diff"
+  - "{{ minecraft_root_dir }}/backup/full"
+
+- name: Download minecraft executable
+  get_url:
+    url: "{{ minecraft_jar }}"
+    dest: "{{ minecraft_root_dir }}/jars/{{ minecraft_server_version }}.jar"
+    owner: "{{ minecraft_user}}"
+    group: "{{ minecraft_group }}"
+    mode: 0644

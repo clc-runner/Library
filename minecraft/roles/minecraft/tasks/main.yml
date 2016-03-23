@@ -1,0 +1,18 @@
+---
+- include: server-rereqs.yml
+  tags:
+    - server-req
+
+- include: install-mc.yml
+  tags:
+    - install-mc
+
+- include: cfg-mc.yml
+  tags:
+    - cfg-mc
+
+- include: run-mc.yml
+  tags:
+    - run-mc
+
+- include: profit.yml

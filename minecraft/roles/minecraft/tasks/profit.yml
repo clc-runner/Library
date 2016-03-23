@@ -1,0 +1,4 @@
+---
+- name: Deliciously tasty goodness
+  debug:
+    msg: "PROFIT!"

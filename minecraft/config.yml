@@ -1,0 +1,12 @@
+name: MineCraft 
+description: Build a MineCraft game server for the lols
+descriptionShort: Build a MineCraft game server for the lols
+public: true
+fields:
+  # Server Password
+  - name: serverpass
+    displayName: Server Password
+    type: password
+    required: true
+    minLength: 1
+    maxLength: 35
