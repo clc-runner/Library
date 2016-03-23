@@ -1,0 +1,3 @@
+---
+- include: provision_server.yml
+- include: haproxy.yml

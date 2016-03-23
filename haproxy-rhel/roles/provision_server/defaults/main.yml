@@ -1,0 +1,12 @@
+server_group: HAProxy
+server_name: HAPXY
+serverpass: P@s$w0Rd!
+server_os: rhel-7-64
+server_count: 1
+cpu_count: 1
+memory_count: 1
+type: standard
+storage_type: standard
+datacenter: VA1
+ports:
+  - "80"

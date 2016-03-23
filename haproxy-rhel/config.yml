@@ -1,0 +1,44 @@
+name: RHEL HAProxy
+description: Build a publicly accessible RHEL server with HAProxy and basic configuration. HAProxy configuration is setup to build a backend configuration based on a CLC Group Name. Frontend is default HTTP.
+descriptionShort: RHEL with HAProxy
+public: true
+
+# Allow for single panel fact collection.
+fields:
+
+  # Sample text field
+  - name: server_group
+    displayName: server_group
+    type: text
+    required: true
+    min: 1
+    
+  - name: backend_group
+    displayName: backend_group
+    type: text
+    required: true
+    min: 1
+
+  # Sample password field
+  - name: root_password
+    displayName: Root Password
+    type: password
+    required: true
+
+  # Sample network, should load networks based on account alias.
+  - name: master_network
+    displayName: Master Network
+    type: networks
+    required: true
+
+  # Sample network, should load networks based on account alias.
+  - name: networks
+    displayName: Networks
+    type: networks
+    multiple: true
+    required: true
+
+tags:
+  - cloud
+  - loadbalancing
+  - rhel

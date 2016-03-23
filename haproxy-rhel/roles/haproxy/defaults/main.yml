@@ -1,0 +1,15 @@
+# haproxy/defaults/main.yml
+
+# haproxy.cfg
+mode: http
+log: global
+retries: 3
+timeout_http_request: 10s
+timeout_queue: 1m
+timeout_connect: 10s
+timeout_client: 1m
+timeout_server: 1m
+timeout_http_keep_alive: 10s
+timeout_check: 10s
+maxconn: 3000
+bind_port: 80

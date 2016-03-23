@@ -1,0 +1,40 @@
+global
+    log         127.0.0.1 local2
+
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        root
+    group       root
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats level admin
+
+defaults
+    mode                    {{ mode }}
+    log                     {{ log }}
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 {{ retries }}
+    timeout http-request    {{ timeout_http_request }}
+    timeout queue           {{ timeout_queue }}
+    timeout connect         {{ timeout_connect }}
+    timeout client          {{ timeout_client }}
+    timeout server          {{ timeout_server }}
+    timeout http-keep-alive {{ timeout_http_keep_alive }}
+    timeout check           {{ timeout_check }}
+    maxconn                 {{ maxconn }}
+
+frontend http-in
+    bind *:{{ bind_port }}
+    default_backend app
+
+backend app
+    balance roundrobin
+    {% for host in groups['{{ backend_group }}'] %}
+        server {{ host }} {{ hostvars[host]['ansible_'+ ansible_default_ipv4.interface].ipv4.address }}:80
+    {% endfor %}

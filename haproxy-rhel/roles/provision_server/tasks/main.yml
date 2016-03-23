@@ -1,0 +1,44 @@
+---
+- name: Create Server Group
+  clc_group:
+    name: "{{ server_group }}"
+    location: "{{ datacenter }}"
+    state: present
+
+- name: "Build {{ server_name }} Servers | Exact Count of {{ server_count }}"
+  clc_server:
+    name: "{{ server_name }}"
+    location: "{{ datacenter }}"
+    template: "{{ server_os }}"
+    password: "{{ serverpass }}"
+    group: "{{ server_group }}"
+    exact_count: "{{ server_count }}"
+    count_group: "{{ server_group }}"
+#    network_id: "{{ network_id }}"
+    cpu: "{{ cpu_count }}"
+    memory: "{{ memory_count }}"
+    type: "{{ type }}"
+    storage_type: "{{ storage_type }}"
+  register: haproxy
+
+- name: Add public ipaddress
+  clc_publicip:
+    server_ids: "{{ item.name }}"
+    ports: "{{ ports }}"
+    state: present
+  with_flattened: haproxy.servers
+
+- name: Give SSH a moment to come up
+  command: sleep 10
+
+- name: Update known_hosts with new servers
+  shell: "ssh-keygen -R {{ item.ipaddress }} && ssh-keyscan -t rsa -H {{ item.ipaddress }} >> ~/.ssh/known_hosts"
+  with_flattened: haproxy.servers
+
+- name: "Add {{ server_name }} Servers to an in-memory Group"
+  add_host:
+    name={{ item.name }}
+    ansible_ssh_host={{ item.ipaddress }}
+    ansible_ssh_user=root
+    groupname="{{ server_group }}"
+  with_flattened: haproxy.servers
