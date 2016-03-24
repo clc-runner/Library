@@ -1,4 +1,3 @@
-
 # Copyright 2015 CenturyLink
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +18,13 @@
   connection: local
   gather_facts: true
   vars:
+    server_name: WRDPRS
+    server_count: 1
     pswd: C35vqNvmkIuQ
+    datacenter_name: UC1
+    def_cpu: 1
+    def_mem: 2
+
   tasks:
 
     - name: Provision Ubuntu Server
@@ -27,16 +32,15 @@
         name: "{{server_name}}"
         template: ubuntu-14-64
         password: "{{pswd}}"
-        count: 1
-        location: 'UC1'
-        cpu: 1 # Default -- not necessary
-        memory: 2 # Default -- not necessary
+        count: "{{server_count}}"
+        location: "{{datacenter_name}}"
+        cpu: "{{def_cpu}}" # Default -- not necessary
+        memory: "{{def_mem}}" # Default -- not necessary
         #ttl: 3700
       register: provisioned
 
     - name: Wait for ssh to come up on the server
-      wait_for: host={{ item.ipaddress }} port=22 delay=5 timeout=320 state=started
-      with_flattened: provisioned.servers
+      command: sleep 30
 
 
     - name: "Add server to in-memory Group"
