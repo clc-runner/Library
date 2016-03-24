@@ -40,6 +40,7 @@ fields:
   - name: server_name
     displayName: Server Name
     type: text
+    required: true
     minLength: 1
     maxLength: 6
 
