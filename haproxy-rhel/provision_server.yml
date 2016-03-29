@@ -1,6 +1,6 @@
 ---
 - name: Build HAProxy server
   hosts: localhost
-  connetion: local
+  connection: local
   roles:
     - provision_server
