@@ -1,8 +1,4 @@
 ---
-- hosts: "{{ backend_group }}"
-  gather_facts: true
-  tasks: []
-
 - hosts: "{{ server_group }}"
   gather_facts: true
   roles:
