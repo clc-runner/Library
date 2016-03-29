@@ -11,31 +11,16 @@ fields:
     displayName: server_group
     type: text
     required: true
-    min: 1
     
   - name: backend_group
     displayName: backend_group
     type: text
     required: true
-    min: 1
 
   # Sample password field
-  - name: root_password
+  - name: serverpass
     displayName: Root Password
     type: password
-    required: true
-
-  # Sample network, should load networks based on account alias.
-  - name: master_network
-    displayName: Master Network
-    type: networks
-    required: true
-
-  # Sample network, should load networks based on account alias.
-  - name: networks
-    displayName: Networks
-    type: networks
-    multiple: true
     required: true
 
 tags:
