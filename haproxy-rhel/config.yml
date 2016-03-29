@@ -10,13 +10,13 @@ author: Runner Team
 fields:
 
   # Sample text field
-  - name: Server Group
-    displayName: server_group
+  - name: server_group
+    displayName: Server Group
     type: text
     required: true
     
-  - name: Backend Group
-    displayName: backend_group
+  - name: backend_group
+    displayName: Backend Group
     type: text
     required: true
 
