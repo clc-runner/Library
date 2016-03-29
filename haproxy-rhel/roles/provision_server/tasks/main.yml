@@ -29,16 +29,13 @@
   with_flattened: haproxy.servers
 
 - name: Give SSH a moment to come up
-  command: sleep 10
-
-- name: Update known_hosts with new servers
-  shell: "ssh-keygen -R {{ item.ipaddress }} && ssh-keyscan -t rsa -H {{ item.ipaddress }} >> ~/.ssh/known_hosts"
-  with_flattened: haproxy.servers
+  command: sleep 30
 
 - name: "Add {{ server_name }} Servers to an in-memory Group"
   add_host:
     name={{ item.name }}
     ansible_ssh_host={{ item.ipaddress }}
     ansible_ssh_user=root
+    ansible_ssh_pass={{ serverpass }}
     groupname="{{ server_group }}"
   with_flattened: haproxy.servers
