@@ -66,7 +66,7 @@ fields:
     
   # Sample network, should load networks based on account alias.
   - name: selectName
-    displayName: selectDisplayName
+    displayName: Select Display Name
     type: select
     required: true
     options:
