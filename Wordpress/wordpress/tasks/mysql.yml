@@ -21,7 +21,7 @@
     - ::1
     - localhost
 
-- name: Copy the templates to their respestive destination
+- name: Copy the templates to their respective destination
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
