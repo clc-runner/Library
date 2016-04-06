@@ -18,28 +18,28 @@ fields:
     inventory: true
     
   # Servers field.
-#  - name: servers_single
-#    displayName: Servers Single (Add To Inventory)
-#    type: servers
-#    required: true
-#    multiple: false
-#    inventory: true
+  - name: servers_single
+    displayName: Servers Single (Add To Inventory)
+    type: servers
+    required: true
+    multiple: false
+    inventory: true
     
   # Servers field.
-#  - name: servers_multiple_props
-#    displayName: Servers (Add To Properties)
-#    type: servers
-#    required: true
-#    multiple: true
-#    inventory: false
+  - name: servers_multiple_props
+    displayName: Servers (Add To Properties)
+    type: servers
+    required: true
+    multiple: true
+    inventory: false
     
-#  # Servers field.
-#  - name: servers_single_props
-#    displayName: Servers Single (Add To Properties)
-#    type: servers
-#    required: true
-#    multiple: false
-#    inventory: false
+  # Servers field.
+  - name: servers_single_props
+    displayName: Servers Single (Add To Properties)
+    type: servers
+    required: true
+    multiple: false
+    inventory: false
 
   # Sample text field
   - name: instance_name
