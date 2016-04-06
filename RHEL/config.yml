@@ -29,7 +29,7 @@ fields:
   #                                       #
   # ------------------------------------- #
 
-- name: server_template
+  - name: server_template
     displayName: Select Operating System
     type: select
     required: true
