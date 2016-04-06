@@ -64,10 +64,10 @@ fields:
     max: 99
 
   # Sample text area field
-#  - name: license
-#    displayName: License
-#    type: textarea
-#    required: true
+  - name: license
+    displayName: License
+    type: textarea
+    required: true
     
   # Sample network, should load networks based on account alias.
 #  - name: selectName
