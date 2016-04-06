@@ -20,7 +20,6 @@
   vars:
     server_name: RHEL5
     server_template: rhel-5-64
-    #ubuntu-14-64
     server_count: 1
     pswd: C35vqNvmkIuQ
     datacenter_name: UC1
