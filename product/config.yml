@@ -10,12 +10,12 @@ public: false
 fields:
 
   # Servers field.
-#  - name: servers_multiple
-#    displayName: Servers (Add To Inventory)
-#    type: servers
-#    required: true
-#    multiple: true
-#    inventory: true
+  - name: servers_multiple
+    displayName: Servers (Add To Inventory)
+    type: servers
+    required: true
+    multiple: true
+    inventory: true
     
   # Servers field.
 #  - name: servers_single
