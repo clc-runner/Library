@@ -10,12 +10,12 @@ public: false
 fields:
 
   # Servers field.
-  - name: servers_multiple
-    displayName: Servers (Add To Inventory)
-    type: servers
-    required: true
-    multiple: true
-    inventory: true
+#  - name: servers_multiple
+#    displayName: Servers (Add To Inventory)
+#    type: servers
+#    required: true
+#    multiple: true
+#    inventory: true
     
   # Servers field.
 #  - name: servers_single
@@ -50,39 +50,39 @@ fields:
     maxLength: 35
   
   # Sample password field
-  - name: root_password
-    displayName: Root Password
-    type: password
-    required: true
+#  - name: root_password
+#    displayName: Root Password
+#    type: password
+#    required: true
     
   # Sample numeric field
-  - name: node_count
-    displayName: Cluster Nodes
-    type: number
-    required: true
-    min: 6
-    max: 99
-    step: 3
+#  - name: node_count
+#    displayName: Cluster Nodes
+#    type: number
+#    required: true
+#    min: 6
+#    max: 99
+#    step: 3
 
   # Sample text area field
-  - name: license
-    displayName: License
-    type: textarea
-    required: true
+#  - name: license
+#    displayName: License
+#    type: textarea
+#    required: true
     
   # Sample network, should load networks based on account alias.
-  - name: selectName
-    displayName: Select Display Name
-    type: select
-    required: true
-    options:
-      - displayName: displayNameOne
-        value: optionValueOne
-      - displayName: displayNameTwo
-        value: optionValueTwo
-        selected: true
-      - displayName: displayNameThree
-        value: optionValueThree
+#  - name: selectName
+#    displayName: Select Display Name
+#    type: select
+#    required: true
+#    options:
+#      - displayName: displayNameOne
+#        value: optionValueOne
+#      - displayName: displayNameTwo
+#        value: optionValueTwo
+#        selected: true
+#      - displayName: displayNameThree
+#        value: optionValueThree
 
 tags:
   - cloud
