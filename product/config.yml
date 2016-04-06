@@ -50,10 +50,10 @@ fields:
     maxLength: 35
   
   # Sample password field
-#  - name: root_password
-#    displayName: Root Password
-#    type: password
-#    required: true
+  - name: root_password
+    displayName: Root Password
+    type: password
+    required: true
     
   # Sample numeric field
 #  - name: node_count
