@@ -70,18 +70,18 @@ fields:
     required: true
     
   # Sample network, should load networks based on account alias.
-#  - name: selectName
-#    displayName: Select Display Name
-#    type: select
-#    required: true
-#    options:
-#      - displayName: displayNameOne
-#        value: optionValueOne
-#      - displayName: displayNameTwo
-#        value: optionValueTwo
-#        selected: true
-#      - displayName: displayNameThree
-#        value: optionValueThree
+  - name: selectName
+    displayName: Select Display Name
+    type: select
+    required: true
+    options:
+      - displayName: displayNameOne
+        value: optionValueOne
+      - displayName: displayNameTwo
+        value: optionValueTwo
+        selected: true
+      - displayName: displayNameThree
+        value: optionValueThree
 
 tags:
   - cloud
