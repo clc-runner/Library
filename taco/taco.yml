@@ -1,0 +1,10 @@
+---
+- name: taco taco taco
+  hosts: all
+  connection: local
+  tasks:
+    - name: nap time
+      pause:
+        minutes: 2
+        prompt: just taking a nap
+

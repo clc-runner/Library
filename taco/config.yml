@@ -1,0 +1,11 @@
+name: Tacos are back 
+description: taco 
+shortDescription: taco
+imagePath: http://info.runner.ctl.io/wp-content/uploads/2016/04/Kubernetes-1.png
+version: 1.0
+updateDate: April 6, 2016
+public: false
+defaultPlaybook: taco.yml 
+author: bmh 
+organization: CenturyLink
+organizationUrl: http://runner.ctl.io
