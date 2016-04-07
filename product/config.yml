@@ -82,6 +82,20 @@ fields:
         selected: true
       - displayName: displayNameThree
         value: optionValueThree
+        
+  - name: multiSelectName
+    displayName: Multi-Select Display Name
+    type: select
+    required: true
+    multiple: true
+    options:
+      - displayName: displayNameOne
+        value: optionValueOne
+      - displayName: displayNameTwo
+        value: optionValueTwo
+        selected: true
+      - displayName: displayNameThree
+        value: optionValueThree
 
 tags:
   - cloud
