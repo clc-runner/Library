@@ -11,7 +11,7 @@ fields:
     
   # Data Center field.
   - name: datacenter
-    displayName: Data Center Picker
+    displayName: Datacenter Picker
     type: datacenters
     required: true
     
