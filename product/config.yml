@@ -9,6 +9,12 @@ public: false
 # Allow for single panel fact collection.
 fields:
     
+  # Data Center field.
+  - name: datacenter
+    displayName: Data Center Picker
+    type: datacenters
+    required: true
+    
   # Groups field.
   - name: group
     displayName: Group Picker
