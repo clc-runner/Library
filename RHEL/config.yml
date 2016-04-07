@@ -3,8 +3,8 @@ description: Create a server with one of the world's most popular server operati
 descriptionShort: Create a Red Hat Enterprise Linux Server in minutes!
 imagePath: http://info.runner.ctl.io/wp-content/uploads/2016/04/RedHat.svg-200.png
 shortDescription: Create a Red Hat Enterprise Linux Server in minutes!
-version: 1.2.3
-updateDate: Jan 1, 2016
+version: 1.1
+updateDate: April 6, 2016
 public: true
 defaultPlaybook: playbook.yml
 author: Chris Kent
