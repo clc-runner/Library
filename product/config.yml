@@ -19,7 +19,7 @@ fields:
   - name: networks
     displayName: Network Picker
     type: networks
-    parent: datacenters
+    parent: datacenter
     required: true
     
   # Groups field.
