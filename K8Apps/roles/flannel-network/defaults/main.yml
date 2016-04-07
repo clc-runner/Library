@@ -1,0 +1,2 @@
+etcd_endpoint: http://127.0.0.1:4001
+flannel_network: 18.16.0.0/16

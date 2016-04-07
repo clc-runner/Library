@@ -1,0 +1,9 @@
+- hosts: master
+  roles:
+    - nameserver  
+    - etcd
+    - flannel
+    - flannel-network
+    - flannel-client
+    - kubernetes
+    - kubernetes-master

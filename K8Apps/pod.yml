@@ -1,0 +1,19 @@
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: Deploy Pod
+     kubernetes:
+       endpoint: "{{ endpoint }}"
+       state: "{{ state }}"
+       model:
+         apiVersion: v1
+         kind: Pod
+         metadata:
+           name: "{{ pod_name }}"
+           namespace: "{{ namespace }}"
+         spec:
+           containers:
+           - image: "{{ image }}"
+             imagePullPolicy: Always
+             name: "{{ container_name }}"
+           restartPolicy: Never

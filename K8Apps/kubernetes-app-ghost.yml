@@ -1,0 +1,50 @@
+- hosts: master
+  tasks:
+  - name: Create Ghost Replication Controller.
+    kubernetes:
+      endpoint: "{{ apiserver_endpoint }}"
+      state: present
+      model:
+        apiVersion: v1
+        kind: ReplicationController
+        metadata:
+          name: "ghost-rc"
+          namespace: default
+        spec:
+          replicas: 1
+          imagePullPolicy: IfNotPresent
+          selector:
+            app: "ghost"
+          template:
+            metadata:
+              labels:
+                app: "ghost"
+            spec:
+              containers:
+              - name: "ghost"
+                image: ghost
+                ports:
+                - containerPort: 2368
+            restartPolicy: Always
+            
+  - name: Create Ghost Service
+    kubernetes:
+      endpoint: "{{ apiserver_endpoint }}"
+      state: present
+      model:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: "ghost-svc"
+          namespace: default
+          labels:
+            app: "ghost"
+        spec:
+          type: NodePort
+          ports:
+          - port: 8080
+            targetPort: 2368
+            protocol: TCP
+            nodePort: 30280
+          selector:
+            app: "ghost"

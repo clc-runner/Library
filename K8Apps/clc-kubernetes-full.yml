@@ -1,0 +1,80 @@
+- hosts: localhost
+  tasks:
+    - name: Generate server root password.
+      command: openssl rand -base64 15
+      register: server_pass
+    
+    - name: Set server password fact.
+      set_fact:
+        server_pass: "{{ server_pass.stdout }}"
+    
+    - name: Create group if needed.
+      clc_group:
+        name: "{{ group }}"
+        location: "{{ datacenter }}"
+        state: present
+    
+    - name: Create new kubernetes server for master deployment.
+      clc_server:
+        name: "K8SM"
+        location: "{{ datacenter }}"
+        template: ubuntu-14-64
+        password: "{{ server_pass }}"
+        count: 1
+        group: "{{ group }}"
+        network_id: "{{ network_id }}"
+        cpu: 1
+        memory: 2
+        type: standard
+        storage_type: standard
+      register: new_inv_master
+      
+    - name: Add new servers to in-memory inventory.
+      add_host:
+        name={{ item.name }}
+        ansible_ssh_host={{ item.ipaddress }}
+        ansible_ssh_user=root
+        ansible_ssh_pass={{ server_pass }}
+        etcd_endpoint=http://{{ item.ipaddress }}:4001 
+        apiserver_endpoint=http://{{ item.ipaddress }}:8080
+        groups=master
+      with_items: new_inv_master.servers
+      
+    - name: Set playbook facts.
+      set_fact:
+        master_ip: "{{ item.ipaddress }}"
+      with_items: new_inv_master.servers
+      
+    - debug: msg="{{ master_ip }}"
+    
+    - name: Create new kubernetes server for node deployment.
+      clc_server:
+        name: "K8SN"
+        location: "{{ datacenter }}"
+        template: ubuntu-14-64
+        password: "{{ server_pass }}"
+        count: 1
+        group: "{{ group }}"
+        network_id: "{{ network_id }}"
+        cpu: 1
+        memory: 2
+        type: standard
+        storage_type: standard
+      register: new_inv_node
+    
+    - name: Add new servers to in-memory inventory.
+      add_host:
+        name={{ item.name }}
+        ansible_ssh_host={{ item.ipaddress }}
+        ansible_ssh_user=root
+        ansible_ssh_pass={{ server_pass }}
+        etcd_endpoint=http://{{ master_ip }}:4001 
+        apiserver_endpoint=http://{{ master_ip }}:8080
+        groups=node
+      with_items: new_inv_node.servers
+    
+    - name: Wait for SSH services be vailable on hosts.
+      command: sleep 30
+
+- include: kubernetes-master.yml
+- include: kubernetes-node.yml

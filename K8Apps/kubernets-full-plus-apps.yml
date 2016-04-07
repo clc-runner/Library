@@ -1,0 +1,9 @@
+- hosts: localhost
+- include: kubernetes-master.yml
+- include: kubernetes-node.yml
+- include: kubernetes-app-wordpress.yml
+- include: kubernetes-app-rocket-chat.yml
+- include: kubernetes-app-ghost.yml
+- include: kubernetes-app-jenkins.yml
+- include: kubernetes-app-joomla.yml
+- include: kubernetes-app-mysql.yml

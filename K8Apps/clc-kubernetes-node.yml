@@ -1,0 +1,39 @@
+- hosts: localhost
+  tasks:
+    - name: Generate server root password
+      command: openssl rand -base64 15
+      register: server_pass
+    
+    - name: Set server password fact.
+      set_fact:
+        server_pass: "{{ server_pass.stdout }}"
+    
+    - name: Create new kubernetes server for node deployment.
+      clc_server:
+        name: "{{ name }}"
+        location: "{{ datacenter }}"
+        template: ubuntu-14-64
+        password: "{{ server_pass }}"
+        count: 1
+        group: "{{ group }}"
+        network_id: "{{ network_id }}"
+        cpu: 4
+        memory: 8
+        type: standard
+        storage_type: standard
+      register: new_inv
+    
+    - name: Add new servers to in-memory inventory.
+      add_host:
+        name={{ item.name }}
+        ansible_ssh_host={{ item.ipaddress }}
+        ansible_ssh_user=root
+        ansible_ssh_pass={{ server_pass }}
+        groups=node
+      with_items: new_inv.servers
+      
+    - name: Wait for SSH process.
+      wait_for: host={{ item.ipaddress }} port=22 delay=5 timeout=320 state=started
+      with_flattened: new_inv.servers
+
+- include: kubernetes-node.yml hosts=node

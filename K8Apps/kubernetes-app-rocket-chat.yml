@@ -1,0 +1,57 @@
+- hosts: master
+  tasks:
+  - name: Create Rocket Chat Replication Controller.
+    kubernetes:
+      endpoint: "{{ apiserver_endpoint }}"
+      state: present
+      model:
+        apiVersion: v1
+        kind: ReplicationController
+        metadata:
+          name: "rocket-chat-rc"
+          namespace: default
+        spec:
+          replicas: 1
+          imagePullPolicy: IfNotPresent
+          selector:
+            app: "rocket-chat"
+          template:
+            metadata:
+              labels:
+                app: "rocket-chat"
+            spec:
+              containers:
+              - name: "mongo"
+                image: mongo
+                ports:
+                - containerPort: 27017
+              - name: "rocket-chat"
+                image: rocket.chat
+                env:
+                - name: MONGO_URL
+                  value: mongodb://127.0.0.1:27017/rocketchat
+                ports:
+                - containerPort: 3000
+            restartPolicy: Always
+            
+  - name: Create Rocket Chat Service
+    kubernetes:
+      endpoint: "{{ apiserver_endpoint }}"
+      state: present
+      model:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: "rocket-chat-svc"
+          namespace: default
+          labels:
+            app: "rocket-chat"
+        spec:
+          type: NodePort
+          ports:
+          - port: 8080
+            targetPort: 3000
+            protocol: TCP
+            nodePort: 30180
+          selector:
+            app: "rocket-chat"

@@ -1,0 +1,14 @@
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: Unschedule Node
+     kubernetes-node:
+       endpoint: "{{ apiserver_endpoint }}"
+       state: present
+       model:
+         apiVersion: v1
+         kind: Node
+         metadata:
+           name: "{{ node_name }}"
+         spec:
+           unschedulable: true

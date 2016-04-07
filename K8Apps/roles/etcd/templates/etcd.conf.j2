@@ -1,0 +1,10 @@
+description "etcd service"
+author "mark ramach"
+
+script
+
+	ETCD_OPTS="--name 'default --data-dir /lib/var/{{ etcd_version }}/data.etcd --listen-client-urls http://0.0.0.0:4001"
+
+	exec etcd $ETCD_OPTS > /var/log/etcd.log
+
+end script

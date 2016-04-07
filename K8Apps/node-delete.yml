@@ -1,0 +1,14 @@
+- hosts: localhost
+  connection: local
+  tasks:
+   - name: Delete Node
+     kubernetes-node:
+       endpoint: "{{ apiserver_endpoint }}"
+       state: absent
+       model:
+         apiVersion: v1
+         kind: Node
+         metadata:
+           name: "{{ node_name }}"
+         spec:
+           unschedulable: true

@@ -1,0 +1,5 @@
+- name: Update resolv.conf with required nameserver entries.
+  template: src=base.j2 dest=/etc/resolvconf/resolv.conf.d/head
+  
+- name: Reload resolv.conf
+  command: resolvconf -u

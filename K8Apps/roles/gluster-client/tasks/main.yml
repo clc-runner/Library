@@ -1,0 +1,8 @@
+- name: Update gluster ppa.
+  command: add-apt-repository ppa:gluster/glusterfs-3.7 -y
+  
+- name: Update packages.
+  command: apt-get update
+  
+- name: Install glusterfs client.
+  apt: name=glusterfs-client state=present

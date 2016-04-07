@@ -1,0 +1,10 @@
+- hosts: node
+  roles:
+    - nameserver
+    - flannel
+    - flannel-client
+    - docker
+    - docker-flannel
+    - gluster-client
+    - kubernetes
+    - kubernetes-node

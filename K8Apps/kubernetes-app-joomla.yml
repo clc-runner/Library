@@ -1,0 +1,62 @@
+- hosts: master
+  tasks:
+  - name: Create Joomla Replication Controller.
+    kubernetes:
+      endpoint: "{{ apiserver_endpoint }}"
+      state: present
+      model:
+        apiVersion: v1
+        kind: ReplicationController
+        metadata:
+          name: "joomla-rc"
+          namespace: default
+        spec:
+          replicas: 1
+          imagePullPolicy: IfNotPresent
+          selector:
+            app: "joomla"
+          template:
+            metadata:
+              labels:
+                app: "joomla"
+            spec:
+              containers:
+              - name: "mariadb"
+                image: mariadb:5
+                env:
+                - name: MYSQL_ROOT_PASSWORD
+                  value: password
+                ports:
+                - containerPort: 3306
+              - name: "joomla"
+                image: joomla
+                env:
+                - name: JOOMLA_DB_HOST
+                  value: 127.0.0.1
+                - name: JOOMLA_DB_PASSWORD
+                  value: password
+                ports:
+                - containerPort: 80
+            restartPolicy: Always
+            
+  - name: Create Joomla Service
+    kubernetes:
+      endpoint: "{{ apiserver_endpoint }}"
+      state: present
+      model:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          name: "joomla-svc"
+          namespace: default
+          labels:
+            app: "joomla"
+        spec:
+          type: NodePort
+          ports:
+          - port: 8080
+            targetPort: 80
+            protocol: TCP
+            nodePort: 30480
+          selector:
+            app: "joomla"

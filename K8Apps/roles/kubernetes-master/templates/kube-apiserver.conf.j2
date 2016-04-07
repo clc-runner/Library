@@ -1,0 +1,10 @@
+description "kube-apiserver service"
+author "mark ramach"
+
+script
+
+	KUBE_APISERVER_OPTS="--address=0.0.0.0 --advertise-address={{ ansible_default_ipv4.address }} --service-cluster-ip-range=192.168.253.0/24 --etcd-servers={{ etcd_endpoint }}"
+
+	exec kube-apiserver $KUBE_APISERVER_OPTS > /var/log/kube-apiserver.log
+
+end script

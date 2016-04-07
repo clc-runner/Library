@@ -1,0 +1,10 @@
+description "kubelet service"
+author "mark ramach"
+
+script
+
+	KUBELET_OPTS="--address=0.0.0.0 --api-servers={{ apiserver_endpoint }} --hostname-override={{ ansible_eth0.ipv4.address }} --allow-privileged={{ allow_privileged }}"
+
+	exec kubelet $KUBELET_OPTS > /var/log/kubelet.log
+
+end script
