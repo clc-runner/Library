@@ -11,14 +11,14 @@ fields:
 
   - name: groups_multiple
     displayName: Groups
-    type: servers
+    type: groups
     required: true
     multiple: true
     
   # Servers field.
   - name: groups_single
     displayName: Groups Single
-    type: servers
+    type: groups
     required: true
     multiple: false
 
