@@ -8,19 +8,12 @@ public: false
 
 # Allow for single panel fact collection.
 fields:
-
-  - name: groups_multiple
-    displayName: Groups
-    type: groups
-    required: true
-    multiple: true
     
-  # Servers field.
-  - name: groups_single
-    displayName: Groups Single
+  # Groups field.
+  - name: group
+    displayName: Group Picker
     type: groups
     required: true
-    multiple: false
 
   # Servers field.
   - name: servers_multiple
