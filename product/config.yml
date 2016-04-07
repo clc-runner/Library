@@ -9,6 +9,19 @@ public: false
 # Allow for single panel fact collection.
 fields:
 
+  - name: groups_multiple
+    displayName: Groups
+    type: servers
+    required: true
+    multiple: true
+    
+  # Servers field.
+  - name: groups_single
+    displayName: Groups Single
+    type: servers
+    required: true
+    multiple: false
+
   # Servers field.
   - name: servers_multiple
     displayName: Servers (Add To Inventory)
