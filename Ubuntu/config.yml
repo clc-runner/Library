@@ -1,0 +1,89 @@
+name: Create Ubuntu Server
+description: Create a server with one of the world's most popular server operating systems!
+descriptionShort: Create a Ubuntu Server in minutes!
+imagePath: http://info.runner.ctl.io/wp-content/uploads/2016/04/ubuntu-logo112-200.png
+shortDescription: Create a Ubuntu Server in minutes!
+version: 1.2.3
+updateDate: Jan 1, 2016
+public: true
+defaultPlaybook: playbook.yml
+author: Chris Kent
+organization: CenturyLink
+organizationUrl: http://runner.ctl.io
+
+# Allow for single panel fact collection.
+fields:
+
+  # ------------------------------------- #
+  #                                       #
+  # By default, the configuration will    #
+  # use the default values. Modify        #
+  # the following values, if you want to  #
+  # change any of the parameters.         #
+  #                                       #
+  # ------------------------------------- #
+
+  # ------------------------------------- #
+  #                                       #
+  # Server Parameters (not required)      #
+  #                                       #
+  # ------------------------------------- #
+
+  - name: server_template
+    displayName: Select Operating System
+    type: select
+    required: true
+    options:
+      - displayName: Ubuntu 12 (64-bit)
+        value: ubuntu-14-64
+        selected: true
+      - displayName: Ubuntu 14 (64-bit)
+        value: ubuntu-14-64
+
+  # Server Password
+  - name: pswd
+    displayName: Server Password
+    type: password
+    minLength: 1
+    maxLength: 35
+
+  # Server Name
+  - name: server_name
+    displayName: Server Name
+    type: text
+    minLength: 1
+    maxLength: 6
+
+  # Server Count
+  - name: server_count
+    displayName: Server Count
+    type: number
+    minLength: 1
+    maxLength: 5
+
+  # Datacenter Name
+  - name: datacenter_name
+    displayName: Datacenter
+    type: text
+    minLength: 2
+    maxLength: 4
+
+  # CPU Count
+  - name: def_cpu
+    displayName: CPU Count
+    type: number
+    minLength: 1
+    maxLength: 3
+
+  # Mem Count
+  - name: def_mem
+    displayName: Memory Count
+    type: number
+    minLength: 1
+    maxLength: 3
+
+
+tags:
+  - blogging
+  - wordpress
+  - social
