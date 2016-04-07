@@ -6,7 +6,7 @@ shortDescription: Kubernetes Clustered Environment with Wordpress, Jenkins, Rock
 version: 1.0
 updateDate: April 6, 2016
 public: false
-defaultPlaybook: kubernetes-full-plus-apps.yml
+defaultPlaybook: clc-kubernetes-full-plus-apps.yml
 author: Chris Kent
 organization: CenturyLink
 organizationUrl: http://runner.ctl.io
