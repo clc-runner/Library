@@ -1,7 +1,7 @@
 name: Red Hat Enterprise Linux Server
 description: Create a server with one of the world's most popular server operating systems!
 descriptionShort: Create a Red Hat Enterprise Linux Server in minutes!
-imagePath: http://info.runner.ctl.io/wp-content/uploads/2016/04/RedHat.svg-small.png
+imagePath: http://info.runner.ctl.io/wp-content/uploads/2016/04/RedHat.svg-200.png
 shortDescription: Create a Red Hat Enterprise Linux Server in minutes!
 version: 1.2.3
 updateDate: Jan 1, 2016
@@ -36,9 +36,9 @@ fields:
     options:
       - displayName: RHEL 5 (64-bit)
         value: rhel-5-64
+        selected: true
       - displayName: RHEL 6 (64-bit)
         value: rhel-6-64
-        selected: true
       - displayName: RHEL 7 (64-bit)
         value: rhel-7-64
 

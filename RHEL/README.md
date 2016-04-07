@@ -1,9 +1,8 @@
 
-![Certified Runner Job](http://info.runner.ctl.io/wp-content/uploads/2016/03/Github-Header.jpg)
+<!--![Certified Runner Job](http://info.runner.ctl.io/wp-content/uploads/2016/03/Github-Header.jpg)-->
 
 
-# Red Hat Linux Server
-![RHEL Logo](http://info.runner.ctl.io/wp-content/uploads/2016/04/RedHat.svg-small.png)
+![RHEL Logo](http://info.runner.ctl.io/wp-content/uploads/2016/04/RedHat.svg-200.png)
 
 Create a server with one of the world's most popular server operating systems! [Know more about Red Hat Enterprise Linux.](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) <br>
 
@@ -19,7 +18,7 @@ ___
 ___
 
 ### Resources Provisioned
-This job provisions (1) Virtual Machine (VM) with Red Hat Enterprise Linux within your servers Default Group and datacenter, unless you specify differently. The VM, by default, has 1 CPU and 1GB Memory. This can be changed and the cost associated with these different configurations will be incurred on your monthly billing. **Your account will be charged for the VM - based on usage.**
+This job provisions (1) Virtual Machine (VM) with Red Hat Enterprise Linux within your servers Default Group and datacenter, unless you specify differently. The VM, by default, has 1 CPU and 1GB Memory. This can be changed and the cost associated with these different configurations will be incurred on your monthly billing. **Your account will be charged for the VM based on usage.**
 
 For additional pricing information, you can visit either the Pricing Catalog (which requires a Control login) [https://control.ctl.io/pricingcatalog#/pricingCatalog](https://control.ctl.io/pricingcatalog#/pricingCatalog) or our [Estimator](https://www.ctl.io/estimator/) to look at the cost of different configurations.
 
