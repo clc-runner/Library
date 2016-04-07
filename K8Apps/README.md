@@ -2,7 +2,7 @@
 <!--![Certified Runner Job](http://info.runner.ctl.io/wp-content/uploads/2016/03/Github-Header.jpg)-->
 
 
-![K8 w/ Apps](http://info.runner.ctl.io/wp-content/uploads/2016/04/ubuntu-logo112-200.png)
+![K8 w/ Apps](http://info.runner.ctl.io/wp-content/uploads/2016/04/Kubernetes-1.png)
 
 Kubernetes Clustered Environment with Wordpress, Jenkins, RocketChat, Drupal, and More!<br>
 
