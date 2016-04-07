@@ -15,6 +15,13 @@ fields:
     type: datacenters
     required: true
     
+  # Networks field.
+  - name: networks
+    displayName: Network Picker
+    type: networks
+    parent: datacenters
+    required: true
+    
   # Groups field.
   - name: group
     displayName: Group Picker
