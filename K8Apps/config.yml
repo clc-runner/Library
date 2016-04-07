@@ -29,7 +29,7 @@ fields:
   # Group field.
   - name: group
     displayName: Group
-    type: datacenters
+    type: text
     required: true
 
 tags:
