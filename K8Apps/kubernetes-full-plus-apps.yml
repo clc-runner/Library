@@ -7,6 +7,8 @@
       ansible_ssh_host=10.120.45.15
       ansible_ssh_user=root
       ansible_ssh_pass=CDtqzVKdkUV8Aiq9w/RV
+      etcd_endpoint=http://10.120.45.15:4001 
+      apiserver_endpoint=http://10.120.45.15:8080
       groups=master
       
   - name: Add Node To Inventory
