@@ -4,21 +4,21 @@
   - name: Add Master To Inventory
     add_host:
       name=UC1WFADK8SM17
-      ansible_ssh_host=10.120.45.12
+      ansible_ssh_host=10.121.41.12
       ansible_ssh_user=root
       ansible_ssh_pass=CDtqzVKdkUV8Aiq9w/RV
-      etcd_endpoint=http://10.120.45.12:4001 
-      apiserver_endpoint=http://10.120.45.12:8080
+      etcd_endpoint=http://10.121.41.12:4001 
+      apiserver_endpoint=http://10.121.41.12:8080
       groups=master
       
   - name: Add Node To Inventory
     add_host:
       name=UC1WFADK8SN46
-      ansible_ssh_host=10.120.45.13
+      ansible_ssh_host=10.121.41.13
       ansible_ssh_user=root
       ansible_ssh_pass=CDtqzVKdkUV8Aiq9w/RV
-      etcd_endpoint=http://10.120.45.12:4001 
-      apiserver_endpoint=http://10.120.45.12:8080
+      etcd_endpoint=http://10.121.41.12:4001 
+      apiserver_endpoint=http://10.121.41.12:8080
       groups=node
 
 - include: kubernetes-master.yml
