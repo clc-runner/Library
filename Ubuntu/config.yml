@@ -30,10 +30,10 @@ organizationUrl: http://runner.ctl.io
   # ------------------------------------- #
 
 # Allow for multi-panel fact collection.
-panels:
-
-  - name: Server Location
-    fields:
+# panels:
+#
+#   - name: Server Location
+#     fields:
 
       # Data Center Name
       - name: datacenter_name
@@ -55,9 +55,9 @@ panels:
         required: true
 
 
-
-  - name: Server Type
-    fields:
+  #
+  # - name: Server Type
+  #   fields:
 
       - name: server_template
         displayName: Select Operating System
@@ -71,9 +71,9 @@ panels:
             value: ubuntu-14-64
 
 
-
-  - name: Server Information
-    fields:
+  # 
+  # - name: Server Information
+  #   fields:
       # Server Password
       - name: pswd
         displayName: Server Password
