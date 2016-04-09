@@ -30,9 +30,9 @@ fields:
   # ------------------------------------- #
 
 # Allow for multi-panel fact collection.
-panels:
+#panels:
 
-  - name: Server Location
+  #- name: Server Location
     fields:
 
       # Data Center Name
@@ -56,8 +56,8 @@ panels:
 
 
 
-  - name: Server Type
-    fields:
+  # - name: Server Type
+  #   fields:
 
       - name: server_template
         displayName: Select Operating System
@@ -72,8 +72,8 @@ panels:
 
 
 
-  - name: Server Information
-    fields:
+  # - name: Server Information
+  #   fields:
       # Server Password
       - name: pswd
         displayName: Server Password
