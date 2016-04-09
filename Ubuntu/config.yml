@@ -12,7 +12,7 @@ organization: CenturyLink
 organizationUrl: http://runner.ctl.io
 
 # Allow for single panel fact collection.
-#fields:
+fields:
 
   # ------------------------------------- #
   #                                       #
