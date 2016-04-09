@@ -36,79 +36,79 @@ fields:
   #   fields:
 
       # Data Center Name
-      - name: datacenter_name
-        displayName: Data Center Picker
-        type: datacenters
-        required: true
+    - name: datacenter_name
+      displayName: Data Center Picker
+      type: datacenters
+      required: true
 
-      # Groups field.
-      - name: server_group
-        displayName: Group Picker
-        type: groups
-        required: true
+    # Groups field.
+    - name: server_group
+      displayName: Group Picker
+      type: groups
+      required: true
 
-        # Networks field.
-      - name: networks
-        displayName: Network Picker
-        type: networks
-        parent: datacenter
-        required: true
+      # Networks field.
+    - name: networks
+      displayName: Network Picker
+      type: networks
+      parent: datacenter
+      required: true
 
 
 
   # - name: Server Type
   #   fields:
 
-      - name: server_template
-        displayName: Select Operating System
-        type: select
-        required: true
-        options:
-          - displayName: Ubuntu 12 (64-bit)
-            value: ubuntu-14-64
-            selected: true
-          - displayName: Ubuntu 14 (64-bit)
-            value: ubuntu-14-64
+    - name: server_template
+      displayName: Select Operating System
+      type: select
+      required: true
+      options:
+        - displayName: Ubuntu 12 (64-bit)
+          value: ubuntu-14-64
+          selected: true
+        - displayName: Ubuntu 14 (64-bit)
+          value: ubuntu-14-64
 
 
 
   # - name: Server Information
   #   fields:
       # Server Password
-      - name: pswd
-        displayName: Server Password
-        type: password
-        minLength: 1
-        maxLength: 35
+    - name: pswd
+      displayName: Server Password
+      type: password
+      minLength: 1
+      maxLength: 35
 
-      # Server Name
-      - name: server_name
-        displayName: Server Name
-        type: text
-        minLength: 1
-        maxLength: 6
+    # Server Name
+    - name: server_name
+      displayName: Server Name
+      type: text
+      minLength: 1
+      maxLength: 6
 
-      # Server Count
-      - name: server_count
-        displayName: Server Count
-        type: number
-        minLength: 1
-        maxLength: 5
+    # Server Count
+    - name: server_count
+      displayName: Server Count
+      type: number
+      minLength: 1
+      maxLength: 5
 
 
-      # CPU Count
-      - name: def_cpu
-        displayName: CPU Count
-        type: number
-        minLength: 1
-        maxLength: 3
+    # CPU Count
+    - name: def_cpu
+      displayName: CPU Count
+      type: number
+      minLength: 1
+      maxLength: 3
 
-      # Mem Count
-      - name: def_mem
-        displayName: Memory Count
-        type: number
-        minLength: 1
-        maxLength: 3
+    # Mem Count
+    - name: def_mem
+      displayName: Memory Count
+      type: number
+      minLength: 1
+      maxLength: 3
 
 
 tags:
