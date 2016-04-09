@@ -30,6 +30,7 @@
     - name: Provision Ubuntu Server
       clc_server:
         name: "{{server_name}}"
+        group: "{{server_group}}"
         template: "{{server_template}}"
         password: "{{pswd}}"
         count: "{{server_count}}"
