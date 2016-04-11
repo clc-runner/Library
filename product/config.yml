@@ -81,6 +81,15 @@ fields:
     required: true
     min: 6
     max: 99
+    
+  # Sample slider field
+  - name: slider
+    displayName: Slider Field
+    type: slider
+    required: true
+    min: 1
+    max: 10
+    default: 4
 
   # Sample text area field
   - name: license
