@@ -51,7 +51,7 @@ fields:
     - name: networks
       displayName: Network Picker
       type: networks
-      parent: datacenter
+      parent: datacenter_name
       required: true
 
 
