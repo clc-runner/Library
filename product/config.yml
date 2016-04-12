@@ -33,6 +33,7 @@ fields:
   - name: servers_multiple
     displayName: Servers (Add To Inventory)
     type: servers
+    parent: datacenter
     required: true
     multiple: true
     inventory: true
