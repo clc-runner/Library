@@ -26,6 +26,7 @@ fields:
   - name: group
     displayName: Group Picker
     type: groups
+    parent: datacenter
     required: true
 
   # Servers field.
