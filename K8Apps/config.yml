@@ -1,6 +1,6 @@
 name: Kubernetes Clustered App Suite
 description: Kubernetes Clustered Environment with Wordpress, Jenkins, RocketChat, Drupal, and More!
-imagePath: http://info.runner.ctl.io/wp-content/uploads/2016/04/Kubernetes-1.png
+imagePath: https://info.runner.ctl.io/wp-content/uploads/2016/04/Kubernetes-1.png
 shortDescription: Kubernetes Clustered Environment with Wordpress, Jenkins, RocketChat, Drupal, and More!
 version: 1.0
 updateDate: April 6, 2016
