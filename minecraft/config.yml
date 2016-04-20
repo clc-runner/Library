@@ -1,6 +1,6 @@
 name: MineCraft 
 description: Build a MineCraft game server for the lols
-descriptionShort: Build a MineCraft game server for the lols
+shortDescription: Build a MineCraft game server for the lols
 public: true
 fields:
   # Server Password
