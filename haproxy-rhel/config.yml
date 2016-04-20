@@ -1,6 +1,6 @@
 name: RHEL HAProxy
 description: Build a publicly accessible RHEL server with HAProxy and basic configuration. HAProxy configuration is setup to build a backend configuration based on a CLC Group Name. Frontend is default HTTP.
-descriptionShort: RHEL with HAProxy
+shortDescription: RHEL with HAProxy
 public: true
 organization: CenturyLink
 organizationUrl: https://runner.ctl.io
