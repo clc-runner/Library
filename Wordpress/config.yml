@@ -1,6 +1,5 @@
 name: WordPress
 description: Most popular blogging software WordPress can be built in your CenturyLink cloud within minutes. WordPress is most extensively used software to host blogs and even applications. With the high contribution by open source community, it provides a wide range of free themes and plugins to suit your blog or app and can help you host your business pretty quickly. <a href="https://wordpress.org/" target="_blank">Know more about WordPress.</a>
-descriptionShort: Most popular blogging software WordPress can be built in your CenturyLink cloud within minutes.</a>
 imagePath: https://s.w.org/style/images/wp-header-logo.png?1
 shortDescription: Install and Configure WordPress on a New Ubuntu Server
 version: 1.2.3
