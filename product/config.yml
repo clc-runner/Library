@@ -92,6 +92,13 @@ fields:
     min: 1
     max: 10
     default: 4
+    
+  # Sample toggle field
+  - name: toggle
+    displayName: Toggle Field
+    type: toggle
+    required: true
+    default: true
 
   # Sample text area field
   - name: license
