@@ -1,6 +1,6 @@
 name: Red Hat Enterprise Linux Server
 description: Create a server with one of the world's most popular server operating systems!
-imagePath: https://raw.github.com/clc-runner/Assets/blob/master/RedHat.svg-200.png
+imagePath: https://raw.github.com/clc-runner/Assets/master/RedHat.svg-200.png
 shortDescription: Create a Red Hat Enterprise Linux Server in minutes!
 version: 1.1
 updateDate: April 6, 2016
