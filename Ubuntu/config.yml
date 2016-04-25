@@ -1,6 +1,6 @@
 name: Create Ubuntu Server
 description: Create a server with one of the world's most popular server operating systems!
-imagePath: https://github.com/clc-runner/Assets/blob/master/ubuntu-logo112-200.png
+imagePath: https://raw.github.com/clc-runner/Assets/blob/master/ubuntu-logo112-200.png
 shortDescription: Create a Ubuntu Server in minutes!
 version: 1.0
 updateDate: April 6, 2016
