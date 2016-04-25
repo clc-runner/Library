@@ -19,7 +19,6 @@
   gather_facts: true
   vars:
     server_name: RHEL5
-    server_template: rhel-5-64
     server_count: 1
     pswd: C35vqNvmkIuQ
     datacenter_name: UC1
@@ -31,6 +30,7 @@
     - name: Provision RHEL5 Server
       clc_server:
         name: "{{server_name}}"
+        group: "{{server_group}}"
         template: "{{server_template}}"
         password: "{{pswd}}"
         count: "{{server_count}}"
