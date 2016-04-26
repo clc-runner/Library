@@ -4,7 +4,7 @@ imagePath: https://raw.github.com/clc-runner/Assets/master/Kubernetes%20%281%29.
 shortDescription: Kubernetes Clustered Environment with Wordpress, Jenkins, RocketChat, Drupal, and More!
 version: 1.0
 updateDate: April 6, 2016
-public: true
+public: false
 defaultPlaybook: kubernetes-full-plus-apps.yml
 author: Chris Kent
 organization: CenturyLink
