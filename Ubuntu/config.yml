@@ -44,6 +44,7 @@ fields:
     - name: server_group
       displayName: group
       type: groups
+      parent: datacenter_name
       required: true
 
       # Networks field.
