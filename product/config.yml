@@ -66,6 +66,14 @@ fields:
   - name: instance_name
     displayName: Instance Name
     type: text
+    required: true
+    minLength: 1
+    maxLength: 35
+    
+  # Sample text field
+  - name: instance_name_dflt
+    displayName: Instance Name (with default)
+    type: text
     default: DFLT
     required: true
     minLength: 1
@@ -80,6 +88,14 @@ fields:
   # Sample numeric field
   - name: node_count
     displayName: Cluster Nodes
+    type: number
+    required: true
+    min: 6
+    max: 99
+    
+  # Sample numeric field
+  - name: node_count_dftl
+    displayName: Cluster Nodes (with default)
     type: number
     default: 8
     required: true
