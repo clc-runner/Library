@@ -66,6 +66,7 @@ fields:
   - name: instance_name
     displayName: Instance Name
     type: text
+    default: DFLT
     required: true
     minLength: 1
     maxLength: 35
