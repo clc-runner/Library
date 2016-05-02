@@ -1,8 +1,27 @@
-name: MineCraft 
-description: Build a MineCraft game server for the lols
+name: MineCraft
+description: MineCraft is a fun, creative game to play. Run this job if you would like to run your own Minecraft server for you and your friends to play on!
 shortDescription: Build a MineCraft game server for the lols
-public: true
+author: Chaser
+organization: Runner
+organizationUrl: http://runner.ctl.io
+public: false
 fields:
+
+    # ------------------------------------- #
+    #                                       #
+    # By default, the configuration will    #
+    # use the default values. Modify        #
+    # the following values, if you want to  #
+    # change any of the parameters.         #
+    #                                       #
+    # ------------------------------------- #
+
+    # ------------------------------------- #
+    #                                       #
+    # Server Parameters (not required)      #
+    #                                       #
+    # ------------------------------------- #
+
   # Server Password
   - name: serverpass
     displayName: Server Password
@@ -10,3 +29,207 @@ fields:
     required: true
     minLength: 1
     maxLength: 35
+
+  - name: datacenter
+    displayName: Datacenter
+    type: text
+    minLength: 2
+    maxLength: 4
+
+  - name: group_name
+    displayName: Group Name
+    type: text
+    minLength: 1
+    maxLength: 9
+
+  - name: server_name
+    displayName: Server Name
+    type: text
+    minLength: 1
+    maxLength: 6
+
+  - name: def_cpu
+    displayName: CPU Count
+    type: number
+    minLength: 1
+    maxLength: 3
+
+  - name: def_mem
+    displayName: Memory Count
+    type: number
+    minLength: 1
+    maxLength: 3
+
+    # ------------------------------------- #
+    #                                       #
+    # Minecraft Parameters (not required)   #
+    #                                       #
+    # ------------------------------------- #
+
+  - name: minecraft_user
+    displayName: Minecraft User
+    type: text
+    minLength: 4
+    maxLength: 12
+
+  - name: minecraft_group
+    displayName: Minecraft Group
+    type: text
+    minLength: 4
+    maxLength: 12
+
+  - name: minecraft_overlord_user
+    displayName: Overlord User
+    type: text
+    minLength: 4
+    maxLength: 12
+
+  - name: minecraft_upstart_kill_timeout
+    displayName: Upstart Kill Timeout
+    type: number
+    minLength: 1
+    maxLength: 8
+
+  - name: minecraft_upstart_respawn_limit
+    displayName: Upstart Respawn Limit
+    type: number
+    minLength: 1
+    maxLength: 8
+
+  - name: allow-flight
+    displayName: Allow Flight
+    type: toggle
+    default: false
+
+  - name: allow-nether
+    displayName: Allow Nether
+    default: true
+
+  - name: announce-player-achievements
+    displayName: Announce Player Achievements
+    default: true
+
+  - name: difficulty
+    displayName: Difficulty
+    type: number
+    minLength: 1
+    maxLength: 5
+
+  - name: enable-command-block
+    displayName: Enable Command Block
+    default: false
+
+  - name: enbale-query
+    displayName: Enable Query
+    default: false
+
+  - name: enable-rcon
+    displayName: Enable Recon
+    default: false
+
+  - name: force-gamemode
+    displayName: Force GameMode
+    default: false
+
+  - name: gamemode
+    displayName: GameMode
+    type: number
+    minLength: 1
+    maxLength: 5
+
+  - name: generate-structures
+    displayName: Generate Structures
+    default: true
+
+  - name: hardcore
+    displayName: Hardcore
+    default: false
+
+  - name: level-name
+    displayName: Level Name
+    type: text
+    minLength: 1
+    maxLength: 20
+
+  - name: max-build-height
+    displayName: Max Build Height
+    type: number
+    minLength: 1
+    maxLength: 8
+
+  - name: max-players
+    displayName: Max Players
+    type: number
+    minLength: 1
+    maxLength: 4
+
+  - name: motd
+    displayName: Message of the Day
+    type: text
+    minLength: 1
+    maxLength: 150
+
+  - name: online-mode
+    displayName: Online Mode
+    default: true
+
+  - name: op-permission-level
+    displayName: OP Permission Level
+    type: number
+    minLength: 1
+    maxLength: 3
+
+  - name: player-idle-timeout
+    displayName: Player Idle Timeout
+    type: number
+    minLength: 1
+    maxLength: 8
+
+  - name: pvp
+    displayName: PVP
+    default: true
+
+  - name: server-port
+    displayName: Server Port
+    type: number
+    minLength: 1
+    maxLength: 8
+
+  - name: snooper-enabled
+    displayName: Snooper Enabled
+    default: true
+
+  - name: spawn-animals
+    displayName: Spawn Animals
+    default: true
+
+  - name: spawn-monsters
+    displayName: Spawn Monsters
+    default: true
+
+  - name: spawn-npcs
+    displayName: Spawn NPCs
+    default: true
+
+  - name: spawn-protection
+    displayName: Spawn Protection
+    type: number
+    minLength: 1
+    maxLength: 3
+
+  - name: view-distance
+    displayName: View Distance
+    type: number
+    minLength: 1
+    maxLength: 4
+
+  - name: white-list
+    displayName: White List
+    default: false
+
+tags:
+  - minecraft
+  - funsies
+  - lollerskates
+  - gaming
+  - games

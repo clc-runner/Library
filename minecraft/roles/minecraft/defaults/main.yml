@@ -53,7 +53,8 @@ op-permission-level: 2
 player-idle-timeout: 0
 pvp: true
 resource-pack:
-server-ip: "{{ hostvars[groups['MINECRAFT'][0]]['ansible_eth0']['ipv4']['address'] }}"
+#server-ip: "{{ hostvars[groups['MINECRAFT'][0]]['ansible_eth0']['ipv4']['address'] }}"
+server-ip: "{{ hostvars[groups[{{ group_name }}][0]['ansible_eth0']['ipv4']['address'] }}"
 server-port: 25565
 snooper-enabled: true
 spawn-animals: true
