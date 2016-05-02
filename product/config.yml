@@ -81,6 +81,7 @@ fields:
   - name: node_count
     displayName: Cluster Nodes
     type: number
+    default: 8
     required: true
     min: 6
     max: 99
