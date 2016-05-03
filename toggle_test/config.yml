@@ -1,0 +1,165 @@
+name: Super Cool Product Name
+description: This is the description of the super cool product
+shortDescription: This is the short description of the super cool product
+imagePath: https://i.imgur.com/x2KufBj.png
+version: 1.2.3
+updateDate: Jan 1, 2016
+public: false
+
+# Allow for single panel fact collection.
+fields:
+    
+  # Toggle field.
+  - name: useDynamicInventory
+    displayName: Use Dynamic Inventory
+    type: toggle
+    required: true
+    
+  # Data Center field.
+  - name: datacenter
+    displayName: Datacenter Picker
+    type: datacenters
+    required: true
+    
+  # Networks field.
+  - name: networks
+    displayName: Network Picker
+    type: networks
+    parent: datacenter
+    required: true
+    
+  # Groups field.
+  - name: group
+    displayName: Group Picker
+    type: groups
+    parent: datacenter
+    required: true
+
+  # Servers field.
+  - name: servers_multiple
+    displayName: Servers (Add To Inventory)
+    type: servers
+    parent: datacenter
+    required: true
+    multiple: true
+    inventory: true
+    
+  # Servers field.
+  - name: servers_single
+    displayName: Servers Single (Add To Inventory)
+    type: servers
+    required: true
+    multiple: false
+    inventory: true
+    
+  # Servers field.
+  - name: servers_multiple_props
+    displayName: Servers (Add To Properties)
+    type: servers
+    required: true
+    multiple: true
+    inventory: false
+    
+  # Servers field.
+  - name: servers_single_props
+    displayName: Servers Single (Add To Properties)
+    type: servers
+    required: true
+    multiple: false
+    inventory: false
+
+  # Sample text field
+  - name: instance_name
+    displayName: Instance Name
+    type: text
+    required: true
+    minLength: 1
+    maxLength: 35
+    
+  # Sample text field
+  - name: instance_name_dflt
+    displayName: Instance Name (with default)
+    type: text
+    default: DFLT
+    required: true
+    minLength: 1
+    maxLength: 35
+  
+  # Sample password field
+  - name: root_password
+    displayName: Root Password
+    type: password
+    required: true
+    
+  # Sample numeric field
+  - name: node_count
+    displayName: Cluster Nodes
+    type: number
+    required: true
+    min: 6
+    max: 99
+    
+  # Sample numeric field
+  - name: node_count_dftl
+    displayName: Cluster Nodes (with default)
+    type: number
+    default: 8
+    required: true
+    min: 6
+    max: 99
+    
+  # Sample slider field
+  - name: slider
+    displayName: Slider Field
+    type: slider
+    required: true
+    min: 1
+    max: 10
+    default: 4
+    
+  # Sample toggle field
+#  - name: toggle
+#    displayName: Toggle Field
+#    type: toggle
+#    required: true
+#    default: true
+
+  # Sample text area field
+  - name: license
+    displayName: License
+    type: textarea
+    required: true
+    
+  # Sample network, should load networks based on account alias.
+  - name: selectName
+    displayName: Select Display Name
+    type: select
+    required: true
+    options:
+      - displayName: displayNameOne
+        value: optionValueOne
+      - displayName: displayNameTwo
+        value: optionValueTwo
+        selected: true
+      - displayName: displayNameThree
+        value: optionValueThree
+        
+  - name: multiSelectName
+    displayName: Multi-Select Display Name
+    type: select
+    required: true
+    multiple: true
+    options:
+      - displayName: displayNameOne
+        value: optionValueOne
+      - displayName: displayNameTwo
+        value: optionValueTwo
+        selected: true
+      - displayName: displayNameThree
+        value: optionValueThree
+
+tags:
+  - cloud
+  - storage
+  - block
+  - seph
