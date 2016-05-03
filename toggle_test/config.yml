@@ -13,8 +13,7 @@ fields:
   - name: toggleTest
     displayName: Toggle Test
     type: toggle
-    required: true
-    default: true
+    default: false
 
 
 tags:
