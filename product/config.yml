@@ -10,9 +10,9 @@ public: false
 fields:
     
   # Toggle field.
-  - name: datacenter
-    displayName: Datacenter Picker
-    type: datacenters
+  - name: useDynamicInventory
+    displayName: Use Dynamic Inventory
+    type: toggle
     required: true
     
   # Data Center field.
