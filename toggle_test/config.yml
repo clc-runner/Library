@@ -1,0 +1,23 @@
+name: Toggle Test Product
+description: This is the description of the toggle test product
+shortDescription: This is the short description of the toggle test product
+imagePath: https://i.imgur.com/WjuS4XX.png
+version: 3.4.5
+updateDate: Jan 1, 2016
+public: false
+
+# Allow for single panel fact collection.
+fields:
+
+  # Toggle field.
+  - name: toggleTest
+    displayName: Toggle Test
+    type: toggle
+    required: true
+    default: true
+
+tags:
+  - cloud
+  - storage
+  - block
+  - seph

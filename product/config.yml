@@ -9,6 +9,12 @@ public: false
 # Allow for single panel fact collection.
 fields:
     
+  # Toggle field.
+  - name: useDynamicInventory
+    displayName: Use Dynamic Inventory
+    type: toggle
+    required: true
+    
   # Data Center field.
   - name: datacenter
     displayName: Datacenter Picker
