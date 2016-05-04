@@ -49,20 +49,18 @@ fields:
   #                                       #
   # ------------------------------------- #
 
-  - name: server_template
-    displayName: Select Operating System
-    type: select
-    required: true
-    options:
-      - displayName: RHEL 5 (64-bit)
-        value: rhel-5-64
-        selected: true
-      - displayName: RHEL 6 (64-bit)
-        value: rhel-6-64
-      - displayName: RHEL 7 (64-bit)
-        value: rhel-7-64
-
-
+    - name: server_template
+      displayName: operating system
+      type: select
+      required: true
+      options:
+        - displayName: RHEL 5 (64-bit)
+          value: rhel-5-64
+          selected: true
+        - displayName: RHEL 6 (64-bit)
+          value: rhel-6-64
+        - displayName: RHEL 7 (64-bit)
+          value: rhel-7-64
 
   # - name: Server Information
   #   fields:
