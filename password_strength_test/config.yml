@@ -12,7 +12,6 @@ fields:
   # Password Strength field.
   - name: password_strength_test
     displayName: Password Strength Test
-    validationMsg: Password Strength Validation Message
     requiredStrength: 4
     dissallowedCharacters: []{}
     type: passwordStrength
