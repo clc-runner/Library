@@ -67,6 +67,7 @@ fields:
   - name: server_name
     displayName: server name
     type: text
+    default: WRDPRS
     minLength: 1
     maxLength: 6
 
@@ -74,6 +75,7 @@ fields:
   - name: pswd
     displayName: server password
     type: password
+    required: true
     minLength: 1
     maxLength: 35
 
@@ -107,36 +109,36 @@ fields:
 
   # Default WordPress Site Name
   - name: website_name
-    displayName: WordPress Site Name (optional)
+    displayName: WordPress Site Name
     type: text
+    required: true
+    default: "www.yoursite.com"
     minLength: 1
     maxLength: 150
 
   # WordPress Directory to Install In
   - name: wordpress_dir
-    displayName: WordPress Install Directory (optional)
+    displayName: WordPress Install Directory
     type: text
+    required: true
+    default: "/var/www"
     minLength: 1
     maxLength: 250
 
-  # Domain/URL for WordPress
-  - name: wordpress_url
-    displayName: WordPress URL (optional)
-    type: text
-    minLength: 1
-    maxLength: 35
-
   # WordPress Username
   - name: wordpress_user
-    displayName: WordPress Username (optional)
+    displayName: WordPress Username
     type: text
+    required: true
+    default: admin
     minLength: 1
     maxLength: 35
 
   # WordPress Password
   - name: wordpress_passwd
-    displayName: WordPress Password (optional)
+    displayName: WordPress Password
     type: password
+    required: true
     minLength: 1
     maxLength: 35
 
