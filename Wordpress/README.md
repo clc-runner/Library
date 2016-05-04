@@ -1,5 +1,5 @@
 
-![Certified Runner Job](http://info.runner.ctl.io/wp-content/uploads/2016/03/Github-Header.jpg)
+<!-- ![Certified Runner Job](http://info.runner.ctl.io/wp-content/uploads/2016/03/Github-Header.jpg) -->
 
 
 # Wordpress + Ubuntu Server
