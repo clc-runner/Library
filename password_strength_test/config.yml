@@ -8,15 +8,13 @@ public: false
 
 # Allow for single panel fact collection.
 fields:
-
-  # Password Strength field.
-  - name: password_strength_test
-    displayName: Password Strength Test
-    validationMsg: Password Strength Validation Message
-    requiredStrength: 4
-    dissallowedCharacters: []{}
-    type: passwordStrength
-    required: true
+- name : password_stength_test
+  displayName: Password Strength Test
+  validationMsg: Password Strength Validation Message
+  requiredStrength: 4
+  dissallowedCharacters: "[]{}"
+  type: passwordStrength
+  required: true
 
 tags:
   - cloud
