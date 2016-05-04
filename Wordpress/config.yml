@@ -1,5 +1,5 @@
 name: WordPress
-description: Most popular blogging software WordPress can be built in your CenturyLink cloud within minutes. WordPress is most extensively used software to host blogs and even applications. With the high contribution by open source community, it provides a wide range of free themes and plugins to suit your blog or app and can help you host your business pretty quickly. <a href="https://wordpress.org/" target="_blank">Know more about WordPress.</a>
+description: Most popular blogging software WordPress can be built in your CenturyLink cloud within minutes. WordPress is most extensively used software to host blogs and even applications. With the high contribution by open source community, it provides a wide range of free themes and plugins to suit your blog or app and can help you host your business pretty quickly.
 imagePath: https://s.w.org/style/images/wp-header-logo.png?1
 shortDescription: Install and Configure WordPress on a New Ubuntu Server
 version: 1.2.3
@@ -8,7 +8,7 @@ public: true
 defaultPlaybook: playbook.yml
 author: Chris Kent
 organization: CenturyLink
-organizationUrl: http://runner.ctl.io
+organizationUrl: http://ctl.io/runner
 
 # Allow for single panel fact collection.
 fields:
@@ -28,79 +28,75 @@ fields:
   #                                       #
   # ------------------------------------- #
 
-  # Server Password
-  - name: pswd
-    displayName: Server Password
-    type: password
-    minLength: 1
-    maxLength: 35
+# - name: Server Location
+#   fields:
+
+    # Data Center Name
+  - name: datacenter_name
+    displayName: location
+    type: datacenters
+    required: true
+
+  # Groups field.
+  - name: server_group
+    displayName: group
+    type: groups
+    parent: datacenter_name
+    required: true
+
+    # Networks field.
+  - name: networks
+    displayName: network
+    type: networks
+    parent: datacenter_name
+    required: true
+
+  # - name: Server Information
+  #   fields:
+
+  # Server Count
+  - name: server_count
+    displayName: number of server to create
+    type: slider
+    required: true
+    min: 1
+    max: 100
+    default: 1
 
   # Server Name
   - name: server_name
-    displayName: Server Name
+    displayName: server name
     type: text
     minLength: 1
     maxLength: 6
 
-  # Server Count
-  - name: server_count
-    displayName: Server Count
-    type: number
-    minLength: 1
-    maxLength: 5
-
-  # Datacenter Name
-  - name: datacenter_name
-    displayName: Datacenter
-    type: text
-    minLength: 2
-    maxLength: 4
-
-  # CPU Count
-  - name: def_cpu
-    displayName: CPU Count
-    type: number
-    minLength: 1
-    maxLength: 3
-
-  # Mem Count
-  - name: def_mem
-    displayName: Memory Count
-    type: number
-    minLength: 1
-    maxLength: 3
-
-
-
-
-
-  # ------------------------------------- #
-  #                                       #
-  # MySQL Parameters (not required)       #
-  #                                       #
-  # ------------------------------------- #
-
-  # MySQL Root Password
-  - name: mysql_root_pass
-    displayName: MySQL Root Password
+  # Server Password
+  - name: pswd
+    displayName: server password
     type: password
     minLength: 1
     maxLength: 35
 
-  # Sample numeric field
-  - name: mysql_port
-    displayName: MySQL Port
-    type: number
+
+  # CPU Count
+  - name: def_cpu
+    displayName: server CPU
+    type: slider
+    required: true
     min: 1
-    max: 8
+    max: 16
+    default: 1
+
+  # Mem Count
+  - name: def_mem
+    displayName: server memory (GB)
+    type: slider
+    required: true
+    min: 1
+    max: 128
+    default: 2
 
 
-  # Sample numeric field
-  - name: mysql_bind_address
-    displayName: MySQL Bind Address
-    type: text
-    min: 1
-    max: 20
 
 
   # ------------------------------------- #
@@ -111,46 +107,38 @@ fields:
 
   # Default WordPress Site Name
   - name: website_name
-    displayName: WordPress Site Name
+    displayName: WordPress Site Name (optional)
     type: text
     minLength: 1
     maxLength: 150
 
   # WordPress Directory to Install In
   - name: wordpress_dir
-    displayName: WordPress Install Directory
+    displayName: WordPress Install Directory (optional)
     type: text
     minLength: 1
     maxLength: 250
 
   # Domain/URL for WordPress
   - name: wordpress_url
-    displayName: WordPress URL
+    displayName: WordPress URL (optional)
     type: text
     minLength: 1
     maxLength: 35
 
   # WordPress Username
   - name: wordpress_user
-    displayName: WordPress Username
+    displayName: WordPress Username (optional)
     type: text
     minLength: 1
     maxLength: 35
 
   # WordPress Password
   - name: wordpress_passwd
-    displayName: WordPress Password
+    displayName: WordPress Password (optional)
     type: password
     minLength: 1
     maxLength: 35
-
-  # WordPress Database Name
-  - name: wordpress_db
-    displayName: Wordpress Database Name
-    type: text
-    minLength: 1
-    maxLength: 35
-
 
 tags:
   - blogging
