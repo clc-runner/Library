@@ -8,7 +8,7 @@ public: true
 defaultPlaybook: playbook.yml
 author: Chris Kent
 organization: CenturyLink
-organizationUrl: http://runner.ctl.io
+organizationUrl: http://ctl.io/runner
 
 # Allow for single panel fact collection.
 fields:
