@@ -103,10 +103,12 @@ fields:
 
   - name: allow-nether
     displayName: Allow Nether
+    type: toggle
     default: true
 
   - name: announce-player-achievements
     displayName: Announce Player Achievements
+    type: toggle
     default: true
 
   - name: difficulty
@@ -117,18 +119,22 @@ fields:
 
   - name: enable-command-block
     displayName: Enable Command Block
+    type: toggle
     default: false
 
   - name: enbale-query
     displayName: Enable Query
+    type: toggle
     default: false
 
   - name: enable-rcon
     displayName: Enable Recon
+    type: toggle
     default: false
 
   - name: force-gamemode
     displayName: Force GameMode
+    type: toggle
     default: false
 
   - name: gamemode
@@ -139,10 +145,12 @@ fields:
 
   - name: generate-structures
     displayName: Generate Structures
+    type: toggle
     default: true
 
   - name: hardcore
     displayName: Hardcore
+    type: toggle
     default: false
 
   - name: level-name
@@ -171,6 +179,7 @@ fields:
 
   - name: online-mode
     displayName: Online Mode
+    type: toggle
     default: true
 
   - name: op-permission-level
@@ -187,6 +196,7 @@ fields:
 
   - name: pvp
     displayName: PVP
+    type: toggle
     default: true
 
   - name: server-port
@@ -197,18 +207,22 @@ fields:
 
   - name: snooper-enabled
     displayName: Snooper Enabled
+    type: toggle
     default: true
 
   - name: spawn-animals
     displayName: Spawn Animals
+    type: toggle
     default: true
 
   - name: spawn-monsters
     displayName: Spawn Monsters
+    type: toggle
     default: true
 
   - name: spawn-npcs
     displayName: Spawn NPCs
+    type: toggle
     default: true
 
   - name: spawn-protection
@@ -225,6 +239,7 @@ fields:
 
   - name: white-list
     displayName: White List
+    type: toggle
     default: false
 
 tags:
