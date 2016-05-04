@@ -1,6 +1,6 @@
-name: Password Strength Product
-description: This is the description of the password strength product
-shortDescription: This is the short description of the password strength product
+name: Password Strength Test Product
+description: This is the description of the password strength test product
+shortDescription: This is the short description of the password strength test product
 imagePath: https://i.imgur.com/WjuS4XX.png
 version: 3.4.5
 updateDate: Jan 1, 2016
@@ -12,6 +12,7 @@ fields:
   # Password Strength field.
   - name: password_strength_test
     displayName: Password Strength Test
+    validationMsg: Password Strength Validation Message
     type: passwordStrength
     required: true
 
