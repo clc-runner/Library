@@ -1,6 +1,6 @@
-name: Toggle Test Product
-description: This is the description of the toggle test product
-shortDescription: This is the short description of the toggle test product
+name: Password Strength Product
+description: This is the description of the password strength product
+shortDescription: This is the short description of the password strength product
 imagePath: https://i.imgur.com/WjuS4XX.png
 version: 3.4.5
 updateDate: Jan 1, 2016
@@ -9,12 +9,11 @@ public: false
 # Allow for single panel fact collection.
 fields:
     
-  # Toggle field.
-  - name: toggleTest
-    displayName: Toggle Test
-    type: toggle
+  # Password Strength field.
+  - name: password_strength_test
+    displayName: Password Strength Test
+    type: passwordStrength
     required: true
-    default: true
 
 
 tags:

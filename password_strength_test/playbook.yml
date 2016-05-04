@@ -1,0 +1,4 @@
+- hosts: all
+  tasks:
+    - name: Print OS Name 
+      shell: "uname -a"
