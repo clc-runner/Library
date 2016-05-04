@@ -69,12 +69,14 @@ fields:
   - name: minecraft_user
     displayName: Minecraft User
     type: text
+    default: minecraft
     minLength: 4
     maxLength: 12
 
   - name: minecraft_group
     displayName: Minecraft Group
     type: text
+    default: minecraft
     minLength: 4
     maxLength: 12
 
@@ -87,14 +89,9 @@ fields:
   - name: minecraft_upstart_kill_timeout
     displayName: Upstart Kill Timeout
     type: number
+    default: 120
     minLength: 1
-    maxLength: 8
-
-  - name: minecraft_upstart_respawn_limit
-    displayName: Upstart Respawn Limit
-    type: number
-    minLength: 1
-    maxLength: 8
+    maxLength: 300
 
   - name: allow-flight
     displayName: Allow Flight
@@ -103,128 +100,154 @@ fields:
 
   - name: allow-nether
     displayName: Allow Nether
+    type: toggle
     default: true
 
   - name: announce-player-achievements
     displayName: Announce Player Achievements
+    type: toggle
     default: true
 
   - name: difficulty
     displayName: Difficulty
     type: number
+    default: 1
     minLength: 1
     maxLength: 5
 
   - name: enable-command-block
     displayName: Enable Command Block
+    type: toggle
     default: false
 
   - name: enbale-query
     displayName: Enable Query
+    type: toggle
     default: false
 
   - name: enable-rcon
     displayName: Enable Recon
+    type: toggle
     default: false
 
   - name: force-gamemode
     displayName: Force GameMode
+    type: toggle
     default: false
 
   - name: gamemode
     displayName: GameMode
     type: number
+    default: 0
     minLength: 1
     maxLength: 5
 
   - name: generate-structures
     displayName: Generate Structures
+    type: toggle
     default: true
 
   - name: hardcore
     displayName: Hardcore
+    type: toggle
     default: false
 
   - name: level-name
     displayName: Level Name
     type: text
+    default: ChocolateCremePies
     minLength: 1
     maxLength: 20
 
   - name: max-build-height
     displayName: Max Build Height
     type: number
+    default: 256
     minLength: 1
-    maxLength: 8
+    maxLength: 1024
 
   - name: max-players
     displayName: Max Players
     type: number
+    default: 20
     minLength: 1
-    maxLength: 4
+    maxLength: 50
 
   - name: motd
     displayName: Message of the Day
     type: text
+    default: Welcome to Thunderdome!!
     minLength: 1
     maxLength: 150
 
   - name: online-mode
     displayName: Online Mode
+    type: toggle
     default: true
 
   - name: op-permission-level
     displayName: OP Permission Level
     type: number
+    default: 2
     minLength: 1
-    maxLength: 3
+    maxLength: 5
 
   - name: player-idle-timeout
     displayName: Player Idle Timeout
     type: number
+    default: 0
     minLength: 1
-    maxLength: 8
+    maxLength: 300
 
   - name: pvp
     displayName: PVP
+    type: toggle
     default: true
 
   - name: server-port
     displayName: Server Port
     type: number
+    default: 25565
     minLength: 1
-    maxLength: 8
+    maxLength: 65000
 
   - name: snooper-enabled
     displayName: Snooper Enabled
+    type: toggle
     default: true
 
   - name: spawn-animals
     displayName: Spawn Animals
+    type: toggle
     default: true
 
   - name: spawn-monsters
     displayName: Spawn Monsters
+    type: toggle
     default: true
 
   - name: spawn-npcs
     displayName: Spawn NPCs
+    type: toggle
     default: true
 
   - name: spawn-protection
     displayName: Spawn Protection
     type: number
+    default: 16
     minLength: 1
-    maxLength: 3
+    maxLength: 300
 
   - name: view-distance
     displayName: View Distance
     type: number
+    default: 8
     minLength: 1
-    maxLength: 4
+    maxLength: 20
 
   - name: white-list
     displayName: White List
+    type: toggle
     default: false
 
 tags:
