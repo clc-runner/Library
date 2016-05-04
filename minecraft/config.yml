@@ -27,36 +27,42 @@ fields:
     displayName: Server Password
     type: password
     required: true
+    default:
     minLength: 1
     maxLength: 35
 
   - name: datacenter
     displayName: Datacenter
     type: text
+    default: UC1
     minLength: 2
     maxLength: 4
 
   - name: group_name
     displayName: Group Name
     type: text
+    default: Minecraft
     minLength: 1
     maxLength: 9
 
   - name: server_name
     displayName: Server Name
     type: text
+    default: MCRAFT
     minLength: 1
     maxLength: 6
 
   - name: def_cpu
     displayName: CPU Count
     type: number
+    default: 1
     minLength: 1
     maxLength: 3
 
   - name: def_mem
     displayName: Memory Count
     type: number
+    default: 2
     minLength: 1
     maxLength: 3
 
