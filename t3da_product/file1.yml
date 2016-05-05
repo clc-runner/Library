@@ -1,1 +1,4 @@
-- debug: var=vars_file
+- name: print variable reference
+  debug: var=vars_file
+- name: say something else
+  debug: msg="I just printed {{ vars_file }} to the log."
