@@ -5,4 +5,12 @@ imagePath: https://i.imgur.com/WjuS4XX.png
 version: 0.0.1 
 updateDate: Jan 1, 2016
 public: false
-
+default_playbook: playbook.yml
+fields:
+  # Servers field.
+  - name: servers_single
+    displayName: Servers Single (Add To Inventory)
+    type: servers
+    required: true
+    multiple: false
+    inventory: true
