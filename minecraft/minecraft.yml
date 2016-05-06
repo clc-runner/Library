@@ -1,4 +1,4 @@
-- hosts: MINECRAFT
+- hosts: "{{ group_name }}" 
   gather_facts: true
   roles:
     - minecraft
