@@ -24,6 +24,7 @@
     server_ids: "{{ item.name }}"
     ports:
       - "80"
+    protocol: TCP
     state: present
   with_flattened: mc.servers
 
