@@ -12,7 +12,7 @@
 
 - name: "Install OpenJDK because it's not installed"
   apt: name=openjdk-7-jre-headless state=present
-  sudo: yes
+  become_user: root
   when: check_java.rc != 0
   tags:
     - java

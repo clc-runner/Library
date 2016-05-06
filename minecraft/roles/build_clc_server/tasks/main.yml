@@ -19,19 +19,18 @@
     storage_type: "{{ storage_type }}"
   register: mc
 
-- name: CLC | Add public ipaddress
-  clc_publicip:
-    server_ids: "{{ item.name }}"
-    ports:
-      - "80"
-    protocol: TCP
-    state: present
-  with_flattened: mc.servers
+#- name: CLC | Add public ipaddress
+#  clc_publicip:
+#    server_ids: "{{ item.name }}"
+#    ports:
+#      - "80"
+#    protocol: TCP
+#    state: present
+#  with_flattened: '{{mc.servers}}'
 
 - name: Update known_hosts With New Servers
   shell: "ssh-keygen -R {{ item.ipaddress }} && ssh-keyscan -t rsa -H {{ item.ipaddress }} >> ~/.ssh/known_hosts"
-  with_flattened:
-    - mc.servers
+  with_flattened: '{{mc.servers}}'
 
 - name: Add New Servers to an in-memory Group
   add_host:
@@ -40,4 +39,4 @@
     ansible_ssh_user=root
     ansible_ssh_pass={{ serverpass }}
     groupname={{ group_name }}
-  with_items: mc.servers
+  with_items: '{{mc.servers}}'
