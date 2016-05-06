@@ -30,36 +30,36 @@ minecraft_upstart_kill_timeout: 120
 minecraft_upstart_respawn_limit: 3 120
 
 # server.properties
-allow-flight: false
-allow-nether: true
-announce-player-achievements: true
+allow_flight: false
+allow_nether: true
+announce_player_achievements: true
 difficulty: 1
-enable-command-block: false
-enbale-query: false
-enable-rcon: false
-force-gamemode: false
+enable_command_block: false
+enbale_query: false
+enable_rcon: false
+force_gamemode: false
 gamemode: 0
-generate-structures: true
-generator-settings:
+generate_structures: true
+generator_settings:
 hardcore: false
-level-seed:
-level-name: ChocolateCremePies
-level-type: DEFAULT
-max-build-height: 256
-max-players: 20
+level_seed:
+level_name: ChocolateCremePies
+level_type: DEFAULT
+max_build_height: 256
+max_players: 20
 motd: Welcome to Thunderdome!
-online-mode: true
-op-permission-level: 2
-player-idle-timeout: 0
+online_mode: true
+op_permission_level: 2
+player_idle_timeout: 0
 pvp: true
-resource-pack:
-#server-ip: "{{ hostvars[groups['MINECRAFT'][0]]['ansible_eth0']['ipv4']['address'] }}"
-server-ip: "{{ hostvars[groups[{{ group_name }}][0]['ansible_eth0']['ipv4']['address'] }}"
-server-port: 25565
-snooper-enabled: true
-spawn-animals: true
-spawn-monsters: true
-spawn-npcs: true
-spawn-protection: 16
-view-distance: 8
-white-list: false
+resource_pack:
+#server_ip: "{{ hostvars[groups['MINECRAFT'][0]]['ansible_eth0']['ipv4']['address'] }}"
+server_ip: "{{ hostvars[groups[{{ group_name }}][0]['ansible_eth0']['ipv4']['address'] }}"
+server_port: 25565
+snooper_enabled: true
+spawn_animals: true
+spawn_monsters: true
+spawn_npcs: true
+spawn_protection: 16
+view_distance: 8
+white_list: false
