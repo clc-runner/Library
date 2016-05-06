@@ -4,7 +4,7 @@ storage_type: standard
 cpu: 1
 memory: 2
 datacenter: 'WA1'
-group_name: MINECRAFT
+group_name: Minecraft
 server_name: MCRAFT
 os_template: ubuntu-14-64
 serverpass: 5hm4HYJjNuBFWp46

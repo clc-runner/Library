@@ -35,7 +35,7 @@ allow_nether: true
 announce_player_achievements: true
 difficulty: 1
 enable_command_block: false
-enbale_query: false
+enable_query: false
 enable_rcon: false
 force_gamemode: false
 gamemode: 0
@@ -53,8 +53,7 @@ op_permission_level: 2
 player_idle_timeout: 0
 pvp: true
 resource_pack:
-#server_ip: "{{ hostvars[groups['MINECRAFT'][0]]['ansible_eth0']['ipv4']['address'] }}"
-server_ip: "{{ hostvars[groups[{{ group_name }}][0]['ansible_eth0']['ipv4']['address'] }}"
+server_ip: "{{ hostvars[groups['Minecraft'][0]]['ansible_eth0']['ipv4']['address'] }}"
 server_port: 25565
 snooper_enabled: true
 spawn_animals: true
