@@ -28,10 +28,10 @@
   clc_publicip:
     server_ids: "{{ item.name }}"
     ports:
-      - "80"
+      - "{{ server_port }}"
     protocol: TCP
     state: present
-  with_items: "{{mc.servers}}"
+  with_items: "{{ mc.servers }}"
 
 - name: Wait for SSH Services to Become Available
   command: sleep 15
@@ -43,4 +43,4 @@
     ansible_ssh_user=root
     ansible_ssh_pass={{ serverpass.stdout }}
     groupname=Minecraft
-  with_items: "{{mc.servers}}"
+  with_items: "{{ mc.servers }}"
