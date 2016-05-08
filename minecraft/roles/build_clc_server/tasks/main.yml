@@ -4,12 +4,17 @@
     location: "{{ datacenter }}"
     state: present
 
+- name: Generate Password
+  command: openssl rand -base64 15
+  register: serverpass
+  changed_when: False
+
 - name: CLC | Build MINECRAFT Server if Needed
   clc_server:
     name: "{{ server_name }}"
     location: "{{ datacenter }}"
     template: "{{ os_template }}"
-    password: "{{ serverpass }}"
+    password: "{{ serverpass.stdout }}"
     exact_count: 1
     group: "{{ group_name }}"
     count_group: "{{ group_name }}"
@@ -26,17 +31,16 @@
       - "80"
     protocol: TCP
     state: present
-  with_flattened: '{{mc.servers}}'
+  with_items: "{{mc.servers}}"
 
-- name: Update known_hosts With New Servers
-  shell: "ssh-keygen -R {{ item.ipaddress }} && ssh-keyscan -t rsa -H {{ item.ipaddress }} >> ~/.ssh/known_hosts"
-  with_flattened: '{{mc.servers}}'
+- name: Wait for SSH Services to Become Available
+  command: sleep 15
 
-- name: Add New Servers to an in-memory Group
+- name: Add New Servers to an inventory
   add_host:
     name={{ item.name }}
     ansible_ssh_host={{ item.ipaddress }}
     ansible_ssh_user=root
-    ansible_ssh_pass={{ serverpass }}
+    ansible_ssh_pass={{ serverpass.stdout }}
     groupname=Minecraft
-  with_items: '{{mc.servers}}'
+  with_items: "{{mc.servers}}"
