@@ -22,15 +22,6 @@ fields:
     #                                       #
     # ------------------------------------- #
 
-  # Server Password
-  - name: serverpass
-    displayName: Server Password
-    type: password
-    required: true
-    default:
-    minLength: 1
-    maxLength: 35
-
   - name: datacenter
     displayName: Datacenter
     type: text
