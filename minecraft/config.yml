@@ -4,6 +4,7 @@ shortDescription: Build a MineCraft game server for funsies
 author: Chaser
 organization: Runner
 organizationUrl: http://runner.ctl.io
+imagePath: https://pmcdeadline2.files.wordpress.com/2014/02/minecraft__140227211000.jpg
 public: false
 fields:
 
