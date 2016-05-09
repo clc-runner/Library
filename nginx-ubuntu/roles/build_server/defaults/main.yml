@@ -1,0 +1,9 @@
+group_size: 1
+type: standard
+storage_type: standard
+cpu: 1
+memory: 2
+datacenter: 'WA1'
+group_name: Nginx
+server_name: NGINX
+os_template: ubuntu-14-64

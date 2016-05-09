@@ -1,0 +1,3 @@
+---
+- include: build_server.yml
+- include: nginx.yml

@@ -1,0 +1,32 @@
+---
+- name: Create nginx group
+  group:
+    name: nginx
+
+- name: Create nginx user
+  user:
+    name: nginx
+
+- name: Install nginx
+  apt:
+    name: nginx
+
+- name: Set nginx config
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: "{{ nginx_owner }}"
+    group: "{{ nginx_group }}"
+
+- name: Set a config
+  template:
+    src: super.conf.j2
+    dest: /etc/nginx/conf.d/super.conf
+    owner: "{{ nginx_owner }}"
+    group: "{{ nginx_group }}"
+  notify: restart nginx
+
+- name: Start / enable nginx
+  service:
+    name: nginx
+    state: started

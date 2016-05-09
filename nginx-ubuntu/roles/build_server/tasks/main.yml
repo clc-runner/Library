@@ -1,0 +1,37 @@
+- name: CLC | Create Nginx Group
+  clc_group:
+    name: "{{ group_name }}"
+    location: "{{ datacenter }}"
+    state: present
+
+- name: Generate Password
+  command: openssl rand -base64 15
+  register: serverpass
+  changed_when: False
+
+- name: CLC | Build Nginx Server if Needed
+  clc_server:
+    name: "{{ server_name }}"
+    location: "{{ datacenter }}"
+    template: "{{ os_template }}"
+    password: "{{ serverpass.stdout }}"
+    exact_count: 1
+    group: "{{ group_name }}"
+    count_group: "{{ group_name }}"
+    cpu: "{{ cpu }}"
+    memory: "{{ memory }}"
+    type: "{{ type }}"
+    storage_type: "{{ storage_type }}"
+  register: nginx
+
+- name: Wait for SSH Services to Become Available
+  command: sleep 15
+
+- name: Add New Servers to an inventory
+  add_host:
+    name={{ item.name }}
+    ansible_ssh_host={{ item.ipaddress }}
+    ansible_ssh_user=root
+    ansible_ssh_pass={{ serverpass.stdout }}
+    groupname=Nginx
+  with_items: "{{ nginx.servers }}"
