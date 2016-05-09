@@ -64,6 +64,13 @@ fields:
     #                                       #
     # ------------------------------------- #
 
+  - name: minecraft_server_version
+    displayName: Minecraft Version
+    type: text
+    default: 1.9.2
+    minLength: 5
+    maxLength: 10
+
   - name: minecraft_user
     displayName: Minecraft User
     type: text
