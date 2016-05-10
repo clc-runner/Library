@@ -1,11 +1,14 @@
 name: MineCraft
 description: MineCraft is a fun, creative game to play. Run this job if you would like to run your own Minecraft server for you and your friends to play on!
 shortDescription: Build a MineCraft game server for funsies
+version: 1.8
+updateDate: May 10, 2016
+defaultPlaybook: main.yml
 author: Chaser
 organization: Runner
 organizationUrl: http://runner.ctl.io
 imagePath: https://pmcdeadline2.files.wordpress.com/2014/02/minecraft__140227211000.jpg
-public: false 
+public: false
 fields:
 
     # ------------------------------------- #
@@ -24,7 +27,7 @@ fields:
     # ------------------------------------- #
 
   - name: datacenter
-    displayName: Datacenter
+    displayName: Location
     type: text
     default: UC1
     minLength: 2
@@ -44,19 +47,21 @@ fields:
 #    minLength: 1
 #    maxLength: 6
 
-  - name: def_cpu
-    displayName: CPU Count
-    type: number
-    default: 1
-    minLength: 1
-    maxLength: 3
+    - name: def_cpu
+      displayName: server CPU
+      type: slider
+      required: true
+      min: 1
+      max: 16
+      default: 1
 
-  - name: def_mem
-    displayName: Memory Count
-    type: number
-    default: 2
-    minLength: 1
-    maxLength: 3
+    - name: def_mem
+      displayName: server memory (GB)
+      type: slider
+      required: true
+      min: 1
+      max: 128
+      default: 2
 
     # ------------------------------------- #
     #                                       #
@@ -70,20 +75,6 @@ fields:
     default: 1.9.2
     minLength: 5
     maxLength: 10
-
-  - name: minecraft_user
-    displayName: Minecraft User
-    type: text
-    default: minecraft
-    minLength: 4
-    maxLength: 12
-
-  - name: minecraft_group
-    displayName: Minecraft Group
-    type: text
-    default: minecraft
-    minLength: 4
-    maxLength: 12
 
   - name: minecraft_overlord_user
     displayName: Overlord User
@@ -125,7 +116,7 @@ fields:
     type: toggle
     default: false
 
-  - name: enbale-query
+  - name: enable-query
     displayName: Enable Query
     type: toggle
     default: false

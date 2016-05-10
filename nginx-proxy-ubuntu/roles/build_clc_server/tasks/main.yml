@@ -15,7 +15,7 @@
     location: "{{ datacenter }}"
     template: "{{ os_template }}"
     password: "{{ serverpass.stdout }}"
-    exact_count: 1
+    exact_count: "{{ server_count }}"
     group: "{{ group_name }}"
     count_group: "{{ group_name }}"
     cpu: "{{ cpu }}"
@@ -28,11 +28,11 @@
   clc_publicip:
     server_ids: "{{ item.name }}"
     ports:
-      - "80"
+      - "{{ listen_port }}"
     protocol: TCP
     state: present
   with_items: "{{nginx.servers}}"
-  when: "{{ public }} is True"
+  when: ("{{ public }}" == 'true')
 
 - name: Wait for SSH Services to Become Available
   command: sleep 15

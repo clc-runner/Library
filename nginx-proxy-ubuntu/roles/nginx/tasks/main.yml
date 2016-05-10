@@ -18,10 +18,10 @@
     owner: "{{ nginx_owner }}"
     group: "{{ nginx_group }}"
 
-- name: Set a config
+- name: Set backend config
   template:
-    src: super.conf.j2
-    dest: /etc/nginx/conf.d/super.conf
+    src: proxy.conf.j2
+    dest: /etc/nginx/conf.d/proxy.conf
     owner: "{{ nginx_owner }}"
     group: "{{ nginx_group }}"
   notify: restart nginx
