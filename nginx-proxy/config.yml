@@ -90,9 +90,10 @@ fields:
       required: true
 
     - name: backend_group
-      displayName: Backend Group
-      type: datacenters
-      required: true
+      displayName: Group
+      type: groups
+      parent: datacenter_name
+      required: false
 
     - name: backend_port
       displayName: Backend Port
