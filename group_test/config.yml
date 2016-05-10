@@ -28,7 +28,7 @@ fields:
 #panels:
     - name: datacenter_name
       displayName: datacenter
-      type: datacenter
+      type: datacenters
       required: true
 
     # Groups field.
