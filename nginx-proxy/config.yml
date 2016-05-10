@@ -38,11 +38,11 @@ fields:
       required: false
 
     # Groups field.
-    - name: server_group
-      displayName: Group
-      type: groups
-      parent: datacenter_name
-      required: false
+#    - name: server_group
+#      displayName: Group
+#      type: groups
+#      parent: datacenter_name
+#      required: false
 
     - name: server_count
       displayName: Number of Servers to Create
