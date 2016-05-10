@@ -2,7 +2,6 @@ name: Nginx
 description: Create a server with either your own config or a basic backend config
 imagePath: https://pbs.twimg.com/profile_images/567774844322713600/tYoVju31.png
 shortDescription: Create an Nginx Server
-version: 1.0
 updateDate: May 9, 2016
 public: false
 defaultPlaybook: site.yml
@@ -88,18 +87,19 @@ fields:
       type: number
       minLength: 1
       maxLength: 65555
+      required: true
 
     - name: backend_group
       displayName: Backend Group
-      type: text
-      minLength: 1
-      maxLength: 20
+      type: datacenters
+      required: true
 
     - name: backend_port
       displayName: Backend Port
       type: number
       minLength: 1
       maxLength: 65555
+      required: true
 
 tags:
   - proxy
