@@ -32,7 +32,7 @@ fields:
   #   fields:
 
       # Data Center Name
-    - name: datacenter_name
+    - name: datacenter
       displayName: Location
       type: datacenters
       required: false
