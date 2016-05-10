@@ -7,8 +7,13 @@ defaultPlaybook: main.yml
 author: Chaser
 organization: Runner
 organizationUrl: http://runner.ctl.io
+<<<<<<< HEAD
 imagePath: https://pmcdeadline2.files.wordpress.com/2014/02/minecraft__140227211000.jpg
 public: false
+=======
+imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/Minecraft-Logo-PNG.png
+public: false 
+>>>>>>> d28a2d4995e3eee1c05b9f132b90d4633a6cf7f9
 fields:
 
     # ------------------------------------- #
