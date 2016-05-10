@@ -8,4 +8,4 @@ datacenter: 'WA1'
 group_name: Nginx
 server_name: NGINX
 os_template: ubuntu-14-64
-public: false
+public: true

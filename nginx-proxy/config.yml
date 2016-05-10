@@ -81,7 +81,7 @@ fields:
     - name: public
       displayName: PublicIP
       type: toggle
-      default: false
+      default: true
 
     - name: listen_port
       displayName: Listen Port

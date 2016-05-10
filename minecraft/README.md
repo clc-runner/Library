@@ -19,7 +19,6 @@ There are a few things that are intentionally left out of the playbook.
 * Pass --extra-args alias variable
 
 ### TYPICAL OVERRIDES:
-##
 * server_name: base name of server [can only be 6 characters or less] (default == MCRAFT)
 * datacenter: locate to provision servers (default == WA1)
 * minecraft_user: user to install minecraft on the server (default == minecraft)
