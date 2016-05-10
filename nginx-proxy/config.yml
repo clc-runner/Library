@@ -1,6 +1,6 @@
 name: Nginx
 description: Create a server with either your own config or a basic backend config
-imagePath: https://raw.github.com/clc-runner/Assets/master/ubuntu-logo112-200.png
+imagePath: https://pbs.twimg.com/profile_images/567774844322713600/tYoVju31.png
 shortDescription: Create an Nginx Server
 version: 1.0
 updateDate: May 9, 2016
