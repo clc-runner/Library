@@ -1,5 +1,5 @@
 ---
-- hosts: Nginx
+- hosts: nginx
   gather_facts: true
   roles:
     - nginx
