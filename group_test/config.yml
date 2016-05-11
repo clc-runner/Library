@@ -26,7 +26,10 @@ fields:
 
 # Allow for multi-panel fact collection.
 #panels:
-
+    - name: datacenter_name
+      displayName: datacenter
+      type: datacenters
+      required: true
 
     # Groups field.
     - name: server_group
