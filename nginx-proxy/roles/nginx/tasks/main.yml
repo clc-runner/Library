@@ -18,6 +18,13 @@
     owner: "{{ nginx_owner }}"
     group: "{{ nginx_group }}"
 
+- name: Get backend group information
+  clc_server_fact:
+    server_id: "{{ item }}"
+  with_items:
+    - "{{ backend_servers }}"
+  register: backend
+
 - name: Set backend config
   template:
     src: proxy.conf.j2
