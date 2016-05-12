@@ -89,11 +89,13 @@ fields:
       maxLength: 65555
       required: true
 
-    - name: backend_group
-      displayName: Group
-      type: groups
-      parent: datacenter_name
-      required: false
+    - name: backend
+      displayName: Backend Servers
+      type: servers
+      parent: datacenter
+      required: true
+      multiple: true
+      inventory: true
 
     - name: backend_port
       displayName: Backend Port
