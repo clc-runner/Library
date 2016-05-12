@@ -1,0 +1,77 @@
+name: Patch Windows
+description: Apply Microsoft provided and recommended updates on Windows servers.
+shortDescription: Bring Windows servers up to date
+imagePath: http://www.factfiend.com/wp-content/uploads/2014/10/windows-logo.png
+updateDate: May 12, 2016
+public: false
+defaultPlaybook: site.yml
+author: Chaser
+organization: Runner
+organizationUrl: http://runner.ctl.io
+fields:
+    - name: servers
+      displayName: Servers
+      type: servers
+      required: true
+      multiple: true
+      inventory: true
+
+    - name: definitionUpdates
+      displayName: Definition Updates
+      type: toggle
+      default: false
+
+    - name: critical
+      displayName: Critical
+      type: toggle
+      default: true
+
+    - name: security
+      displayName: Security
+      type: toggle
+      default: true
+
+    - name: servicePacks
+      displayName: Service Packs
+      type: toggle
+      default: true
+
+    - name: updates
+      displayName: General Updates
+      type: toggle
+      default: false
+
+    - name: updateRollups
+      displayName: Update Rollups
+      type: toggle
+      default: false
+
+    - name: featurePacks
+      displayName: Feature Packs
+      type: toggle
+      default: false
+
+    - name: application
+      displayName: Application
+      type: toggle
+      default: false
+
+    - name: connectors
+      displayName: Connectors
+      type: toggle
+      default: false
+
+    - name: developerKits
+      displayName: Developer Kits
+      type: toggle
+      default: false
+
+    - name: tools
+      displayName: Tools
+      type: toggle
+      default: false
+
+    - name: guidance
+      displayName: Guidance
+      type: toggle
+      default: false

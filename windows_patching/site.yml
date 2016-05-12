@@ -1,0 +1,5 @@
+---
+- hosts: "{{ servers }}"
+  connection: winrm
+  roles:
+    - windows_patching
