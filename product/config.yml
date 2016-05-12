@@ -28,6 +28,13 @@ fields:
     parent: datacenter
     required: true
     
+  # Networks field.
+  - name: networks_invalid
+    displayName: Network Picker 2
+    type: networks
+    parent: datacenter_invalid
+    required: false
+    
   # Groups field.
   - name: group
     displayName: Group Picker
