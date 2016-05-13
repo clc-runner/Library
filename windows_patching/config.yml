@@ -9,6 +9,11 @@ author: Chaser
 organization: Runner
 organizationUrl: http://runner.ctl.io
 fields:
+    - name: datacenter
+      displayName: Location
+      type: datacenters
+      required: false
+
     - name: servers
       displayName: Servers
       type: servers
