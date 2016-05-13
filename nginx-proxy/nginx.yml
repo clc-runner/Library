@@ -1,4 +1,9 @@
 ---
+- hosts: backend
+  gather_facts: true
+  tasks:
+    []
+
 - hosts: nginx
   gather_facts: true
   roles:
