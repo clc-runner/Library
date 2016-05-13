@@ -33,13 +33,13 @@ fields:
 
     # Groups field.
     - name: server_group
-      displayName: Group
+      displayName: Server Group
       type: groups
       parent: datacenter_name
       required: false
 
     - name: backend_group
-      displayName: Group
+      displayName: Backend Group
       type: groups
       parent: datacenter_name
       required: false
