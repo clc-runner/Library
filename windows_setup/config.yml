@@ -18,6 +18,6 @@ fields:
 
   - name: server
     displayName: Servers
-    type: server
+    type: servers
     required: true
     parent: datacenter
