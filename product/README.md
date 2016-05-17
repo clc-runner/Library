@@ -1,5 +1,3 @@
-<p><a href='http://example.com/' onclick='stealCookies()'>Link</a></p>
-
 ## Blabla Blablabla
 
 ### Blabla bla blablabla
