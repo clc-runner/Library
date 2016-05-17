@@ -22,7 +22,7 @@
   clc_server_fact:
     server_id: "{{ item }}"
   with_items:
-    - "{{ backend_servers }}"
+    - "{{ backend }}"
   register: backend
 
 - name: Set backend config
