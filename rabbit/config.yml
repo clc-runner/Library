@@ -1,0 +1,44 @@
+name: RabbitMQ
+description:
+shortDescription:
+date: May 17, 2016
+public: false
+defaultPlaybook: main.yml
+author: Runner
+organization: Runner
+organizationUrl: http://ctl.io/runner
+
+fields:
+
+  - name: datacenter
+    displayName: Location
+    type: datacenters
+    required: true
+
+  - name: group_name
+    displayName: Group
+    type: text
+    min_length: 3
+    max_length: 20
+
+  - name: server_name
+    displayName: Server Name
+    type: text
+    min_length: 3
+    max_length: 6
+
+  - name: cpu
+    displayName: CPU
+    type: slider
+    required: false
+    min: 1
+    max: 128
+    default: 1
+
+  - name: memory
+    displayName: Memory
+    type: slider
+    required: false
+    min: 1
+    max: 128
+    default: 2
