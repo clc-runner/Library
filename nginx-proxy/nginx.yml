@@ -1,5 +1,5 @@
 ---
-- hosts: backend
+- hosts: "{{ backend }}"
   gather_facts: true
   tasks:
     []
