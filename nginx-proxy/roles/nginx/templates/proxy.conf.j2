@@ -1,5 +1,5 @@
 upstream customer {
-        server {{ backend.results|map(attribute='server.ipaddress')|list }}:{{ backend_port }};
+        server {{ backend_servers.results|map(attribute='server.ipaddress')|list }}:{{ backend_port }};
 }
 
 server {

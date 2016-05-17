@@ -23,7 +23,7 @@
     server_id: "{{ item }}"
   with_items:
     - "{{ backend }}"
-  register: backend
+  register: backend_servers
 
 - name: Set backend config
   template:
