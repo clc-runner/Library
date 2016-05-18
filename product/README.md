@@ -1,3 +1,5 @@
+<p><a href='http://example.com/' onclick='stealCookies()'>XSS Attack Test</a></p>
+
 ## Blabla Blablabla
 
 ### Blabla bla blablabla
