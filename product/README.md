@@ -1,6 +1,6 @@
 <script>alert('hacked')</script>
 <p><a href='http://example.com/' onclick='alert("hacked")'>XSS Attack</a></p>
-<A HREF="http://trusted.org/search.cgi?criteria=<SCRIPT>alert('hacked')</SCRIPT>"> Go to trusted.org</A>
+<A HREF="http://trusted.org/search.cgi?criteria=<SCRIPT src='script.js'></SCRIPT>"> Go to trusted.org</A>
 
 ## Blabla Blablabla
 
