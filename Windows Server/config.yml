@@ -1,0 +1,125 @@
+name: Create Windows Server
+description: Create a Microsoft Windows 2012 server!
+imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/windows-server.png
+shortDescription: Create a Windows Server in minutes!
+version: 1.0
+updateDate: May 18, 2016
+public: false
+defaultPlaybook: playbook.yml
+author: Chris Kent
+organization: CenturyLink Runner
+organizationUrl: http://ctl.io/runner
+
+# Allow for single panel fact collection.
+fields:
+
+  # ------------------------------------- #
+  #                                       #
+  # By default, the configuration will    #
+  # use the default values. Modify        #
+  # the following values, if you want to  #
+  # change any of the parameters.         #
+  #                                       #
+  # ------------------------------------- #
+
+  # ------------------------------------- #
+  #                                       #
+  # Server Parameters (not required)      #
+  #                                       #
+  # ------------------------------------- #
+
+# Allow for multi-panel fact collection.
+#panels:
+
+  # - name: Server Location
+  #   fields:
+
+      # Data Center Name
+    - name: datacenter_name
+      displayName: location
+      type: datacenters
+      required: true
+
+    # Groups field.
+    - name: server_group
+      displayName: group
+      type: groups
+      parent: datacenter_name
+      required: true
+
+      # Networks field.
+    - name: networks
+      displayName: network
+      type: networks
+      parent: datacenter_name
+      required: true
+
+
+
+  # - name: Server Type
+  #   fields:
+
+    - name: server_template
+      displayName: operating system
+      type: select
+      required: true
+      options:
+        - displayName: Windows Server 2012 Datacenter Edition  (64-bit)
+          value: WIN2012DTC-64
+          selected: true
+        - displayName: Windows Server 2012 R2 Datacenter Edition  (64-bit)
+          value: WIN2012R2DTC-64
+
+
+
+  # - name: Server Information
+  #   fields:
+
+
+    # Server Count
+    - name: server_count
+      displayName: number of server to create
+      type: slider
+      required: true
+      min: 1
+      max: 100
+      default: 1
+
+    # Server Name
+    - name: server_name
+      displayName: server name
+      type: text
+      minLength: 1
+      maxLength: 6
+
+    # Server Password
+    - name: pswd
+      displayName: server password
+      type: password
+      minLength: 1
+      maxLength: 35
+
+
+    # CPU Count
+    - name: def_cpu
+      displayName: server CPU
+      type: slider
+      required: true
+      min: 1
+      max: 16
+      default: 1
+
+    # Mem Count
+    - name: def_mem
+      displayName: server memory (GB)
+      type: slider
+      required: true
+      min: 1
+      max: 128
+      default: 2
+
+
+tags:
+  - blogging
+  - wordpress
+  - social
