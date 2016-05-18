@@ -1,0 +1,4 @@
+- name: Update Guidance Libraries
+  win_updates:
+    category_names: "Guidance"
+    log_path: c:/guidance_updates.txt

@@ -1,0 +1,4 @@
+- name: Update Connectors
+  win_updates:
+    category_names: "Connectors"
+    log_path: c:/connector_updates.txt

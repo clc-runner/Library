@@ -1,0 +1,4 @@
+- name: Install Service Packs
+  win_updates:
+    category_names: "ServicePacks"
+    log_path: c:/service_packs.txt

@@ -1,81 +1,36 @@
 ---
-- name: Perform Definition Updates
-  win_updates:
-    category_names: "DefinitionUpdates"
-    log_path: c:/definition_updates.txt
-  register: definintion
+- include: definition.yml
   when: ("{{ definitionUpdates }}" == 'true')
 
-- name: Reboot server if required
-  hosts: localhost
-  connection: local
-  clc_server:
-    server_ids: "{{ }}"
-    state: stopped
-  when: ("{{ definintion.reboot_required }}" == 'true')
-
-- name: Apply Critical updates
-  win_updates:
-    category_names: "CriticalUpdates"
-    log_path: c:/critical_updates.txt
+- include: criticals.yml
   when: ("{{ critical }}" == 'true')
 
-- name: Apply Security Updates
-  win_updates:
-    category_names: "SecurityUpdates"
-    log_path: c:/security_updates.txt
+- include: security.yml
   when: ("{{ security }}" == 'true')
 
-- name: Install Service Packs
-  win_updates:
-    category_names: "ServicePacks"
-    log_path: c:/service_packs.txt
+- include: service_packs.yml
   when: ("{{ servicePacks }}" == 'true')
 
-- name: Apply General Updates
-  win_updates:
-    category_names: "Updates"
-    log_path: c:/general_updates.txt
+- include: general_updates.yml
   when: ("{{ updates }}" == 'true')
 
-- name: Apply Update Rollups
-  win_updates:
-    category_names: "UpdateRollups"
-    log_path: c:/update_rollups.txt
+- include: rollups.yml
   when: ("{{ updateRollups }}" == 'true')
 
-- name: Install Feature Packs
-  win_updates:
-    category_names: "FeaturePacks"
-    log_path: c:/feature_packs.txt
+- include: feature_packs.yml
   when: ("{{ featurePacks }}" == 'true')
 
-- name: Apply Application Updates
-  win_updates:
-    category_names: "Application"
-    log_path: c:/application_updates.txt
+- include: application.yml
   when: ("{{ application }}" == 'true')
 
-- name: Update Connectors
-  win_updates:
-    category_names: "Connectors"
-    log_path: c:/connector_updates.txt
+- include: connectors.yml
   when: ("{{ connectors }}" == 'true')
 
-- name: Update Developer Kits
-  win_updates:
-    category_names: "DeveloperKits"
-    log_path: c:/developer_kits.txt
+- include: dev_kits.yml
   when: ("{{ developerKits }}" == 'true')
 
-- name: Update Microsoft Tools
-  win_updates:
-    category_names: "Tools"
-    log_path: c:/tools_updates.txt
+- include: tools.yml
   when: ("{{ tools }}" == 'true')
 
-- name: Update Guidance Libraries
-  win_updates:
-    category_names: "Guidance"
-    log_path: c:/guidance_updates.txt
+- include: guidance.yml
   when: ("{{ guidance }}" == 'true')

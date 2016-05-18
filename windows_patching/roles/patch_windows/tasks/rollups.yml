@@ -1,0 +1,4 @@
+- name: Apply Update Rollups
+  win_updates:
+    category_names: "UpdateRollups"
+    log_path: c:/update_rollups.txt

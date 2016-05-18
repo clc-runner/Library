@@ -1,0 +1,4 @@
+- name: Update Developer Kits
+  win_updates:
+    category_names: "DeveloperKits"
+    log_path: c:/developer_kits.txt

@@ -1,0 +1,4 @@
+- name: Install Feature Packs
+  win_updates:
+    category_names: "FeaturePacks"
+    log_path: c:/feature_packs.txt

@@ -1,0 +1,4 @@
+- name: Update Microsoft Tools
+  win_updates:
+    category_names: "Tools"
+    log_path: c:/tools_updates.txt

@@ -1,0 +1,4 @@
+- name: Apply General Updates
+  win_updates:
+    category_names: "Updates"
+    log_path: c:/general_updates.txt

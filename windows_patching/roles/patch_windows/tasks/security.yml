@@ -1,0 +1,4 @@
+- name: Apply Security Updates
+  win_updates:
+    category_names: "SecurityUpdates"
+    log_path: c:/security_updates.txt

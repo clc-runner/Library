@@ -1,0 +1,4 @@
+- name: Apply Critical updates
+  win_updates:
+    category_names: "CriticalUpdates"
+    log_path: c:/critical_updates.txt

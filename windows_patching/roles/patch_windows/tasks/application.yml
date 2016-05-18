@@ -1,0 +1,4 @@
+- name: Apply Application Updates
+  win_updates:
+    category_names: "Application"
+    log_path: c:/application_updates.txt
