@@ -3,7 +3,16 @@
   win_updates:
     category_names: "DefinitionUpdates"
     log_path: c:/definition_updates.txt
+  register: definintion
   when: ("{{ definitionUpdates }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ definintion.reboot_required }}" == 'true')
 
 - name: Apply Critical updates
   win_updates:
