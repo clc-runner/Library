@@ -17,6 +17,7 @@ fields:
     - name: servers
       displayName: Servers
       type: servers
+      parent: datacenter
       required: true
       multiple: true
       inventory: true

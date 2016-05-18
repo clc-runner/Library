@@ -1,5 +1,4 @@
 ---
-- hosts: servers
-  connection: winrm
+- hosts: all
   roles:
     - windows_patching
