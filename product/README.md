@@ -1,3 +1,4 @@
+<script>alert('hacked')</script>
 <p><a href='http://example.com/' onclick='stealCookies()'>XSS Attack Test</a></p>
 
 ## Blabla Blablabla
