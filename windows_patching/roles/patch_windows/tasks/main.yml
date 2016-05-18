@@ -1,72 +1,72 @@
 ---
 - name: Perform Definition Updates
-  win_update:
+  win_updates:
     category_names: "DefinitionUpdates"
     log_path: c:/definition_updates.txt
   when: ("{{ definitionUpdates }}" == 'true')
 
 - name: Apply Critical updates
-  win_update:
+  win_updates:
     category_names: "CriticalUpdates"
     log_path: c:/critical_updates.txt
   when: ("{{ critical }}" == 'true')
 
 - name: Apply Security Updates
-  win_update:
+  win_updates:
     category_names: "SecurityUpdates"
     log_path: c:/security_updates.txt
   when: ("{{ security }}" == 'true')
 
 - name: Install Service Packs
-  win_update:
+  win_updates:
     category_names: "ServicePacks"
     log_path: c:/service_packs.txt
   when: ("{{ servicePacks }}" == 'true')
 
 - name: Apply General Updates
-  win_update:
+  win_updates:
     category_names: "Updates"
     log_path: c:/general_updates.txt
   when: ("{{ updates }}" == 'true')
 
 - name: Apply Update Rollups
-  win_update:
+  win_updates:
     category_names: "UpdateRollups"
     log_path: c:/update_rollups.txt
   when: ("{{ updateRollups }}" == 'true')
 
 - name: Install Feature Packs
-  win_update:
+  win_updates:
     category_names: "FeaturePacks"
     log_path: c:/feature_packs.txt
   when: ("{{ featurePacks }}" == 'true')
 
 - name: Apply Application Updates
-  win_update:
+  win_updates:
     category_names: "Application"
     log_path: c:/application_updates.txt
   when: ("{{ application }}" == 'true')
 
 - name: Update Connectors
-  win_update:
+  win_updates:
     category_names: "Connectors"
     log_path: c:/connector_updates.txt
   when: ("{{ connectors }}" == 'true')
 
 - name: Update Developer Kits
-  win_update:
+  win_updates:
     category_names: "DeveloperKits"
     log_path: c:/developer_kits.txt
   when: ("{{ developerKits }}" == 'true')
 
 - name: Update Microsoft Tools
-  win_update:
+  win_updates:
     category_names: "Tools"
     log_path: c:/tools_updates.txt
   when: ("{{ tools }}" == 'true')
 
 - name: Update Guidance Libraries
-  win_update:
+  win_updates:
     category_names: "Guidance"
     log_path: c:/guidance_updates.txt
   when: ("{{ guidance }}" == 'true')
