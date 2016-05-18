@@ -13,12 +13,12 @@
 # limitations under the License.
 
 ---
-- name: Ubuntu Server
+- name: Windows Server 2012
   hosts: localhost
   connection: local
   gather_facts: true
   vars:
-    server_name: UBUNT
+    server_name: WINSRV
     server_count: 1
     pswd: C35vqNvmkIuQ
     datacenter_name: UC1
@@ -27,7 +27,7 @@
 
   tasks:
 
-    - name: Provision Ubuntu Server
+    - name: Provision Windows Server 2012
       clc_server:
         name: "{{server_name}}"
         group: "{{server_group}}"
