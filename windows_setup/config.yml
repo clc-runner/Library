@@ -19,5 +19,6 @@ fields:
   - name: server
     displayName: Servers
     type: servers
+    multiple: true
     required: true
     parent: datacenter
