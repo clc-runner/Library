@@ -11,3 +11,11 @@
     server_ids: "{{ }}"
     state: stopped
   when: ("{{ definintion.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ definintion.reboot_required }}" == 'true')

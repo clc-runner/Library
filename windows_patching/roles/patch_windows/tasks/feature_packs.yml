@@ -2,3 +2,20 @@
   win_updates:
     category_names: "FeaturePacks"
     log_path: c:/feature_packs.txt
+  register: features
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ features.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ features.reboot_required }}" == 'true')

@@ -2,3 +2,20 @@
   win_updates:
     category_names: "Connectors"
     log_path: c:/connector_updates.txt
+  register: connectors
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ connectors.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ connectors.reboot_required }}" == 'true')

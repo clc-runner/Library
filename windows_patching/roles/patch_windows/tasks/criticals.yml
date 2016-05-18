@@ -2,3 +2,20 @@
   win_updates:
     category_names: "CriticalUpdates"
     log_path: c:/critical_updates.txt
+  register: criticals
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ criticals.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ criticals.reboot_required }}" == 'true')

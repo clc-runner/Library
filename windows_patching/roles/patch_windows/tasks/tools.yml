@@ -2,3 +2,20 @@
   win_updates:
     category_names: "Tools"
     log_path: c:/tools_updates.txt
+  register: tools
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ tools.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ tools.reboot_required }}" == 'true')

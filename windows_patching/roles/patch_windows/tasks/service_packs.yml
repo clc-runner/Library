@@ -2,3 +2,20 @@
   win_updates:
     category_names: "ServicePacks"
     log_path: c:/service_packs.txt
+  register: sp
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ sp.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ sp.reboot_required }}" == 'true')

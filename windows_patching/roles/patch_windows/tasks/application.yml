@@ -2,3 +2,20 @@
   win_updates:
     category_names: "Application"
     log_path: c:/application_updates.txt
+  register: application
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ application.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ application.reboot_required }}" == 'true')

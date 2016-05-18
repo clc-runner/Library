@@ -2,3 +2,20 @@
   win_updates:
     category_names: "DeveloperKits"
     log_path: c:/developer_kits.txt
+  register: developer
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ developer.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ developer.reboot_required }}" == 'true')

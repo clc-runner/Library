@@ -2,3 +2,20 @@
   win_updates:
     category_names: "UpdateRollups"
     log_path: c:/update_rollups.txt
+  register: rollups
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ rollups.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ rollups.reboot_required }}" == 'true')

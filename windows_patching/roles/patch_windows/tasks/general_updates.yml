@@ -2,3 +2,20 @@
   win_updates:
     category_names: "Updates"
     log_path: c:/general_updates.txt
+  register: general
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: stopped
+  when: ("{{ general.reboot_required }}" == 'true')
+
+- name: Reboot server if required
+  hosts: localhost
+  connection: local
+  clc_server:
+    server_ids: "{{ }}"
+    state: started
+  when: ("{{ general.reboot_required }}" == 'true')
