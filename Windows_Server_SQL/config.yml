@@ -1,0 +1,219 @@
+name: Create Windows Server 2012 with SQL Server
+description: Create a Microsoft Windows 2012 server and install SQL Server
+imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/windows-sql.png
+shortDescription: Create a Windows Server with SQL in minutes!
+version: 1.1
+updateDate: May 18, 2016
+public: false
+defaultPlaybook: playbook.yml
+author: Chris Kent
+organization: CenturyLink Runner
+organizationUrl: http://ctl.io/runner
+
+# Allow for single panel fact collection.
+fields:
+
+  # ------------------------------------- #
+  #                                       #
+  # By default, the configuration will    #
+  # use the default values. Modify        #
+  # the following values, if you want to  #
+  # change any of the parameters.         #
+  #                                       #
+  # ------------------------------------- #
+
+  # ------------------------------------- #
+  #                                       #
+  # Server Parameters (not required)      #
+  #                                       #
+  # ------------------------------------- #
+
+# Allow for multi-panel fact collection.
+#panels:
+
+  # - name: Server Location
+  #   fields:
+
+      # Data Center Name
+    - name: datacenter_name
+      displayName: location
+      type: datacenters
+      required: true
+
+    # Groups field.
+    - name: server_group
+      displayName: group
+      type: groups
+      parent: datacenter_name
+      required: true
+
+      # Networks field.
+    - name: networks
+      displayName: network
+      type: networks
+      parent: datacenter_name
+      required: true
+
+
+
+  # - name: Server Type
+  #   fields:
+
+    - name: server_template
+      displayName: operating system
+      type: select
+      required: true
+      options:
+        - displayName: Windows Server 2012 Datacenter Edition  (64-bit)
+          value: WIN2012DTC-64
+          selected: true
+        - displayName: Windows Server 2012 R2 Datacenter Edition  (64-bit)
+          value: WIN2012R2DTC-64
+
+
+
+  # - name: Server Information
+  #   fields:
+
+
+    # Server Count
+    - name: server_count
+      displayName: number of server to create
+      type: slider
+      required: true
+      min: 1
+      max: 100
+      default: 1
+
+    # Server Name
+    - name: server_name
+      displayName: server name
+      type: text
+      minLength: 1
+      maxLength: 6
+
+    # Server Password
+    - name: pswd
+      displayName: server password
+      type: password
+      minLength: 1
+      maxLength: 35
+
+
+    # CPU Count
+    - name: def_cpu
+      displayName: server CPU
+      type: slider
+      required: true
+      min: 1
+      max: 16
+      default: 1
+
+    # Mem Count
+    - name: def_mem
+      displayName: server memory (GB)
+      type: slider
+      required: true
+      min: 1
+      max: 128
+      default: 2
+
+
+    # - name: SQL Required Information / configuration
+
+
+    # Server Password
+    - name: db_pswd
+      displayName: SQL admin password
+      type: password
+      required: true
+      minLength: 1
+      maxLength: 35
+
+    # Server name
+    - name: db_name
+      displayName: Instance Name
+      type: text
+      required: true
+      default: MSSQL
+      minLength: 1
+      maxLength: 35
+
+    # SQL version
+    - name: db_version
+      displayName: SQL version
+      type: select
+      required: true
+      options:
+        - displayName: Windows Server 2012 Datacenter Edition  (64-bit)
+          value: WIN2012DTC-64
+          selected: true
+        - displayName: Windows Server 2012 R2 Datacenter Edition  (64-bit)
+          value: WIN2012R2DTC-64
+
+    # Features
+    - name: db_features
+      displayName: SQL Features
+      type: select
+      required: true
+      multiple: true
+      options:
+        - displayName: Database Engine Services
+          value: SQLEngine
+        - displayName: SQL Server Replication
+          value: Replication
+        - displayName: Full-Text Search
+          value: FullText
+        - displayName: Data Quality Services [2012-2014 Only]
+          value: DQS
+        - displayName: Analysis Services
+          value: AS
+        - displayName: Reporting Services
+          value: RS
+        - displayName: Data Quality Client [2012-2014 Only]
+          value: DQC
+        - displayName: Master Data Services [2012-2014 Only]
+          value: MDS
+        - displayName: Management Tools
+          value: SSMS
+        - displayName: Data Tools (Business Intelligence Development Studio) [2008-2012 Only]
+          value: BIDS
+        - displayName: Documentation Components
+          value: BOL
+        - displayName: Integration Services
+          value: IS
+        - displayName: Connectivity Components
+          value: CONN
+
+    # SQL collation
+    - name: db_collation
+      displayName: database engine collation
+      type: select
+      required: true
+      options:
+        - displayName: SQL_Latin1_General_CP1_CI_AS (Default)
+          value: SQL_Latin1_General_CP1_CI_AS
+          selected: true
+        - displayName: Latin1_General_BIN
+          value: Latin1_General_BIN
+        - displayName: Latin1_General_CI_AS
+          value: Latin1_General_CI_AS
+
+    # SQL mode
+    - name: db_mode
+      displayName: database engine collation
+      type: select
+      required: true
+      options:
+        - displayName: MultiDimensional
+          value: ASM
+          selected: true
+        - displayName: Tabular Mode
+          value: AST
+
+
+
+tags:
+  - database
+  - windows
+  - sql

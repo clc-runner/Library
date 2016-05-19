@@ -1,19 +1,21 @@
 
-Create an Windows Server 2012 in minutes! [Know more about Windows Server 2012.](http://www.microsoft.com/en-us/server-cloud/products/windows-server-2012-r2/) <br>
+Create an Windows Server 2012 with SQL Server [Know more about Windows Server 2012.](http://www.microsoft.com/en-us/server-cloud/products/windows-server-2012-r2/) <br>
 
 ___
-# Creating Windows Server 2012
+# Creating Windows Server 2012 with SQL Server
 
 
 
 ### Provisioning Steps
 1. Provision Virtual Machine
 2. Install Operating System selected
+3. Install Server Updates
+4. Install Microsoft SQL
 
 ___
 
 ### Resources Provisioned
-This job provisions (1) Virtual Machine (VM) with the Windows Server 2012 Operating System within your servers Default Group and datacenter, unless you specify differently. The VM, by default, has 1 CPU and 1GB Memory. This can be changed and the cost associated with these different configurations will be incurred on your monthly billing. **Your account will be charged for the VM based on usage.**
+This job provisions (1) Virtual Machine (VM) with the Windows Server 2012 Operating System with SQL Server within your servers Default Group and datacenter, unless you specify differently. The VM, by default, has 1 CPU and 1GB Memory. This can be changed and the cost associated with these different configurations will be incurred on your monthly billing. **Your account will be charged for the VM based on usage.**
 
 <br><br><br><br>
 
