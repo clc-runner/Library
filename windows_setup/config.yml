@@ -4,8 +4,7 @@ shortDescription: Prepare Windows servers for Ansible execution
 imagePath: http://www.factfiend.com/wp-content/uploads/2014/10/windows-logo.png
 version: 1.0.0
 updateDate: May 18, 2016
-# should be public
-public: false
+public: true
 defaultPlaybook: windows_configure.yml
 author: Runner Team
 organization: Runner
