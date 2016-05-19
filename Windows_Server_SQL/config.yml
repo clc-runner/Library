@@ -160,29 +160,29 @@ fields:
       options:
         - displayName: Database Engine Services
           value: SQLEngine
-      	- displayName: SQL Server Replication
+        - displayName: SQL Server Replication
           value: Replication
-      	- displayName: Full-Text Search
+        - displayName: Full-Text Search
           value: FullText
-      	- displayName: Data Quality Services [2012-2014 Only]
+        - displayName: Data Quality Services [2012-2014 Only]
           value: DQS
-      	- displayName: Analysis Services
+        - displayName: Analysis Services
           value: AS
-      	- displayName: Reporting Services
+        - displayName: Reporting Services
           value: RS
-      	- displayName: Data Quality Client [2012-2014 Only]
+        - displayName: Data Quality Client [2012-2014 Only]
           value: DQC
-      	- displayName: Master Data Services [2012-2014 Only]
+        - displayName: Master Data Services [2012-2014 Only]
           value: MDS
-      	- displayName: Management Tools
+        - displayName: Management Tools
           value: SSMS
-      	- displayName: Data Tools (Business Intelligence Development Studio) [2008-2012 Only]
+        - displayName: Data Tools (Business Intelligence Development Studio) [2008-2012 Only]
           value: BIDS
-      	- displayName: Documentation Components
+        - displayName: Documentation Components
           value: BOL
-      	- displayName: Integration Services
+        - displayName: Integration Services
           value: IS
-      	- displayName: Connectivity Components
+        - displayName: Connectivity Components
           value: CONN
 
     # SQL collation

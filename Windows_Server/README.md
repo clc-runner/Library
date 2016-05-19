@@ -1,5 +1,5 @@
 
-Create an Windows Server 2012 in minutes! [Know more about Ubuntu.](http://www.microsoft.com/en-us/server-cloud/products/windows-server-2012-r2/) <br>
+Create an Windows Server 2012 in minutes! [Know more about Windows Server 2012.](http://www.microsoft.com/en-us/server-cloud/products/windows-server-2012-r2/) <br>
 
 ___
 # Creating Windows Server 2012
