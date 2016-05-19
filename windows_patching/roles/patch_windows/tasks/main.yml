@@ -1,36 +1,120 @@
 ---
-- include: definition.yml
+- name: Perform Definition Updates
+  win_updates:
+    category_names: "DefinitionUpdates"
+    log_path: c:/definition_updates.txt
+  register: definintion
   when: ("{{ definitionUpdates }}" == 'true')
 
-- include: criticals.yml
+- include: reboot.yml
+  when: ("{{ definintion.reboot_required }}" == 'true')
+
+- name: Apply Critical updates
+  win_updates:
+    category_names: "CriticalUpdates"
+    log_path: c:/critical_updates.txt
+  register: criticals
   when: ("{{ critical }}" == 'true')
 
-- include: security.yml
+- include: reboot.yml
+  when: ("{{ criticals.reboot_required }}" == 'true')
+
+- name: Apply Security Updates
+  win_updates:
+    category_names: "SecurityUpdates"
+    log_path: c:/security_updates.txt
+  register: security
   when: ("{{ security }}" == 'true')
 
-- include: service_packs.yml
+- include: reboot.yml
+  when: ("{{ security.reboot_required }}" == 'true')
+
+- name: Install Service Packs
+  win_updates:
+    category_names: "ServicePacks"
+    log_path: c:/service_packs.txt
+  register: sp
   when: ("{{ servicePacks }}" == 'true')
 
-- include: general_updates.yml
+- include: reboot.yml
+  when: ("{{ sp.reboot_required }}" == 'true')
+
+- name: Apply General Updates
+  win_updates:
+    category_names: "Updates"
+    log_path: c:/general_updates.txt
+  register: general
   when: ("{{ updates }}" == 'true')
 
-- include: rollups.yml
+- include: reboot.yml
+  when: ("{{ general.reboot_required }}" == 'true')
+
+- name: Apply Update Rollups
+  win_updates:
+    category_names: "UpdateRollups"
+    log_path: c:/update_rollups.txt
+  register: rollups
   when: ("{{ updateRollups }}" == 'true')
 
-- include: feature_packs.yml
+- include: reboot.yml
+  when: ("{{ rollups.reboot_required }}" == 'true')
+
+- name: Install Feature Packs
+  win_updates:
+    category_names: "FeaturePacks"
+    log_path: c:/feature_packs.txt
+  register: features
   when: ("{{ featurePacks }}" == 'true')
 
-- include: application.yml
+- include: reboot.yml
+  when: ("{{ features.reboot_required }}" == 'true')
+
+- name: Apply Application Updates
+  win_updates:
+    category_names: "Application"
+    log_path: c:/application_updates.txt
+  register: application
   when: ("{{ application }}" == 'true')
 
-- include: connectors.yml
+- include: reboot.yml
+  when: ("{{ application.reboot_required }}" == 'true')
+
+- name: Update Connectors
+  win_updates:
+    category_names: "Connectors"
+    log_path: c:/connector_updates.txt
+  register: connectors
   when: ("{{ connectors }}" == 'true')
 
-- include: dev_kits.yml
+- include: reboot.yml
+  when: ("{{ connectors.reboot_required }}" == 'true')
+
+- name: Update Developer Kits
+  win_updates:
+    category_names: "DeveloperKits"
+    log_path: c:/developer_kits.txt
+  register: developer
   when: ("{{ developerKits }}" == 'true')
 
-- include: tools.yml
+- include: reboot.yml
+  when: ("{{ developer.reboot_required }}" == 'true')
+
+- name: Update Microsoft Tools
+  win_updates:
+    category_names: "Tools"
+    log_path: c:/tools_updates.txt
+  register: tools
   when: ("{{ tools }}" == 'true')
 
-- include: guidance.yml
+- include: reboot.yml
+  when: ("{{ tools.reboot_required }}" == 'true')
+
+- name: Update Guidance Libraries
+  win_updates:
+    category_names: "Guidance"
+    log_path: c:/guidance_updates.txt
+  register: guidance
   when: ("{{ guidance }}" == 'true')
+
+- include: reboot.yml
+  when: ("{{ guidance.reboot_required }}" == 'true')
