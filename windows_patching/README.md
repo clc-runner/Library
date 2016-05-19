@@ -1,4 +1,6 @@
 # WARNING!!
+### THIS WILL LIKELY REBOOT MACHINES!!
+In order for some of the patches to proceed, a reboot of the machine may be required. This job will automatically perform a restart of the machine if required.
 ### Servers to be updated must be prepped for management!!
 The machine(s) need to be on Powershell 3.x or higher.
 WinRM also needs to be configured in accordance with the Ansible documentation to allow for plays to be executed against the server. A script to handle the configuration can be found here: https://github.com/ansible/ansible/blob/devel/examples/scripts/ConfigureRemotingForAnsible.ps1
