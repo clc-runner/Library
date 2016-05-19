@@ -37,7 +37,7 @@
   when: "{{ servicePacks }}"
 
 - include: reboot.yml
-  when: "{{ sp.reboot_required }}"
+  when: sp.reboot_required
 
 - name: Apply General Updates
   win_updates:
@@ -47,7 +47,7 @@
   when: "{{ updates }}"
 
 - include: reboot.yml
-  when: "{{ general.reboot_required }}"
+  when: general.reboot_required
 
 - name: Apply Update Rollups
   win_updates:
@@ -57,7 +57,7 @@
   when: "{{ updateRollups }}"
 
 - include: reboot.yml
-  when: "{{ rollups.reboot_required }}"
+  when: rollups.reboot_required
 
 - name: Install Feature Packs
   win_updates:
@@ -67,7 +67,7 @@
   when: "{{ featurePacks }}"
 
 - include: reboot.yml
-  when: "{{ features.reboot_required }}"
+  when: features.reboot_required
 
 - name: Apply Application Updates
   win_updates:
@@ -77,7 +77,7 @@
   when: "{{ application }}"
 
 - include: reboot.yml
-  when: ("{{ application.reboot_required }}" == 'True')
+  when: application.reboot_required
 
 - name: Update Connectors
   win_updates:
@@ -87,7 +87,7 @@
   when: ("{{ connectors }}" == 'true')
 
 - include: reboot.yml
-  when: ("{{ connectors.reboot_required }}" == 'True')
+  when: connectors.reboot_required
 
 - name: Update Developer Kits
   win_updates:
@@ -97,7 +97,7 @@
   when: ("{{ developerKits }}" == 'true')
 
 - include: reboot.yml
-  when: ("{{ developer.reboot_required }}" == 'True')
+  when: developer.reboot_required
 
 - name: Update Microsoft Tools
   win_updates:
@@ -107,7 +107,7 @@
   when: ("{{ tools }}" == 'true')
 
 - include: reboot.yml
-  when: ("{{ tools.reboot_required }}" == 'True')
+  when: tools.reboot_required
 
 - name: Update Guidance Libraries
   win_updates:
@@ -117,4 +117,4 @@
   when: ("{{ guidance }}" == 'true')
 
 - include: reboot.yml
-  when: ("{{ guidance.reboot_required }}" == 'True')
+  when: guidance.reboot_required
