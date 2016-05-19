@@ -26,6 +26,9 @@
   register: security
   when: ("{{ security }}" == 'true')
 
+- debug:
+  var: security.reboot_required
+
 - include: reboot.yml
   when: ("{{ security.reboot_required }}" == 'True')
 
