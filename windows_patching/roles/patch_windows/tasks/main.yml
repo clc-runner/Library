@@ -16,6 +16,10 @@
   register: criticals
   when: ("{{ critical }}" == 'true')
 
+- name: debugging
+  debug:
+    var: criticals
+
 - include: reboot.yml
   when: ("{{ criticals.reboot_required }}" == true)
 
@@ -28,7 +32,7 @@
 
 - name: debugging
   debug:
-    var: security.reboot_required
+    var: security
 
 - include: reboot.yml
   when: ("{{ security.reboot_required }}" == true)
@@ -39,6 +43,10 @@
     log_path: c:/service_packs.txt
   register: sp
   when: ("{{ servicePacks }}" == 'true')
+
+- name: debugging
+  debug:
+    var: sp
 
 - include: reboot.yml
   when: ("{{ sp.reboot_required }}" == 'True')
