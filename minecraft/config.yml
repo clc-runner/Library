@@ -8,8 +8,7 @@ author: Chaser
 organization: Runner
 organizationUrl: http://runner.ctl.io
 imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/Minecraft-Logo-PNG.png
-# Should be public
-public: false
+public: true
 fields:
 
     # ------------------------------------- #

@@ -4,8 +4,7 @@ imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/ubuntu-log
 shortDescription: Create a Ubuntu Server in minutes!
 version: 1.0
 updateDate: April 6, 2016
-# should be public
-public: false
+public: true
 defaultPlaybook: playbook.yml
 author: Chris Kent
 organization: CenturyLink
