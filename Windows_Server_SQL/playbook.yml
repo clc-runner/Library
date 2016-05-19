@@ -37,28 +37,7 @@
         location: "{{datacenter_name}}"
         cpu: "{{def_cpu}}" # Default -- not necessary
         memory: "{{def_mem}}" # Default -- not necessary
-      register: provisioned
-
-    - name: Run Winrm
-      clc_blueprint_package:
-        server_ids: "{{ item }}"
-        package_id: 5e824098-2366-48af-8e88-63512d17938f
-        package_params: {}
-      with_items: provisioned.servers
-
-    - name: Apply PowerShell Upgrade
-      clc_blueprint_package:
-        server_ids: "{{ item }}"
-        package_id: 37510ad0-cf2b-4f4b-a1bc-a0394f15e8cf
-        package_params: {}
-      with_items: provisioned.servers
-
-    - name: Apply Hotfix
-      clc_blueprint_package:
-        server_ids: "{{ item }}"
-        package_id: 702ce6bf-37a3-4711-a489-299b5e7ecbc0
-        package_params: {}
-      with_items: provisioned.servers
+      register: provisione
 
 
     - name: Install SQL
