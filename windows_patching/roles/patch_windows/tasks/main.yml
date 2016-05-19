@@ -7,7 +7,7 @@
   when: ("{{ definitionUpdates }}" == 'true')
 
 - include: reboot.yml
-  when: ("{{ definintion.reboot_required }}" == 'True')
+  when: ("{{ definintion.reboot_required }}" == true)
 
 - name: Apply Critical updates
   win_updates:
@@ -17,7 +17,7 @@
   when: ("{{ critical }}" == 'true')
 
 - include: reboot.yml
-  when: ("{{ criticals.reboot_required }}" == 'True')
+  when: ("{{ criticals.reboot_required }}" == true)
 
 - name: Apply Security Updates
   win_updates:
@@ -31,7 +31,7 @@
     var: security.reboot_required
 
 - include: reboot.yml
-  when: ("{{ security.reboot_required }}" == 'True')
+  when: ("{{ security.reboot_required }}" == true)
 
 - name: Install Service Packs
   win_updates:
