@@ -4,117 +4,117 @@
     category_names: "DefinitionUpdates"
     log_path: c:/definition_updates.txt
   register: definintion
-  when: "{{ definitionUpdates }}"
+  when: definitionUpdates == "true"
 
 - include: reboot.yml
-  when: definintion.reboot_required
+  when: "definintion.updates_reboot_needed is defined and definintion.updates_reboot_needed"
 
 - name: Apply Critical updates
   win_updates:
     category_names: "CriticalUpdates"
     log_path: c:/critical_updates.txt
   register: criticals
-  when: "{{ critical }}"
+  when: critical == "true"
 
 - include: reboot.yml
-  when: criticals.reboot_required
+  when: "criticals.updates_reboot_needed is defined and criticals.updates_reboot_needed"
 
 - name: Apply Security Updates
   win_updates:
     category_names: "SecurityUpdates"
     log_path: c:/security_updates.txt
   register: security
-  when: "{{ security }}"
+  when: security == "true"
 
 - include: reboot.yml
-  when: security.reboot_required
+  when: "security.updates_reboot_needed is defined and security.updates_reboot_needed"
 
 - name: Install Service Packs
   win_updates:
     category_names: "ServicePacks"
     log_path: c:/service_packs.txt
   register: sp
-  when: "{{ servicePacks }}"
+  when: servicePacks == "true"
 
 - include: reboot.yml
-  when: sp.reboot_required
+  when: "sp.updates_reboot_needed is defined and sp.updates_reboot_needed"
 
 - name: Apply General Updates
   win_updates:
     category_names: "Updates"
     log_path: c:/general_updates.txt
   register: general
-  when: "{{ updates }}"
+  when: updates == "true"
 
 - include: reboot.yml
-  when: general.reboot_required
+  when: "general.updates_reboot_needed is defined and general.updates_reboot_needed"
 
 - name: Apply Update Rollups
   win_updates:
     category_names: "UpdateRollups"
     log_path: c:/update_rollups.txt
   register: rollups
-  when: "{{ updateRollups }}"
+  when: updateRollups == "true"
 
 - include: reboot.yml
-  when: rollups.reboot_required
+  when: "rollups.updates_reboot_needed is defined and rollups.updates_reboot_needed"
 
 - name: Install Feature Packs
   win_updates:
     category_names: "FeaturePacks"
     log_path: c:/feature_packs.txt
   register: features
-  when: "{{ featurePacks }}"
+  when: featurePacks == "true"
 
 - include: reboot.yml
-  when: features.reboot_required
+  when: "features.updates_reboot_needed is defined and feature.updates_reboot_needed"
 
 - name: Apply Application Updates
   win_updates:
     category_names: "Application"
     log_path: c:/application_updates.txt
-  register: application
-  when: "{{ application }}"
+  register: application_boot
+  when: application == "true"
 
 - include: reboot.yml
-  when: application.reboot_required
+  when: "application_boot.updates_reboot_needed is defined and application_boot.updates_reboot_needed"
 
 - name: Update Connectors
   win_updates:
     category_names: "Connectors"
     log_path: c:/connector_updates.txt
-  register: connectors
-  when: ("{{ connectors }}" == 'true')
+  register: connectors_boot
+  when: connectors == "true"
 
 - include: reboot.yml
-  when: connectors.reboot_required
+  when: "connectors_boot.updates_reboot_needed is defined and connectors_boot.updates_reboot_needed"
 
 - name: Update Developer Kits
   win_updates:
     category_names: "DeveloperKits"
     log_path: c:/developer_kits.txt
   register: developer
-  when: ("{{ developerKits }}" == 'true')
+  when: developerKits == "true"
 
 - include: reboot.yml
-  when: developer.reboot_required
+  when: "developer.updates_reboot_needed is defined and developer.updates_reboot_needed"
 
 - name: Update Microsoft Tools
   win_updates:
     category_names: "Tools"
     log_path: c:/tools_updates.txt
-  register: tools
-  when: ("{{ tools }}" == 'true')
+  register: tools_boot
+  when: tools == "true"
 
 - include: reboot.yml
-  when: tools.reboot_required
+  when: "tools_boot.updates_reboot_needed is defined and tools_boot.updates_reboot_needed"
 
 - name: Update Guidance Libraries
   win_updates:
     category_names: "Guidance"
     log_path: c:/guidance_updates.txt
-  register: guidance
-  when: ("{{ guidance }}" == 'true')
+  register: guidance_boot
+  when: guidance == "true"
 
 - include: reboot.yml
-  when: guidance.reboot_required
+  when: "guidance_boot.updates_reboot_needed is defined and guidance_boot.updates_reboot_needed"
