@@ -145,11 +145,19 @@ fields:
       type: select
       required: true
       options:
-        - displayName: Windows Server 2012 Datacenter Edition  (64-bit)
-          value: WIN2012DTC-64
+        - displayName: 2012 Standard
+          value: SOFT-MSSQLSTD2012-CPU
           selected: true
-        - displayName: Windows Server 2012 R2 Datacenter Edition  (64-bit)
-          value: WIN2012R2DTC-64
+        - displayName: 2012 Enterprise
+          value: SOFT-MSSQLENT2012-CPU
+        - displayName: 2012 Web
+          value: SOFT-MSSQLWEB2012-CPU
+        - displayName: 2014 Standard
+          value: SOFT-MSSQLSTD2014-CPU
+        - displayName: 2014 Enterprise
+          value: SOFT-MSSQLENT2014-CPU
+        - displayName: 2014 Web
+          value: SOFT-MSSQLWEB2014-CPU
 
     # Features
     - name: db_features
