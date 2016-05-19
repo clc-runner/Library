@@ -1,5 +1,4 @@
 - name: Reboot server if required
-  hosts: localhost
   connection: local
   clc_server:
     server_ids: "{{ item }}"
@@ -7,7 +6,6 @@
   with_items: groups.server
 
 - name: Reboot server if required
-  hosts: localhost
   connection: local
   clc_server:
     server_ids: "{{ item }}"
