@@ -4,7 +4,8 @@ imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/RedHat.svg
 shortDescription: Create a Red Hat Enterprise Linux Server in minutes!
 version: 1.1
 updateDate: April 6, 2016
-public: true
+# Should be public
+public: false
 defaultPlaybook: playbook.yml
 author: Chris Kent
 organization: CenturyLink
