@@ -7,7 +7,7 @@
   when: definitionUpdates == "true"
 
 - include: reboot.yml
-  when: "definintion.updates_reboot_needed is defined and definintion.updates_reboot_needed"
+  when: "definintion.reboot_required is defined and definintion.reboot_required"
 
 - name: Apply Critical updates
   win_updates:
@@ -17,7 +17,7 @@
   when: critical == "true"
 
 - include: reboot.yml
-  when: "criticals.updates_reboot_needed is defined and criticals.updates_reboot_needed"
+  when: "criticals.reboot_required is defined and criticals.reboot_required"
 
 - name: Apply Security Updates
   win_updates:
@@ -27,7 +27,7 @@
   when: security == "true"
 
 - include: reboot.yml
-  when: "security.updates_reboot_needed is defined and security.updates_reboot_needed"
+  when: "security.reboot_required is defined and security.reboot_required"
 
 - name: Install Service Packs
   win_updates:
@@ -37,7 +37,7 @@
   when: servicePacks == "true"
 
 - include: reboot.yml
-  when: "sp.updates_reboot_needed is defined and sp.updates_reboot_needed"
+  when: "sp.reboot_required is defined and sp.reboot_required"
 
 - name: Apply General Updates
   win_updates:
@@ -47,7 +47,7 @@
   when: updates == "true"
 
 - include: reboot.yml
-  when: "general.updates_reboot_needed is defined and general.updates_reboot_needed"
+  when: "general.reboot_required is defined and general.reboot_required"
 
 - name: Apply Update Rollups
   win_updates:
@@ -57,7 +57,7 @@
   when: updateRollups == "true"
 
 - include: reboot.yml
-  when: "rollups.updates_reboot_needed is defined and rollups.updates_reboot_needed"
+  when: "rollups.reboot_required is defined and rollups.reboot_required"
 
 - name: Install Feature Packs
   win_updates:
@@ -67,7 +67,7 @@
   when: featurePacks == "true"
 
 - include: reboot.yml
-  when: "features.updates_reboot_needed is defined and feature.updates_reboot_needed"
+  when: "features.reboot_required is defined and feature.reboot_required"
 
 - name: Apply Application Updates
   win_updates:
@@ -77,7 +77,7 @@
   when: application == "true"
 
 - include: reboot.yml
-  when: "application_boot.updates_reboot_needed is defined and application_boot.updates_reboot_needed"
+  when: "application_boot.reboot_required is defined and application_boot.reboot_required"
 
 - name: Update Connectors
   win_updates:
@@ -87,7 +87,7 @@
   when: connectors == "true"
 
 - include: reboot.yml
-  when: "connectors_boot.updates_reboot_needed is defined and connectors_boot.updates_reboot_needed"
+  when: "connectors_boot.reboot_required is defined and connectors_boot.reboot_required"
 
 - name: Update Developer Kits
   win_updates:
@@ -97,7 +97,7 @@
   when: developerKits == "true"
 
 - include: reboot.yml
-  when: "developer.updates_reboot_needed is defined and developer.updates_reboot_needed"
+  when: "developer.reboot_required is defined and developer.reboot_required"
 
 - name: Update Microsoft Tools
   win_updates:
@@ -107,7 +107,7 @@
   when: tools == "true"
 
 - include: reboot.yml
-  when: "tools_boot.updates_reboot_needed is defined and tools_boot.updates_reboot_needed"
+  when: "tools_boot.reboot_required is defined and tools_boot.reboot_required"
 
 - name: Update Guidance Libraries
   win_updates:
@@ -117,4 +117,4 @@
   when: guidance == "true"
 
 - include: reboot.yml
-  when: "guidance_boot.updates_reboot_needed is defined and guidance_boot.updates_reboot_needed"
+  when: "guidance_boot.reboot_required is defined and guidance_boot.reboot_required"
