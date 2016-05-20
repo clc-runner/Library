@@ -19,12 +19,44 @@
 - include: reboot.yml
   when: "criticals.reboot_required is defined and criticals.reboot_required"
 
+- name: Reboot server if required
+  connection: local
+  clc_server:
+    server_ids: "{{ item }}"
+    state: stopped
+  with_items: groups.server
+  when: "criticals.reboot_required is defined and criticals.reboot_required"
+
+- name: Reboot server if required
+  connection: local
+  clc_server:
+    server_ids: "{{ item }}"
+    state: started
+  with_items: groups.server
+  when: "criticals.reboot_required is defined and criticals.reboot_required"
+
 - name: Apply Security Updates
   win_updates:
     category_names: "SecurityUpdates"
     log_path: c:/security_updates.txt
   register: security
   when: security == "true"
+
+- name: Reboot server if required
+  connection: local
+  clc_server:
+    server_ids: "{{ item }}"
+    state: stopped
+  with_items: groups.server
+  when: "security.reboot_required is defined and security.reboot_required"
+
+- name: Reboot server if required
+  connection: local
+  clc_server:
+    server_ids: "{{ item }}"
+    state: started
+  with_items: groups.server
+  when: "security.reboot_required is defined and security.reboot_required"
 
 - include: reboot.yml
   when: "security.reboot_required is defined and security.reboot_required"
@@ -37,6 +69,22 @@
   when: servicePacks == "true"
 
 - include: reboot.yml
+  when: "sp.reboot_required is defined and sp.reboot_required"
+
+- name: Reboot server if required
+  connection: local
+  clc_server:
+    server_ids: "{{ item }}"
+    state: stopped
+  with_items: groups.server
+  when: "sp.reboot_required is defined and sp.reboot_required"
+
+- name: Reboot server if required
+  connection: local
+  clc_server:
+    server_ids: "{{ item }}"
+    state: started
+  with_items: groups.server
   when: "sp.reboot_required is defined and sp.reboot_required"
 
 - name: Apply General Updates
