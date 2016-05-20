@@ -6,9 +6,6 @@
   register: definintion
   when: definitionUpdates == "true"
 
-- include: reboot.yml
-  when: "definintion.reboot_required is defined and definintion.reboot_required"
-
 - name: Apply Critical updates
   win_updates:
     category_names: "CriticalUpdates"
@@ -16,23 +13,18 @@
   register: criticals
   when: critical == "true"
 
-- include: reboot.yml
-  when: "criticals.reboot_required is defined and criticals.reboot_required"
-
 - name: Reboot server if required
   connection: local
   clc_server:
-    server_ids: "{{ item }}"
+    server_ids: uc1wftcptch04
     state: stopped
-  with_items: groups.server
   when: "criticals.reboot_required is defined and criticals.reboot_required"
 
 - name: Reboot server if required
   connection: local
   clc_server:
-    server_ids: "{{ item }}"
+    server_ids: uc1wftcptch04
     state: started
-  with_items: groups.server
   when: "criticals.reboot_required is defined and criticals.reboot_required"
 
 - name: Apply Security Updates
@@ -45,20 +37,15 @@
 - name: Reboot server if required
   connection: local
   clc_server:
-    server_ids: "{{ item }}"
+    server_ids: uc1wftcptch04
     state: stopped
-  with_items: groups.server
   when: "security.reboot_required is defined and security.reboot_required"
 
 - name: Reboot server if required
   connection: local
   clc_server:
-    server_ids: "{{ item }}"
+    server_ids: uc1wftcptch04
     state: started
-  with_items: groups.server
-  when: "security.reboot_required is defined and security.reboot_required"
-
-- include: reboot.yml
   when: "security.reboot_required is defined and security.reboot_required"
 
 - name: Install Service Packs
@@ -68,23 +55,18 @@
   register: sp
   when: servicePacks == "true"
 
-- include: reboot.yml
-  when: "sp.reboot_required is defined and sp.reboot_required"
-
 - name: Reboot server if required
   connection: local
   clc_server:
-    server_ids: "{{ item }}"
+    server_ids: uc1wftcptch04
     state: stopped
-  with_items: groups.server
   when: "sp.reboot_required is defined and sp.reboot_required"
 
 - name: Reboot server if required
   connection: local
   clc_server:
-    server_ids: "{{ item }}"
+    server_ids: uc1wftcptch04
     state: started
-  with_items: groups.server
   when: "sp.reboot_required is defined and sp.reboot_required"
 
 - name: Apply General Updates
@@ -94,18 +76,12 @@
   register: general
   when: updates == "true"
 
-- include: reboot.yml
-  when: "general.reboot_required is defined and general.reboot_required"
-
 - name: Apply Update Rollups
   win_updates:
     category_names: "UpdateRollups"
     log_path: c:/update_rollups.txt
   register: rollups
   when: updateRollups == "true"
-
-- include: reboot.yml
-  when: "rollups.reboot_required is defined and rollups.reboot_required"
 
 - name: Install Feature Packs
   win_updates:
@@ -114,18 +90,12 @@
   register: features
   when: featurePacks == "true"
 
-- include: reboot.yml
-  when: "features.reboot_required is defined and feature.reboot_required"
-
 - name: Apply Application Updates
   win_updates:
     category_names: "Application"
     log_path: c:/application_updates.txt
   register: application_boot
   when: application == "true"
-
-- include: reboot.yml
-  when: "application_boot.reboot_required is defined and application_boot.reboot_required"
 
 - name: Update Connectors
   win_updates:
@@ -134,18 +104,12 @@
   register: connectors_boot
   when: connectors == "true"
 
-- include: reboot.yml
-  when: "connectors_boot.reboot_required is defined and connectors_boot.reboot_required"
-
 - name: Update Developer Kits
   win_updates:
     category_names: "DeveloperKits"
     log_path: c:/developer_kits.txt
   register: developer
   when: developerKits == "true"
-
-- include: reboot.yml
-  when: "developer.reboot_required is defined and developer.reboot_required"
 
 - name: Update Microsoft Tools
   win_updates:
@@ -154,15 +118,9 @@
   register: tools_boot
   when: tools == "true"
 
-- include: reboot.yml
-  when: "tools_boot.reboot_required is defined and tools_boot.reboot_required"
-
 - name: Update Guidance Libraries
   win_updates:
     category_names: "Guidance"
     log_path: c:/guidance_updates.txt
   register: guidance_boot
   when: guidance == "true"
-
-- include: reboot.yml
-  when: "guidance_boot.reboot_required is defined and guidance_boot.reboot_required"
