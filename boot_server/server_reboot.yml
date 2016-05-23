@@ -2,6 +2,12 @@
   connection: local
   hosts: all
   tasks:
-    - name: Debug server
-      debug:
-        var: ansible_hostname
+    - name: Server stop
+      clc_server:
+        server_ids: "{{ ansible_hostname }}"
+        state: stopped
+
+    - name: Server start
+      clc_server:
+        server_ids: "{{ ansible_hostname }}"
+        state: started

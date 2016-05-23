@@ -1,0 +1,7 @@
+- name: Reboot a server
+  connection: local
+  hosts: all
+  tasks:
+    - name: Debug server
+      debug:
+        var: ansible_hostname
