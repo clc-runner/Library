@@ -4,12 +4,10 @@
   tasks:
     - name: Server stop
       clc_server:
-        server_ids: "{{ item }}"
+        server_ids: '{{ groups.all }}'
         state: stopped
-      with_items: '{{ groups.all }}'
 
     - name: Server start
       clc_server:
-        server_ids: "{{ item }}"
+        server_ids: '{{ groups.all }}'
         state: started
-      with_items: '{{ groups.all }}'
