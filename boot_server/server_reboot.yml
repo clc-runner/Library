@@ -2,12 +2,6 @@
   connection: local
   hosts: all
   tasks:
-    - name: Server stop
-      clc_server:
-        server_ids: '{{ groups.all }}'
-        state: stopped
-
-    - name: Server start
-      clc_server:
-        server_ids: '{{ groups.all }}'
-        state: started
+    - name: Debug server
+      debug:
+        var: id
