@@ -1,0 +1,44 @@
+---
+- name: Group ID Test
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+
+    - name: Generate Server Admin Password
+      command: openssl rand -base64 15
+      register: serverpass
+      changed_when: False
+
+    - name: Build VM
+      clc_server:
+        name: TEST
+        location: "{{ datacenter }}"
+        template: ubuntu-14-64
+        password: "{{ serverpass.stdout }}"
+        group: "{{ group_id }}"
+        count: 1
+        network_id: "{{ network_id }}"
+        cpu: 1
+        memory: 1
+        type: standard
+        storage_type: standard
+        additional_disks: []
+      register: servers
+
+    - name: Wait for SSH Services to Become Available
+      command: sleep 5
+
+    - name: Add Server To Inventory
+      add_host:
+        name={{ item.name }}
+        ansible_ssh_host={{ item.ipaddress }}
+        ansible_ssh_user=root
+        ansible_ssh_pass={{ serverpass.stdout }}
+        groups=servers
+      with_items: "{{ servers.servers }}"
+
+- name: Execute Host Operations
+  hosts: servers
+  tasks:
+  - setup:

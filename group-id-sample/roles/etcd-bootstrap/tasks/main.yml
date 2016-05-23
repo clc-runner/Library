@@ -1,0 +1,16 @@
+- name: Add etcd bootstrap service configuration.
+  template: src=etcd.conf.j2 dest=/etc/init/etcd-bootstrap.conf
+
+- name: Enable etcd bootstrap service.
+  service: name=etcd-bootstrap enabled=yes
+
+- name: Start etcd bootstrap service.
+  service: name=etcd-bootstrap state=restarted
+
+- name: Create Bootstrap Key
+  uri:
+    url: "http://{{ bootstrap_ip }}:4002/v2/keys/discovery/{{ cluster_id }}/_config/size"
+    method: PUT
+    body: "value={{ cluster_size }}"
+    HEADER_Content-Type: "application/x-www-form-urlencoded"
+    status_code: 201

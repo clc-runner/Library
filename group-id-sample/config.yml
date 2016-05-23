@@ -1,0 +1,30 @@
+name: Group Id Test
+description: Group Id Test
+shortDescription: Group Id Test
+version: 0.0.1
+updateDate: "May 23, 2016"
+public: false
+defaultPlaybook: main.yml
+author: Runner Team
+organization: Runner
+organizationUrl: https://runner.ctl.io
+
+fields:
+
+  - name: datacenter
+    displayName: Datacenter
+    type: datacenters
+    required: true
+
+  - name: network_id
+    displayName: Network
+    type: networks
+    parent: datacenter
+    required: true
+
+  - name: group_id
+    displayName: Group
+    type: groups
+    parent: datacenter
+    required: true
+

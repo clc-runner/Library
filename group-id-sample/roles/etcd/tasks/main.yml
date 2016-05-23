@@ -1,0 +1,12 @@
+- name: Download etcd release.
+  get_url: url={{ etcd_url }} dest=/tmp/
+
+- name: Unarchive etcd release.
+  unarchive: src=/tmp/{{ etcd_version }}.tar.gz dest=/var/lib/ copy=false group=root owner=root mode=755
+
+- name: Create symbolic links to etcd binaries.
+  file: src=/var/lib/{{ etcd_version }}/{{ item }} dest=/usr/bin/{{ item }} owner=root group=root state=link
+  with_items:
+    - etcd
+    - etcdctl
+

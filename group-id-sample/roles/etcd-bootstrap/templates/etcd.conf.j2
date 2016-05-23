@@ -1,0 +1,10 @@
+description "etcd bootstrap service"
+author "runner"
+
+script
+
+	ETCD_OPTS="--name bootstrap --data-dir /lib/var/{{ etcd_version }}/data-bootstrap.etcd --listen-client-urls http://0.0.0.0:4002 --advertise-client-urls http://{{ node_ip }}:4001 --listen-peer-urls http://0.0.0.0:2381"
+
+	exec etcd $ETCD_OPTS > /var/log/etcd-bootstrap.log
+
+end script
