@@ -4,4 +4,4 @@
   tasks:
     - name: Debug server
       debug:
-        var: ansible_host
+        var: ansible_hostname
