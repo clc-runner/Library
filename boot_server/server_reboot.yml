@@ -4,4 +4,4 @@
   tasks:
     - name: Debug server
       debug:
-        var: id
+        var: ansible_host
