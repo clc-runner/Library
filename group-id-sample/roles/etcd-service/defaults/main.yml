@@ -1,3 +1,0 @@
-etcd_url: https://github.com/coreos/etcd/releases/download/v2.3.3/etcd-v2.3.3-linux-amd64.tar.gz
-etcd_version: etcd-v2.3.3-linux-amd64
-cluster_id: 8dffd3567ak567l8j8hasd497fl8rh3456s3456d
