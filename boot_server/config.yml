@@ -4,7 +4,7 @@ shortDescription: Boot it
 imagePath: http://www.sqlstad.nl/wp-content/uploads/2015/10/151008-reboot-300x169.jpg
 updateDate: May 12, 2016
 public: false
-defaultPlaybook: site.yml
+defaultPlaybook: server_reboot.yml
 author: Chaser
 organization: Runner
 organizationUrl: http://runner.ctl.io
