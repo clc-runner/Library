@@ -1,0 +1,14 @@
+- hosts: all
+  gather_facts: true
+  tasks:
+    - name: Bring Debian server up to date
+      apt:
+        upgrade: dist
+        dpkg_options: 'force-confold,force-confdef'
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+
+    - name: Bring RHEL / Cent server up to date
+      command: yum update --exclude=kernel\* --exclude=nss-* -y
+      when: ansible_os_family == "RedHat"

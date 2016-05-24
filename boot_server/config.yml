@@ -20,4 +20,4 @@ fields:
       parent: datacenter
       required: true
       multiple: true
-      inventory: false
+      inventory: falseelmers89#
