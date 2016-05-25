@@ -25,6 +25,13 @@
     def_cpu: 1
     def_mem: 2
 
+    db_version: SOFT-MSSQLSTD2012-CPU
+    db_pswd: C35vqNvmkIuQ
+    db_features: SQLEngine
+    db_mode: ASM
+    db_collation: SQL_Latin1_General_CP1_CI_AS
+    db_name: MSSQL
+
   tasks:
 
     - name: Provision Windows Server 2012
@@ -37,7 +44,7 @@
         location: "{{datacenter_name}}"
         cpu: "{{def_cpu}}" # Default -- not necessary
         memory: "{{def_mem}}" # Default -- not necessary
-      register: provisione
+      register: provisioned
 
 
     - name: Install SQL
