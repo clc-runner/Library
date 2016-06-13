@@ -8,7 +8,31 @@ public: false
 
 # Allow for single panel fact collection.
 fields:
+
+  # Text Block Default
+  - name: text_block_default
+    type: textblockdefault
+    title: Short Title
+    text: This is description text that can provide valuable information to the consumer.
+
+  # Text Block Info
+  - name: text_block_info
+    type: textblockinfo
+    title: Short Title
+    text: This is description text that can provide valuable information to the consumer.
     
+  # Text Block Warning
+  - name: text_block_warning
+    type: textblockwarning
+    title: Short Title
+    text: This is description text that can provide valuable information to the consumer.
+    
+  # Text Block Danger
+  - name: text_block_danger
+    type: textblockdanger
+    title: Short Title
+    text: This is description text that can provide valuable information to the consumer.
+
   # Toggle field.
   - name: useDynamicInventory
     displayName: Use Dynamic Inventory
