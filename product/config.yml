@@ -12,28 +12,28 @@ fields:
   # Text Block Default
   - name: text_block_default
     type: textblock
-    title: Short Title
+    title: Short Title (Default)
     text: This is description text that can provide valuable information to the consumer.
 
   # Text Block Info
   - name: text_block_info
     type: textblock
     level: info
-    title: Short Title
+    title: Short Title (Info)
     text: This is description text that can provide valuable information to the consumer.
     
   # Text Block Warning
   - name: text_block_warning
     type: textblock
     level: warning
-    title: Short Title
+    title: Short Title (Warning)
     text: This is description text that can provide valuable information to the consumer.
     
   # Text Block Danger
   - name: text_block_danger
     type: textblock
     level: danger
-    title: Short Title
+    title: Short Title (Danger)
     text: This is description text that can provide valuable information to the consumer.
 
   # Toggle field.
