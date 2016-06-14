@@ -75,6 +75,7 @@ fields:
   - name: servers_single
     displayName: Servers Single (Add To Inventory)
     type: servers
+    parent: datacenter
     required: true
     multiple: false
     inventory: true
@@ -83,6 +84,7 @@ fields:
   - name: servers_multiple_props
     displayName: Servers (Add To Properties)
     type: servers
+    parent: datacenter
     required: true
     multiple: true
     inventory: false
@@ -91,6 +93,7 @@ fields:
   - name: servers_single_props
     displayName: Servers Single (Add To Properties)
     type: servers
+    parent: datacenter
     required: true
     multiple: false
     inventory: false
