@@ -72,7 +72,7 @@ fields:
   - name: minecraft_server_version
     displayName: Minecraft Version
     type: text
-    default: 1.9.4
+    default: 1.10.2
     minLength: 5
     maxLength: 10
 
