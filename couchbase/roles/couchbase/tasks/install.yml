@@ -27,10 +27,17 @@
   shell: "rpm -i /tmp/{{ couchbase_rpm }}"
   when: couchbase.rc != 0
 
-- name: Install couchbase
+- name: Install couchbase enterprise
   yum:
     name: couchbase-server
     update_cache: yes
+  when: ("{{ couchbase_enterprise }}" == 'true')
+
+- name: Install couchbase community
+  yum:
+    name: couchbase-server-community
+    update_cache: yes
+  when: ("{{ couchbase_enterprise }}" == 'false')
 
 - name: Prepare filesystem
   file:
