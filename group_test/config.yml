@@ -49,3 +49,7 @@ tags:
   - proxy
   - nginx
   - webserver
+
+requirements:
+  - clc-ansible-module==1.1.11
+  
