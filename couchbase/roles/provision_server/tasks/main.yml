@@ -1,0 +1,31 @@
+---
+- name: Generate Server Admin Password
+  command: openssl rand -base64 15
+  register: serverpass
+  changed_when: False
+
+- name: Create Server Group
+  clc_group:
+    name: "{{ server_group }}"
+    location: "{{ datacenter }}"
+    state: present
+  when: build_type is defined
+
+- include: "{{ build_type }}.yml"
+
+- name: "Wait for SSH on {{ server_name }} Servers"
+  wait_for: host={{ item.ipaddress }} port=22 delay=5 timeout=320 state=started
+  with_flattened: '{{ provisioned.servers }}'
+
+- name: Update known_hosts with new servers
+  shell: "ssh-keygen -R {{ item.ipaddress }} && ssh-keyscan -t rsa -H {{ item.ipaddress }} >> ~/.ssh/known_hosts"
+  with_flattened: '{{ provisioned.servers }}'
+
+- name: "Add {{ server_name }} Servers to an in-memory Group"
+  add_host:
+    name={{ item.name }}
+    ansible_ssh_host={{ item.ipaddress }}
+    ansible_ssh_user=root
+    ansible_ssh_pass={{ serverpass.stdout }}
+    groupname=COUCH
+  with_flattened: '{{ provisioned.servers }}'

@@ -1,0 +1,40 @@
+- name: Install dependencies
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - openssl
+    - pkgconfig
+
+- name: Stop firewalld
+  service:
+    name: firewalld
+    enabled: no
+    state: stopped
+
+- name: Set a guard to prevent reinstallation
+  shell: rpm -qa|grep couchbase
+  register: couchbase
+  ignore_errors: true
+
+- name: Pull rpm for yum utility
+  get_url:
+    url: "{{ couchbase_release }}"
+    dest: /tmp
+  when: couchbase.rc != 0
+
+- name: Install couchbase release
+  shell: "rpm -i /tmp/{{ couchbase_rpm }}"
+  when: couchbase.rc != 0
+
+- name: Install couchbase
+  yum:
+    name: couchbase-server
+    update_cache: yes
+
+- name: Prepare filesystem
+  file:
+    path: /data01
+    state: directory
+    owner: "{{ couch_user }}"
+    group: "{{ couch_group }}"

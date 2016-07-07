@@ -1,0 +1,5 @@
+- name: Build Couchbase servers
+  hosts: localhost
+  connection: localhost
+  roles:
+    - {role: provision_server, server_name: COUCH, server_group: CouchBase, server_count: 3, build_type: exact, additional_disks: [{path: /data01, sizeGB: 50, type: partitioned}]}

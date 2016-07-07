@@ -1,0 +1,15 @@
+- name: "Build {{ server_count }} {{ server_name }} Servers"
+  clc_server:
+    name: "{{ server_name }}"
+    location: "{{ datacenter }}"
+    template: "{{ server_template }}"
+    password: "{{ serverpass.stdout }}"
+    group: "{{ server_group }}"
+    count: "{{ server_count }}"
+    network_id: "{{ network_id }}"
+    cpu: "{{ cpu_count }}"
+    memory: "{{ memory_count }}"
+    type: "{{ type }}"
+    storage_type: "{{ storage_type }}"
+    additional_disks: "{{ additional_disks }}"
+  register: provisioned

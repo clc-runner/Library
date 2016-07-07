@@ -1,0 +1,7 @@
+- include: install.yml
+  tags:
+    - install
+
+- include: cluster.yml
+  tags:
+    - cluster
