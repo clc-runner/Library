@@ -13,13 +13,8 @@
 
 - include: "{{ build_type }}.yml"
 
-- name: "Wait for SSH on {{ server_name }} Servers"
-  wait_for: host={{ item.ipaddress }} port=22 delay=5 timeout=320 state=started
-  with_flattened: '{{ provisioned.servers }}'
-
-- name: Update known_hosts with new servers
-  shell: "ssh-keygen -R {{ item.ipaddress }} && ssh-keyscan -t rsa -H {{ item.ipaddress }} >> ~/.ssh/known_hosts"
-  with_flattened: '{{ provisioned.servers }}'
+- name: Wait for SSH Services to Become Available
+  command: sleep 15
 
 - name: "Add {{ server_name }} Servers to an in-memory Group"
   add_host:
