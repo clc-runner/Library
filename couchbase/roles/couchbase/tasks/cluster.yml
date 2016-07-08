@@ -1,5 +1,5 @@
 - name: Init the cluster if it hasnt been done so already
-  shell: /opt/couchbase/bin/couchbase-cli cluster-init -c 127.0.0.1:8091 --cluster-init-user={{ couchbase_admin_username }} --cluster-init-password={{ couchbase_admin_password }} --cluster-init=8091 --cluster-init-ramsize={{ couchbase_server_ram }} --services=data,index,query
+  shell: /opt/couchbase/bin/couchbase-cli cluster-init -c 127.0.0.1:8091 --cluster-init-user={{ couchbase_admin_username }} --cluster-init-password={{ couchbase_admin_password }} --cluster-init=8091 --cluster-init-ramsize={{ (memory_count|int -2) * 1024 }} --services=data,index,query
   when: ansible_ens160.ipv4.address == "{{ hostvars[groups['CouchBase'][0]]['ansible_ens160']['ipv4']['address'] }}"
 
 - name: Add other nodes to the cluster

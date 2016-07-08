@@ -42,7 +42,7 @@ fields:
     displayName: Memory
     type: slider
     required: false
-    min: 1
+    min: 4
     max: 128
     default: 16
 
