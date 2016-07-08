@@ -12,7 +12,7 @@
 - name: Add other nodes to the cluster
   shell: /opt/couchbase/bin/couchbase-cli server-add -c 127.0.0.1:8091 -u {{ couchbase_admin_username }} -p {{ couchbase_admin_password }} --server-add={{ hostvars[item]['ansible_ens160']['ipv4']['address'] }}:8091 --server-add-username={{ couchbase_admin_username }} --server-add-password={{ couchbase_admin_password }}
   when: ansible_ens160.ipv4.address == "{{ hostvars[groups['CouchBase'][0]]['ansible_ens160']['ipv4']['address'] }}"
-  with_items: "{{ groups.CouchBase }}"
+  with_items: "{{ groups['CouchBase'] }}"
 
 - name: Rebalance the cluster
   shell: /opt/couchbase/bin/couchbase-cli rebalance -c 127.0.0.1:8091 -u {{ couchbase_admin_username }} -p {{ couchbase_admin_password }}
