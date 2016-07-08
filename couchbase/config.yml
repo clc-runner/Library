@@ -1,6 +1,6 @@
 name: CouchBase
 description: Couchbase Server is an open-source, distributed (shared-nothing architecture) multi-model NoSQL document-oriented database software package that is optimized for interactive applications.
-shortDescription: 3 node CouchBase Cluster
+shortDescription: Couchbase NoSQL Database
 version: 1.0
 defaultPlaybook: site.yml
 author: Runner
