@@ -22,6 +22,14 @@ fields:
     parent: datacenter
     required: true
 
+  - name: server_count
+    displayName: Server Count
+    type: slider
+    required: false
+    min: 1
+    max: 10
+    default: 3
+
   - name: cpu_count
     displayName: CPU
     type: slider
