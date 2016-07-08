@@ -1,6 +1,6 @@
 #Couch
 
-This will install a minimally configured 3 server, clustered Couchbase instance in the CLC Cloud. The cluster will be initialized to allocate most of the available memory to the Couch installation. 
+This will install a minimally configured instance of CouchBase in the CLC Cloud. The cluster will be initialized to allocate most of the available memory to the Couch installation.  
 
 No buckets or indexes will be instantiated in this installation.
 
