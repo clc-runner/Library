@@ -9,5 +9,5 @@ couchbase_admin_username: Administrator
 couchbase_admin_password: Svvs123!!
 #couchbase_server_ram: 14000
 
-couchbase_enterprise: false
-clusterd: true
+couchbase_enterprise: "false"
+clustered: "true"
