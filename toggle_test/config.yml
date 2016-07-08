@@ -9,9 +9,11 @@ public: false
 # Allow for single panel fact collection.
 fields:
   - name: datacenter
-    displayName: Datacenter Picker
+    displayName: Location
     type: datacenters
     required: true
+    default: UC1
+
   - name: servers_single
     displayName: Servers Single (Add To Inventory)
     type: servers
@@ -19,15 +21,9 @@ fields:
     required: true
     multiple: false
     inventory: true
-  # Toggle field.
+
   - name: toggleTest
     displayName: Toggle Test
     type: toggle
     required: true
     default: true
-
-tags:
-  - cloud
-  - storage
-  - block
-  - seph
