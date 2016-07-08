@@ -3,5 +3,6 @@
     - install
 
 - include: cluster.yml
+  when: ( "{{ clustered }}" == "true" )
   tags:
     - cluster
