@@ -51,6 +51,7 @@ fields:
   - name: couchbase_enterprise
     displayName: Enterprise Edition
     type: toggle
+    required: true
     default: false
 
   - name: couchbase_admin_username
@@ -69,4 +70,5 @@ fields:
   - name: clustered
     displayName: Clustered
     type: toggle
+    required: true
     default: true
