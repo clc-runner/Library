@@ -8,7 +8,17 @@ public: false
 
 # Allow for single panel fact collection.
 fields:
-
+  - name: datacenter
+    displayName: Datacenter Picker
+    type: datacenters
+    required: true
+  - name: servers_single
+    displayName: Servers Single (Add To Inventory)
+    type: servers
+    parent: datacenter
+    required: true
+    multiple: false
+    inventory: true
   # Toggle field.
   - name: toggleTest
     displayName: Toggle Test

@@ -1,4 +1,5 @@
 - hosts: all
   tasks:
-    - name: Print OS Name 
+    - name: Print OS Name
       shell: "uname -a"
+      when: ( "{{ toggleTest }}" == 'true' )
