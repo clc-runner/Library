@@ -24,13 +24,13 @@
   yum:
     name: couchbase-server
     update_cache: yes
-  when: ( "{{ couchbase_enterprise }}" == "true" )
+  when: ( "{{ couchbase_enterprise }}" == 'true' )
 
 - name: Install couchbase community
   yum:
     name: couchbase-server-community
     update_cache: yes
-  when: ( "{{ couchbase_enterprise }}" == "false" )
+  when: ( "{{ couchbase_enterprise }}" == 'false' )
 
 - name: Prepare filesystem
   file:
