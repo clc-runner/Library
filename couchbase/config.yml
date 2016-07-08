@@ -26,7 +26,7 @@ fields:
     displayName: Server Count
     type: slider
     required: false
-    min: 1
+    min: 3
     max: 10
     default: 3
 
@@ -48,11 +48,11 @@ fields:
 
 # optional couchbase installation stuff...pretty important
 
-  - name: couchbase_enterprise
-    displayName: Enterprise Edition
-    type: toggle
-    required: true
-    default: false
+#  - name: couchbase_enterprise
+#    displayName: Enterprise Edition
+#    type: toggle
+#    required: true
+#    default: false
 
   - name: couchbase_admin_username
     type: text
@@ -67,8 +67,8 @@ fields:
     min: 6
     max: 20
 
-  - name: clustered
-    displayName: Clustered
-    type: toggle
-    required: true
-    default: true
+#  - name: clustered
+#    displayName: Clustered
+#    type: toggle
+#    required: true
+#    default: true
