@@ -64,8 +64,6 @@ fields:
   - name: couchbase_admin_password
     type: passwordStrength
     required: true
-    min: 6
-    max: 20
 
 #  - name: clustered
 #    displayName: Clustered
