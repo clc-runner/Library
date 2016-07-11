@@ -1,13 +1,13 @@
 name: CouchBase
 description: Couchbase Server is an open-source, distributed (shared-nothing architecture) multi-model NoSQL document-oriented database software package that is optimized for interactive applications.
 shortDescription: Couchbase NoSQL Database
-version: 1.0
+version: 4.0.0-4051
 defaultPlaybook: site.yml
 author: Runner
 organization: Runner
 organizationUrl: http://runner.ctl.io
 imagePath: https://raw.githubusercontent.com/docker-library/docs/00543c65b06a7f8f54aa4f7908f7d91705d8ddec/couchbase/logo.png
-public: false
+public: true
 
 fields:
   - name: datacenter
@@ -62,7 +62,7 @@ fields:
     maxLength: 20
 
   - name: couchbase_admin_password
-    type: password
+    type: passwordStrength
     required: true
     min: 6
     max: 20
