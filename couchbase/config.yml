@@ -62,6 +62,10 @@ fields:
     maxLength: 20
 
   - name: couchbase_admin_password
+    displayName: CouchBase Admin Password
+    validationMsg: Password Validation
+    requiredStrength: 4
+    dissallowedCharacters: "[]{}"
     type: passwordStrength
     required: true
 
