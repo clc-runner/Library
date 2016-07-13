@@ -65,7 +65,7 @@ fields:
     displayName: CouchBase Admin Password
     validationMsg: Password Validation
     requiredStrength: 4
-    dissallowedCharacters: "[]{}"
+    disallowedCharacters: "[]{}"
     type: passwordStrength
     required: true
 
