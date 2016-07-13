@@ -1,8 +1,0 @@
-- include: install.yml
-  tags:
-    - install
-
-- include: cluster.yml
-  when: ( "{{ clustered }}" == "true" )
-  tags:
-    - cluster

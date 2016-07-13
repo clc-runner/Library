@@ -1,4 +1,0 @@
-- hosts: CouchBase
-  gather_facts: true
-  roles:
-    - couchbase
