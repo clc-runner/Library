@@ -1,5 +1,8 @@
 - hosts: all
   tasks:
+    - name: Print value:
+      debug:
+        msg: "{{ toggleTest }}"
     - name: Print OS Name
       shell: "uname -a"
       when: ( "{{ toggleTest }}" == 'true' )
