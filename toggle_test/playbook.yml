@@ -2,8 +2,8 @@
   tasks:
     - name: Print value
       debug:
-        msg: "{{ toggleTest }}"
+        msg: "{{ toggleTesting }}"
 
     - name: Print OS Name
       shell: "uname -a"
-      when: ( "{{ toggleTest }}" == 'true' )
+      when: ( "{{ toggleTesting }}" == 'true' )
