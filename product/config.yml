@@ -37,9 +37,16 @@ fields:
     text: This is description text that can provide valuable information to the consumer.
 
   # Toggle field.
-  - name: useDynamicInventory
-    displayName: Use Dynamic Inventory
+  - name: toggleTest
+    displayName: Toggle Test
     type: toggle
+    required: true
+    
+  # Toggle field.
+  - name: toggleTestDefault
+    displayName: Toggle Test (Default)
+    type: toggle
+    default: true
     required: true
     
   # Data Center field.
