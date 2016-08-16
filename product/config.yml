@@ -128,6 +128,14 @@ fields:
     type: password
     required: true
     
+  - name: strong_password
+    displayName: Strong Password
+    validationMsg: A password must be at least 9 characters and contain at least 3 of the following (uppercase letters, lowercase letters, numbers, symbols)
+    requiredStrength: 3
+    dissallowedCharacters: "/"
+    type: passwordStrength
+    required: true
+    
   # Sample numeric field
   - name: node_count
     displayName: Cluster Nodes
