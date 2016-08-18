@@ -39,8 +39,8 @@ fields:
   - name: text_block_info
     type: textblock
     level: info
-    title: "-------"
-    text: This is description text that can provide valuable information to the consumer.
+    title: "Runner Tip"
+    text: "Did you know it's easy to setup groups and then create snapshots of all of the VMs in that group? You don't have to worry about manually adding or removing VMs as they're created.  It's automatic."
 
 
   # Servers field.
@@ -54,7 +54,7 @@ fields:
 
   # Toggle field.
   - name: server_list_toggle
-    displayName: Use Server List (Groups will not be used)
+    displayName: Use Server List
     type: toggle
     default: true
     required: false
