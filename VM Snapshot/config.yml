@@ -1,0 +1,79 @@
+name: VM Snapshot
+description: Create a snapshot of your VMs with ease.
+imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/snapshot.jpg
+shortDescription: Create a snapshot of your VMs.  Schedule them to automate it!
+version: 1.0
+updateDate: August 18, 2016
+public: false
+defaultPlaybook: playbook.yml
+author: Chris Kent
+organization: CenturyLink
+organizationUrl: http://ctl.io/runner
+
+# Allow for single panel fact collection.
+fields:
+
+  # ------------------------------------- #
+  #                                       #
+  # By default, the configuration will    #
+  # use the default values. Modify        #
+  # the following values, if you want to  #
+  # change any of the parameters.         #
+  #                                       #
+  # ------------------------------------- #
+
+
+  # Groups field.
+  - name: server_group
+    displayName: Group Picker
+    type: groups
+    parent: datacenter
+    required: true
+
+
+
+  # Servers field.
+  - name: servers_multiple
+    displayName: Servers (Add To Inventory)
+    type: servers
+    required: true
+    multiple: true
+    inventory: false
+
+  # Text Block Default
+  - name: text_block_default
+    type: textblock
+    title: "- - - - - - -"
+    text:
+
+
+  # Toggle field.
+  - name: server_list_toggle
+    displayName: Use Server List (Groups will not be used)
+    type: toggle
+    default: true
+    required: true
+
+  # Text Block Danger
+  - name: text_block_danger
+    type: textblock
+    level: danger
+    title: Inventory Selection
+    text: You can select server groups OR select individual servers. Combinations are not allowed at this time.
+
+
+
+  # Sample slider field
+  - name: slider_ttl
+    displayName: Days to Keep Snapshot
+    type: slider
+    required: true
+    min: 1
+    max: 10
+    default: 5
+
+
+tags:
+  - blogging
+  - wordpress
+  - social
