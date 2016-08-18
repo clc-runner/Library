@@ -22,13 +22,18 @@ fields:
   #                                       #
   # ------------------------------------- #
 
+  # Data Center field.
+  - name: datacenter
+    displayName: Datacenter Picker
+    type: datacenters
+    required: false
 
   # Groups field.
   - name: server_group
     displayName: Group Picker
     type: groups
     parent: datacenter
-    required: true
+    required: false
 
 
 
@@ -52,7 +57,7 @@ fields:
     displayName: Use Server List (Groups will not be used)
     type: toggle
     default: true
-    required: true
+    required: false
 
   # Text Block Danger
   - name: text_block_danger
