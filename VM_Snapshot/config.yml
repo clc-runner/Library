@@ -43,7 +43,7 @@ fields:
   # Text Block Default
   - name: text_block_default
     type: textblock
-    title: - - - - - - -
+    title: "- - - - - - -"
     text:
 
 
