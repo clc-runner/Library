@@ -35,21 +35,21 @@ fields:
     parent: datacenter
     required: false
 
+ # Text Block Info
+  - name: text_block_info
+    type: textblock
+    level: info
+    title: "-------"
+    text: This is description text that can provide valuable information to the consumer.
 
 
   # Servers field.
   - name: servers_multiple
-    displayName: Servers (Add To Inventory)
+    displayName: OR Select Servers
     type: servers
     required: true
     multiple: true
     inventory: false
-
-  # Text Block Default
-  - name: text_block_default
-    type: textblock
-    title: "- - - - - - -"
-    text:
 
 
   # Toggle field.
@@ -62,7 +62,7 @@ fields:
   # Text Block Danger
   - name: text_block_danger
     type: textblock
-    level: danger
+    level: warning
     title: Inventory Selection
     text: You can select server groups OR select individual servers. Combinations are not allowed at this time.
 
