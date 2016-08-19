@@ -220,7 +220,7 @@ class ClcSnapshot:
                 request = self._create_server_snapshot(server, expiration_days)
                 request_list.append(request)
         changed_servers = [
-            server.id for server in servers if server.id]
+            server.id for server in servers_to_change if server.id]
         return changed, request_list, changed_servers
 
     def _create_server_snapshot(self, server, expiration_days):
@@ -263,9 +263,9 @@ class ClcSnapshot:
             if not self.module.check_mode:
                 request = self._delete_server_snapshot(server)
                 request_list.append(request)
-        changed_servers = [
-            server.id for server in servers_to_change if server.id]
-        return changed, request_list, changed_servers
+        # changed_servers = [
+        #     server.id for server in servers_to_change if server.id]
+        return changed, request_list, request_list
 
     def _delete_server_snapshot(self, server):
         """
