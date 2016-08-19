@@ -28,7 +28,7 @@
         expiration_days: "{{slider_ttl}}"
         wait: True
         state: present
-        when: ( "{{ server_list_toggle }}" == 'false' )
+      when: ( "{{ server_list_toggle }}" == 'false' )
 
     - name: Create server snapshot with groups
       clc_server_snapshot:
@@ -36,4 +36,4 @@
         expiration_days: "{{slider_ttl}}"
         wait: True
         state: present
-        when: ( "{{ server_list_toggle }}" == 'false' )
+      when: ( "{{ server_list_toggle }}" == 'false' )
