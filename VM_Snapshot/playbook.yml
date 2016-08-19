@@ -16,7 +16,7 @@
 - name: Create VM Snapshot
   hosts: localhost
   connection: local
-  gather_facts: true
+  gather_facts: false
   vars:
     expiration_days: 1
 
@@ -30,7 +30,7 @@
         state: present
       when: not "{{ server_list_toggle }}"
 
-    - name: Create server snapshot with groups
+    - name: Create server snapshot with list
       clc_server_snapshot:
         server_ids: "{{servers_multiple}}"
         expiration_days: "{{slider_ttl}}"
