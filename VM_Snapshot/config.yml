@@ -4,7 +4,7 @@ imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/snapshot.j
 shortDescription: Create a snapshot of your VMs.  Schedule them to automate it!
 version: 1.0
 updateDate: August 18, 2016
-public: false
+public: true
 defaultPlaybook: playbook.yml
 author: Chris Kent
 organization: CenturyLink
