@@ -1,6 +1,6 @@
 
-
 # Create Snapshots of your VM with ease!
+
 
 
 ### To create a snapshot select one of the following:
@@ -9,6 +9,7 @@
 
 *Please note: Only one option can be used for creating snapshots.  This means you will need to either choose your groups or choose servers to take a snapshot of.  There is a toggle for this delineation.*
 
+<br><br>
 
 ___
 
