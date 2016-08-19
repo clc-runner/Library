@@ -23,13 +23,19 @@
 
 
   tasks:
+    - name: Get Group Members
+      clc_group_fact:
+        group_id: "{{server_group}}"
+      register: server_group_list
+      when: server_list_toggle == false
+
     - name: Create server snapshot with groups
       clc_server_snapshot:
-        server_ids: "{{server_group}}"
+        server_ids: "{{server_group_list.servers}}"
         expiration_days: "{{slider_ttl}}"
         wait: True
         state: present
-      when: "{{ server_list_toggle }} == false"
+      when: server_list_toggle == false
 
     - name: Create server snapshot with list
       clc_server_snapshot:
