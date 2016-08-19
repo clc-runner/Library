@@ -27,7 +27,7 @@
       clc_group_fact:
         group_id: "{{server_group}}"
       register: server_group_list
-      when: server_list_toggle == false
+      when: "{{ server_list_toggle }} == false"
 
     - debug: var=server_group_list
 
@@ -37,7 +37,7 @@
         expiration_days: "{{slider_ttl}}"
         wait: True
         state: present
-      when: server_list_toggle == false
+      when: "{{ server_list_toggle }} == false"
 
     - name: Create server snapshot with list
       clc_server_snapshot:
