@@ -47,7 +47,7 @@ fields:
   - name: servers_multiple
     displayName: OR Select Servers
     type: servers
-    required: true
+    required: false
     multiple: true
     inventory: false
 

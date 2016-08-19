@@ -20,15 +20,12 @@
   vars:
     expiration_days: 1
 
-
-
   tasks:
-    - name: Get Group Members
+    - name: Get group servers
       clc_group_fact:
         group_id: "{{server_group}}"
       register: server_group_list
       when: "{{ server_list_toggle }} == false"
-
 
     - name: Remove group snapshots if present
       clc_server_snapshot:
@@ -45,6 +42,14 @@
         wait: True
         state: present
       when: "{{ server_list_toggle }} == false"
+
+    - name: Remove server snapshot if present
+      clc_server_snapshot:
+        server_ids: "{{servers_multiple}}"
+        expiration_days: "{{slider_ttl}}"
+        wait: True
+        state: absent
+      when: "{{ server_list_toggle }}"
 
     - name: Create server snapshot with list
       clc_server_snapshot:
