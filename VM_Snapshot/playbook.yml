@@ -29,6 +29,8 @@
       register: server_group_list
       when: server_list_toggle == false
 
+    - debug: var=server_group_list
+
     - name: Create server snapshot with groups
       clc_server_snapshot:
         server_ids: "{{server_group_list.servers}}"
