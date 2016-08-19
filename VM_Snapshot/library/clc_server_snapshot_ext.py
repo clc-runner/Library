@@ -211,10 +211,9 @@ class ClcSnapshot:
         servers = self._get_servers_from_clc(
             server_ids,
             'Failed to obtain server list from the CLC API')
-        # servers_to_change = [
-        #     server for server in servers if len(
-        #         server.GetSnapshots()) == 0]
-        for server in servers:
+        servers_to_change = [
+            server for server in servers if True]
+        for server in servers_to_change:
             changed = True
             if not self.module.check_mode:
                 request = self._create_server_snapshot(server, expiration_days)
@@ -256,16 +255,15 @@ class ClcSnapshot:
             server_ids,
             'Failed to obtain server list from the CLC API')
         servers_to_change = [
-            server for server in servers if len(
-                server.GetSnapshots()) > 0]
+            server for server in servers if True]
         for server in servers_to_change:
             changed = True
             if not self.module.check_mode:
                 request = self._delete_server_snapshot(server)
                 request_list.append(request)
-        # changed_servers = [
-        #     server.id for server in servers_to_change if server.id]
-        return changed, request_list, request_list
+        changed_servers = [
+            server.id for server in servers_to_change if server.id]
+        return changed, request_list, changed_servers
 
     def _delete_server_snapshot(self, server):
         """
