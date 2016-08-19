@@ -123,6 +123,7 @@ from distutils.version import LooseVersion
 
 try:
     import requests
+    import json
 except ImportError:
     REQUESTS_FOUND = False
 else:
@@ -236,7 +237,7 @@ class ClcSnapshot:
                 expiration_days=expiration_days)
         except CLCException as ex:
             self.module.fail_json(msg='Failed to create snapshot for server : {0}. {1}'.format(
-                server.id, ex.response_text
+                server.id, json.dumps(ex)
             ))
         return result
 
