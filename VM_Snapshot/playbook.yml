@@ -29,10 +29,17 @@
       register: server_group_list
       when: "{{ server_list_toggle }} == false"
 
-    - debug: var=server_group_list
 
     - name: Create server snapshot with groups
-      clc_server_snapshot_ext:
+      clc_server_snapshot:
+        server_ids: "{{server_group_list.group.servers}}"
+        expiration_days: "{{slider_ttl}}"
+        wait: True
+        state: absent
+      when: "{{ server_list_toggle }} == false"
+
+    - name: Create server snapshot with groups
+      clc_server_snapshot:
         server_ids: "{{server_group_list.group.servers}}"
         expiration_days: "{{slider_ttl}}"
         wait: True
@@ -40,7 +47,7 @@
       when: "{{ server_list_toggle }} == false"
 
     - name: Create server snapshot with list
-      clc_server_snapshot_ext:
+      clc_server_snapshot:
         server_ids: "{{servers_multiple}}"
         expiration_days: "{{slider_ttl}}"
         wait: True
