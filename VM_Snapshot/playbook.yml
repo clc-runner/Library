@@ -33,7 +33,7 @@
 
     - name: Create server snapshot with groups
       clc_server_snapshot:
-        server_ids: "{{server_group_list.servers}}"
+        server_ids: "{{server_group_list.group.servers}}"
         expiration_days: "{{slider_ttl}}"
         wait: True
         state: present
