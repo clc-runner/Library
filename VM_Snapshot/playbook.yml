@@ -38,5 +38,3 @@
         wait: True
         state: present
       when: "{{ server_list_toggle }}"
-
-    - debug: var="{{server_list_toggle}}"
