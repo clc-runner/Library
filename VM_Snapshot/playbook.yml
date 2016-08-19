@@ -21,6 +21,7 @@
     expiration_days: 1
 
 
+
   tasks:
     - name: Create server snapshot with groups
       clc_server_snapshot:
@@ -37,3 +38,5 @@
         wait: True
         state: present
       when: "{{ server_list_toggle }}"
+
+    - debug: var="{{server_list_toggle}}"
