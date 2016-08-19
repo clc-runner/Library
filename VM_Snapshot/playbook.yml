@@ -30,7 +30,7 @@
       when: "{{ server_list_toggle }} == false"
 
 
-    - name: Create server snapshot with groups
+    - name: Remove group snapshots if present
       clc_server_snapshot:
         server_ids: "{{server_group_list.group.servers}}"
         expiration_days: "{{slider_ttl}}"
