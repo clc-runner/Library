@@ -29,7 +29,7 @@
         expiration_days: "{{slider_ttl}}"
         wait: True
         state: present
-      when: "{{ server_list_toggle }}" not defined
+      when: "{{ server_list_toggle }}" is undefined
 
     - name: Create server snapshot with list
       clc_server_snapshot:
