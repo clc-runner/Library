@@ -80,11 +80,11 @@ fields:
 
 
 tags:
-  - ops
-  - snapshot
-  - server
-  - backup
-  - copy
-  - clc
-  - centurylink
-  - save
+- ops
+- snapshot
+- server
+- backup
+- copy
+- clc
+- centurylink
+- save
