@@ -1,4 +1,4 @@
-name: Create Windows Server 2012 with SQL Server
+name: Create Windows + SQL Server
 description: Create a Microsoft Windows 2012 server and install SQL Server
 imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/windows-sql.png
 shortDescription: Create a Windows Server with SQL in minutes!
@@ -120,7 +120,7 @@ fields:
 
     #---#---#---#---#---#---#---#---#---#---#---#
     # SQL Required Information / configuration  #
-    #---#---#---#---#---#---#---#---#---#---#---# 
+    #---#---#---#---#---#---#---#---#---#---#---#
 
     # Server Password
     - name: db_pswd
