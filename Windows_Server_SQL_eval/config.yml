@@ -1,4 +1,4 @@
-name: Create Windows + SQL Server EVAL
+name: Windows + SQL Server EVAL ONLY
 description: Create a Microsoft Windows 2012 server and install SQL Server
 imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/windows-sql.png
 shortDescription: Create a Windows Server with SQL in minutes!
