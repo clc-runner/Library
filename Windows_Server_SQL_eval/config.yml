@@ -161,6 +161,7 @@ fields:
       options:
         - displayName: Database Engine Services
           value: SQLEngine
+          selected: true
         - displayName: SQL Server Replication
           value: Replication
         - displayName: Full-Text Search
