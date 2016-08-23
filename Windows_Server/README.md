@@ -9,6 +9,9 @@ ___
 ### Provisioning Steps
 1. Provision Virtual Machine
 2. Install Operating System selected
+3. Install WinRM to enable Remote Management
+3. Upgrade Powershell
+4. Apply Hotfix
 
 ___
 

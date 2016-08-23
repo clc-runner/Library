@@ -2,7 +2,7 @@ name: Create Windows Server 2012 with SQL Server
 description: Create a Microsoft Windows 2012 server and install SQL Server
 imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/windows-sql.png
 shortDescription: Create a Windows Server with SQL in minutes!
-version: 1.9
+version: 1.0.1
 updateDate: August 22, 2016
 public: true
 defaultPlaybook: playbook.yml
@@ -120,12 +120,12 @@ fields:
 
     #---#---#---#---#---#---#---#---#---#---#---#
     # SQL Required Information / configuration  #
-    #---#---#---#---#---#---#---#---#---#---#---# 
+    #---#---#---#---#---#---#---#---#---#---#---#
 
     # Server Password
     - name: db_pswd
       displayName: SQL admin password
-      type: password
+      type: passwordStrength
       required: true
       minLength: 1
       maxLength: 35
@@ -141,23 +141,16 @@ fields:
 
     # SQL version
     - name: db_version
-      displayName: SQL version
+      displayName: SQL Evaluation Version
       type: select
       required: true
       options:
-        - displayName: 2012 Standard
-          value: SOFT-MSSQLSTD2012-CPU
+        - displayName: 2014 Evaluation
+          value: SOFT-MSSQLEVAL2014-CPU
           selected: true
-        - displayName: 2012 Enterprise
-          value: SOFT-MSSQLENT2012-CPU
-        - displayName: 2012 Web
-          value: SOFT-MSSQLWEB2012-CPU
-        - displayName: 2014 Standard
-          value: SOFT-MSSQLSTD2014-CPU
-        - displayName: 2014 Enterprise
-          value: SOFT-MSSQLENT2014-CPU
-        - displayName: 2014 Web
-          value: SOFT-MSSQLWEB2014-CPU
+        - displayName: 2016 Evaluation
+          value: SOFT-MSSQLEVAL2016-CPU
+
 
     # Features
     - name: db_features
@@ -172,20 +165,16 @@ fields:
           value: Replication
         - displayName: Full-Text Search
           value: FullText
-        - displayName: Data Quality Services [2012-2014 Only]
+        - displayName: Data Quality Services
           value: DQS
         - displayName: Analysis Services
           value: AS
         - displayName: Reporting Services
           value: RS
-        - displayName: Data Quality Client [2012-2014 Only]
+        - displayName: Data Quality Client
           value: DQC
-        - displayName: Master Data Services [2012-2014 Only]
+        - displayName: Master Data Services
           value: MDS
-        - displayName: Management Tools
-          value: SSMS
-        - displayName: Data Tools (Business Intelligence Development Studio) [2008-2012 Only]
-          value: BIDS
         - displayName: Documentation Components
           value: BOL
         - displayName: Integration Services
@@ -206,6 +195,8 @@ fields:
           value: Latin1_General_BIN
         - displayName: Latin1_General_CI_AS
           value: Latin1_General_CI_AS
+        - displayName: Latin1_General_CI_KS_WS
+          value: Latin1_General_CI_KS_WS
 
     # SQL mode
     - name: db_mode
