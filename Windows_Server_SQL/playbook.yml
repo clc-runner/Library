@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ---
-- name: Windows Server 2012
+- name: Windows Server 2012 with SQL
   hosts: localhost
   connection: local
   gather_facts: true
@@ -71,5 +71,5 @@
       clc_blueprint_package:
         server_ids: "{{ item.name }}"
         package_id: 7286d4ea-1c83-11e2-b279-e02d6288709b
-        package_params: {'T3.sql.SAPassword':'{{db_pswd}}', 'ProductCode':'{{db_version}}', 'T3.sql.Features':'{{db_features}}', 'T3.sql.ASMode':'{{db_mode}}', 'T3.sql.Instance':'{{db_name}}', 'T3.sql.SQLCOLLATION':'{{db_collation}}'}
+        package_params: {"T3.sql.SAPassword":"{{db_pswd}}", "ProductCode":"{{db_version}}", "T3.sql.Features":"{{db_features}}", "T3.sql.ASMode":"{{db_mode}}", "T3.sql.Instance":"{{db_name}}", "T3.sql.SQLCOLLATION":"{{db_collation}}"}
       with_items: provisioned.servers
