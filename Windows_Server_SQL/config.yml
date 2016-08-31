@@ -161,7 +161,7 @@ fields:
 
         - displayName: 2016 Enterprise Edition
           value: SOFT-MSSQLENT2016-CPU
-					selected: true
+          selected: true
         - displayName: 2016 Standard Edition
           value: SOFT-MSSQLSTD2016-CPU
         - displayName: 2016 Web Edition
