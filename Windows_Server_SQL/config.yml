@@ -1,5 +1,5 @@
-name: Windows + SQL Server
-description: Create a Microsoft Windows 2012 server and install SQL Server
+name: Microsoft SQL Server + Windows
+description: Install SQL Server on a new Windows 2012 Server
 imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/windows-sql.png
 shortDescription: Create a Windows Server with SQL in minutes!
 version: 1.9
@@ -141,23 +141,32 @@ fields:
 
     # SQL version
     - name: db_version
-      displayName: SQL version
+      displayName: SQL Server version
       type: select
       required: true
       options:
-        - displayName: 2012 Standard
-          value: SOFT-MSSQLSTD2012-CPU
-          selected: true
-        - displayName: 2012 Enterprise
+        - displayName: 2012 Enterprise Edition
           value: SOFT-MSSQLENT2012-CPU
-        - displayName: 2012 Web
+        - displayName: 2012 Standard Edition
+          value: SOFT-MSSQLSTD2012-CPU
+        - displayName: 2012 Web Edition
           value: SOFT-MSSQLWEB2012-CPU
-        - displayName: 2014 Standard
-          value: SOFT-MSSQLSTD2014-CPU
-        - displayName: 2014 Enterprise
+
+        - displayName: 2014 Enterprise Edition
           value: SOFT-MSSQLENT2014-CPU
-        - displayName: 2014 Web
+        - displayName: 2014 Standard Edition
+          value: SOFT-MSSQLSTD2014-CPU
+        - displayName: 2014 Web Edition
           value: SOFT-MSSQLWEB2014-CPU
+
+        - displayName: 2016 Enterprise Edition
+          value: SOFT-MSSQLENT2016-CPU
+					selected: true
+        - displayName: 2016 Standard Edition
+          value: SOFT-MSSQLSTD2016-CPU
+        - displayName: 2016 Web Edition
+          value: SOFT-MSSQLWEB2016-CPU
+
 
     # Features
     - name: db_features
@@ -173,19 +182,19 @@ fields:
           value: Replication
         - displayName: Full-Text Search
           value: FullText
-        - displayName: Data Quality Services [2012-2014 Only]
+        - displayName: Data Quality Services
           value: DQS
         - displayName: Analysis Services
           value: AS
         - displayName: Reporting Services
           value: RS
-        - displayName: Data Quality Client [2012-2014 Only]
+        - displayName: Data Quality Client 
           value: DQC
-        - displayName: Master Data Services [2012-2014 Only]
+        - displayName: Master Data Services
           value: MDS
-        - displayName: Management Tools
+        - displayName: Management Tools [2012-2014 Only]
           value: SSMS
-        - displayName: Data Tools (Business Intelligence Development Studio) [2008-2012 Only]
+        - displayName: Data Tools (Business Intelligence Development Studio) [2012 Only]
           value: BIDS
         - displayName: Documentation Components
           value: BOL
@@ -226,3 +235,6 @@ tags:
   - database
   - windows
   - sql
+  - productivity
+  - microsoft
+  - server
