@@ -1,5 +1,0 @@
----
-- hosts: rabbit
-  gather_facts: true
-  roles:
-    - rabbit

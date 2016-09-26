@@ -1,3 +1,0 @@
----
-- include: build_server.yml
-- include: rabbit.yml

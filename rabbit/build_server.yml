@@ -1,6 +1,0 @@
----
-- name: Build Rabbit Server
-  hosts: localhost
-  connection: local
-  roles:
-     - build_server
