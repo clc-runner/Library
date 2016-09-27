@@ -1,0 +1,89 @@
+---
+
+cloudera_mysql_password: "{{ cloudera_mysql_password_input | default('XXXXX') }}"
+cloudera_cmf_password: "{{ cloudera_cmf_password_input | default('QQQQQQQ') }}"
+
+cloudera_amon_password: "{{cloudera_cmf_password}}"
+cloudera_rman_password: "{{cloudera_cmf_password}}"
+
+cloudera_oozie_password: "{{ cloudera_oozie_password_input | default('DDDDDD') }}"
+cloudera_hive_password: "{{ cloudera_hive_password_input | default('CCCCCC') }}"
+cloudera_hue_password: "{{ cloudera_hue_password_input | default('EEEEEEE') }}"
+
+
+cluster_size:
+  test:
+    masters:
+      srv_count: 1
+      srv_type: standard
+      cores: 2
+      mem: 8
+      disk: 50
+    workers:
+      srv_count: 1
+      srv_type: standard
+      cores: 4
+      mem: 8
+      disk: 200
+  small_hyper:
+    masters:
+      srv_count: 2
+      srv_type: hyperscale
+      cores: 4
+      mem: 16
+      disk: 150
+    workers:
+      srv_count: 4
+      srv_type: hyperscale
+      cores: 8
+      mem: 24
+      disk: 1024
+  large_hyper:
+    masters:
+      srv_count: 3
+      srv_type: hyperscale
+      cores: 8
+      mem: 32
+      disk: 150
+    workers:
+      srv_count: 10
+      srv_type: hyperscale
+      cores: 16
+      mem: 64
+      disk: 1024
+  medium_bare:
+    masters:
+      srv_count: 3
+      srv_type: hyperscale
+      cores: 4
+      mem: 16
+      disk: 150
+    workers:
+      srv_count: 6
+      srv_type: bareMetal
+      bare_metal_id: "medium"
+      cores: 1
+      disk: 1
+      mem: 1
+  large_bare:
+    masters:
+      srv_count: 3
+      srv_type: hyperscale
+      cores: 8
+      mem: 32
+      disk: 150
+    workers:
+      srv_count: 12
+      srv_type: bareMetal
+      bare_metal_id: "large"
+      cores: 1
+      disk: 1
+      mem: 1
+
+
+cluster_size_selected: 'test'
+masters_config: "{{ cluster_size[cluster_size_selected]['masters'] }}"
+workers_config: "{{ cluster_size[cluster_size_selected]['workers'] }}"
+cloudera_manager_ip: "{{ hostvars[groups['New_Hadoop_Masters'][0]]['ansible_ssh_host'] }}"
+
+aa_policy: 'Hadoop AA Policy'

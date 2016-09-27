@@ -1,0 +1,10 @@
+
+# Arguments for the daemon:
+
+# Use the name of the config file to distinguish different Kibana services
+
+export DAEMON_PROG={{install_dir}}/kibana4/bin/kibana
+export DAEMON_PROCNAME="kibana.yml"
+export DAEMON_ARGS="-c /etc/kibana/kibana.yml"
+export DAEMON_SHELL=1
+export DAEMON_LOGFILE={{log_dir}}/kibana.log

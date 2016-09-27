@@ -1,0 +1,11 @@
+---
+
+spark_version: 1.6.1
+hadoop_version: hadoop2.6
+download_url: http://mirrors.sonic.net/apache/spark/spark-{{spark_version}}/spark-{{spark_version}}-bin-{{hadoop_version}}.tgz
+
+install_dir: opt/spark
+data_dir: data1/spark
+master_host: "{{ hostvars[groups['New_Spark_Cluster'][0]]['ansible_ssh_host'] }}"
+master_port: 7077
+spark_master: spark://{{master_host}}:{{master_port}}

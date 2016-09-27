@@ -1,0 +1,18 @@
+
+# Export so that kafka-run-class.sh can pick them up:
+
+export KAFKA_JMX_OPTS="-Djava.rmi.server.hostname={{ansible_fqdn}} -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.net.preferIPv4Stack=true"
+export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:/etc/kafka/log4j.properties"
+export KAFKA_HEAP_OPTS="-Xms{{config.kafka_heap}} -Xmx{{config.kafka_heap}}"
+export KAFKA_JVM_PERFORMANCE_OPTS="-XX:PermSize=48m -XX:MaxPermSize=48m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+CMSClassUnloadingEnabled -XX:+CMSScavengeBeforeRemark -XX:+DisableExplicitGC -Djava.awt.headless=true"
+export KAFKA_OPTS="-XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=20M"
+
+export JMX_PORT=9901
+export SCALA_VERSION={{scala_version}}.0
+export SCALA_BINARY_VERSION={{scala_version}}
+
+# Arguments for the daemon:
+
+export DAEMON_PROG=/{{install_dir}}/kafka/bin/kafka-run-class.sh
+export DAEMON_PROCNAME=kafka.Kafka
+export DAEMON_ARGS="-daemon -name kafka -loggc -Djava.rmi.server.hostname={{ansible_fqdn}} kafka.Kafka /etc/kafka/kafka.config"

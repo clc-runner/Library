@@ -1,0 +1,31 @@
+---
+
+# Expects the following variables:
+#   port: the port to add
+#   comment: the comment to attach to the rule (for replays)
+#
+# NOTE: Only tested on CentOS
+
+
+- name: Get current iptables rules
+  shell: iptables -L
+  register: iptablesrules
+  always_run: yes
+
+- name: Add iptable rule
+  command: /sbin/iptables -I INPUT 1 -p tcp --dport {{port}} -j ACCEPT -m comment --comment '{{comment}}'
+  when: iptablesrules.stdout.find("{{comment}}") == -1
+
+- name: save iptables
+  shell: service iptables save
+  when: iptablesrules.stdout.find("{{comment}}") == -1
+
+- name: Update iptables to store changes
+  command: /sbin/chkconfig iptables on
+  when: iptablesrules.stdout.find("{{comment}}") == -1
+
+- name: restart iptables
+  service:
+    name: iptables
+    state: restarted
+  when: iptablesrules.stdout.find("{{comment}}") == -1

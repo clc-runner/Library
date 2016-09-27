@@ -1,0 +1,5 @@
+---
+
+elasticsearch_version: "2.3.4"
+install_dir: usr/share
+data_dir: data1/elasticsearch

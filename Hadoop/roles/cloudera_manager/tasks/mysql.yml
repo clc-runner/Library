@@ -1,0 +1,119 @@
+---
+
+# Refer to http://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_mysql.html
+
+ - name: Install MySQL
+   yum:
+     name: "{{item}}"
+   with_items:
+    - mysql-server
+    - python-pip
+
+ - name: Python - Install packages
+   pip:
+     name: "{{item}}"
+     extra_args: "--quiet"
+   with_items:
+    - requests==2.2.1
+    - MySQL-python==1.2.3rc1
+
+ - name: Create MySQL directories
+   file:
+     dest: "{{item}}"
+     state: directory
+     group: mysql
+     owner: mysql
+   with_items:
+    - /data1/mysql/
+    - /{{mysql_data_dir}}
+    - /{{mysql_log_dir}}
+
+ - name: Update MySQL properties
+   template:
+     src: etc/my.cnf
+     dest: /etc/my.cnf
+
+ - name: Move MySQL data directory
+   shell: mv /var/lib/mysql/{{item}} /{{mysql_data_dir}}
+   register: cmd_result
+   failed_when: (cmd_result.rc == 1 and cmd_result.stderr.find("No such file or directory") == -1)
+   with_items:
+    - ib*
+    - mysql
+
+ - name: Start MySQL on boot
+   command: /sbin/chkconfig mysqld on
+
+ - name: Start MySQL
+   service:
+     name: mysqld
+     state: started
+
+ - name: Change root user password for localhost
+   mysql_user:
+     login_host: "{{ansible_hostname|lower}}"
+     login_user: root
+     login_password: ""
+     host: localhost
+     name: root
+     password: "{{cloudera_mysql_password}}"
+     priv: "*.*:ALL,GRANT"
+   register: root_result
+   failed_when: (root_result.failed == True and root_result.msg is defined and root_result.msg.find("unable to connect to database") == -1)
+
+ - name: Change root user password for all other hosts
+   mysql_user:
+     login_host: localhost
+     login_user: root
+     login_password: "{{cloudera_mysql_password}}"
+     host: "{{item}}"
+     name: root
+     password: "{{cloudera_mysql_password}}"
+     priv: "*.*:ALL,GRANT"
+   with_items:
+    - 127.0.0.1
+    - "{{ansible_hostname|lower}}"
+
+ - name: Delete anonymous MySQL user
+   mysql_user:
+     login_host: "{{ansible_hostname|lower}}"
+     login_user: root
+     login_password: "{{cloudera_mysql_password}}"
+     host: "{{item}}"
+     user: ""
+     state: absent
+   with_items:
+    - "{{inventory_hostname}}"
+    - localhost
+
+ - name: Remove the MySQL test database
+   mysql_db:
+     login_host: "{{inventory_hostname}}"
+     login_user: root
+     login_password: "{{cloudera_mysql_password}}"
+     name: test
+     state: absent
+
+ - name: Create databases
+   mysql_db:
+     login_host: "{{inventory_hostname}}"
+     login_user: root
+     login_password: "{{cloudera_mysql_password}}"
+     name: "{{item.database}}"
+     state: present
+     encoding: utf8
+   with_items:
+    - "{{mysql_databases}}"
+
+ - name: Add database users
+   mysql_user:
+     login_host: "{{inventory_hostname}}"
+     login_user: root
+     login_password: "{{cloudera_mysql_password}}"
+     host: '%'
+     name: "{{item.user}}"
+     password: "{{item.password}}"
+     priv: "{{item.database}}.*:ALL,GRANT"
+   with_items:
+    - "{{mysql_databases}}"
+   no_log: True

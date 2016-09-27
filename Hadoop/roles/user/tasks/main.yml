@@ -1,0 +1,18 @@
+---
+
+# Expects the following variables:
+#   group_name: the name of the group to create and add the user to
+#   user_name: the name of the user
+#
+# NOTE: Only tested on CentOS
+
+ - name: Create group {{group_name}}
+   group:
+     name: "{{group_name}}"
+     state: present
+
+ - name: Create user {{user_name}}
+   user:
+     name: "{{user_name}}"
+     groups: "{{group_name}}"
+     state: present

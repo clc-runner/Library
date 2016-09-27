@@ -1,0 +1,6 @@
+
+# Logrotate configuration.
+#
+# Use defaults from /etc/logrotate/logrotate.conf (deployed by centos role) unless there is a good reason not to.
+
+{{log_dir}}/kibana.log { }

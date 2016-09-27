@@ -1,0 +1,14 @@
+---
+
+port: {{kibana_port}}
+host: "0.0.0.0"
+
+elasticsearch_url: {{elasticsearch_url}}
+elasticsearch_preserve_host: true
+
+kibana_index: ".kibana"
+
+default_app_id: "discover"
+
+pid_file: /var/lock/kibana/kibana.pid
+log_file: {{log_dir}}/kibana.log

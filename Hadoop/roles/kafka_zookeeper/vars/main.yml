@@ -1,0 +1,11 @@
+---
+
+cache_dir: data1/download_cache
+install_dir: var/lib
+install_version: kafka_{{scala_version}}-{{kafka_version}}
+
+temp_tar: kafka_{{kafka_version}}_{{scala_version}}.tgz
+binary_url: http://apache.spinellicreations.com/kafka/{{kafka_version}}/kafka_{{scala_version}}-{{kafka_version}}.tgz
+
+log_dir: data1/zookeeper/logs
+data_dir: data1/zookeeper/data

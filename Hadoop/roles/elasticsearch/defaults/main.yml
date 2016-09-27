@@ -1,0 +1,5 @@
+---
+
+cluster_name: 'My_Cluster'
+
+num_replicas: "{% if config.srv_count == 1 %}0{% else %}1{% endif %}"

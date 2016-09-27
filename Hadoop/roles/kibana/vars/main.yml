@@ -1,0 +1,10 @@
+---
+
+kibana_port:    5601
+
+# IMPORTANT: If you change the version you must also change it in the elk_kibana role!
+kibana_version: "4.5.4"
+
+cache_dir: /data1/download_cache
+install_dir: /usr/bin
+log_dir: /data1/kibana/logs

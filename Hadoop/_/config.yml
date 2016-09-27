@@ -1,0 +1,81 @@
+name: Cloudera (CDH) Hadoop v5.8.X
+description: Cloudera's release of CDH version 5.8.X
+shortDescription: Create a Hadoop cluster in minutes
+imagePath: http://hadoop.apache.org/images/hadoop-logo.jpg
+version: 1.0.0
+updateDate: Aug 3, 2016
+public: true
+defaultPlaybook: ../hadoop_product.yml
+author: Analytics Team
+organization: CenturyLink
+organizationUrl: http://runner.ctl.io
+
+fields:
+
+  # Account info
+
+  - name: datacenter
+    displayName: Datacenter
+    type: datacenters
+    required: true
+
+  - name: network_name
+    displayName: Network
+    type: networks
+    parent: datacenter
+    required: true
+
+  - name: srv_group_id
+    displayName: Group
+    type: groups
+    parent: datacenter
+    required: true
+
+  # Parameters
+
+  - name: srv_password
+    displayName: Server root Password
+    type: password
+    required: true
+
+  - name: config_selected
+    displayName: Hadoop server types
+    type: select
+    options:
+      - displayName: 'Test - 1 Services VM, 1 Worker VM'
+        value: 'test'
+      - displayName: 'Hyperscale Small - 2 Services VMs, 4 Worker VMs'
+        value: 'small_hyper'
+      - displayName: 'Hyperscale Large - 3 Services VMs, 10 Worker VMs'
+        value: 'large_hyper'
+      - displayName: 'Bare Metal Small - 3 Hyperscale Services VMs, 6 Worker (12-core) VMs'
+        value: 'medium_bare'
+      - displayName: 'Bare Metal Large - 3 Hyperscale Services VMs, 12 Worker (20-core) VMs'
+        value: 'large_bare'
+
+  - name: cloudera_mysql_password_input
+    displayName: MySQL database password
+    type: password
+    required: true
+
+  - name: cloudera_cmf_password_input
+    displayName: Cloudera Manager (cmf, amon, rman) database password
+    type: password
+    required: true
+
+  - name: cloudera_oozie_password_input
+    displayName: Oozie (oozie) database password
+    type: password
+
+  - name: cloudera_hive_password_input
+    displayName: Hive (hive) database password
+    type: password
+
+  - name: cloudera_hue_password_input
+    displayName: Hue (hue) database password
+    type: password
+
+tags:
+  - bigdata
+  - cloud
+  - hadoop

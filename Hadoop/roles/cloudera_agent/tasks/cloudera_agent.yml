@@ -1,0 +1,51 @@
+---
+
+ - name: Install Cloudera Agent
+   yum: name={{item}}
+   with_items:
+    - cloudera-manager-agent
+    - cloudera-manager-daemons
+
+ - name: Link /var/log/cloudera-scm-agent -> /{{log_dir}}/cloudera-scm-agent
+   file:
+     state: link
+     force: yes
+     dest: /var/log/cloudera-scm-agent
+     src: /{{log_dir}}/cloudera-scm-agent
+
+ - name: Create agent directories
+   file:
+     name: "{{item}}"
+     state: directory
+     owner: cloudera-scm
+     group: cloudera-scm
+   with_items:
+    - /{{log_dir}}
+    - /{{log_dir}}/cloudera-scm-agent
+
+ - name: Create parcel directory
+   file:
+     name: /{{parcel_dir}}
+     state: directory
+     owner: cloudera-scm
+     group: cloudera-scm
+
+ - name: Configure agent INI file
+   ini_file:
+     dest: /etc/cloudera-scm-agent/config.ini
+     section: "{{item.section}}"
+     option: "{{item.option}}"
+     value: "{{item.value}}"
+   with_items:
+   - { section: "General", option: "server_host", value: "{{cloudera_manager_ip}}" }
+   - { section: "General", option: "log_file", value: "/data1/cloudera/log/cloudera-scm-agent/cloudera-scm-agent.log" }
+   - { section: "General", option: "parcel_dir", value: "{{parcel_dir}}" }
+   - { section: "General", option: "listening_hostname", value: "{{ansible_hostname}}" }
+   - { section: "General", option: "reported_hostname", value: "{{ansible_hostname}}" }
+   - { section: "General", option: "listening_ip", value: "{{ansible_ssh_host}}" }
+   - { section: "JDBC", option: "cloudera_mysql_connector_jar", value: "/usr/share/java/mysql-connector-java.jar" }
+
+ - name: Start agent
+   service:
+     name: cloudera-scm-agent
+     state: started

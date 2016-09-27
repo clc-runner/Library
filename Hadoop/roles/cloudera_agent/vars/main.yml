@@ -1,0 +1,9 @@
+---
+
+cdh_repo: https://archive.cloudera.com/cm5/redhat/6/x86_64/cm/cloudera-manager.repo
+mysql_jdbc_file: mysql-connector-java-5.1.38
+mysql_jdbc_link: http://dev.mysql.com/get/Downloads/Connector-J/{{mysql_jdbc_file}}
+
+cache_dir: data1/download_cache
+parcel_dir: data1/cloudera/parcels
+log_dir: data1/cloudera/log

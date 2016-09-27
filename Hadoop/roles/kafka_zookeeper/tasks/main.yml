@@ -1,0 +1,56 @@
+---
+
+ - name: Create cache directory
+   file:
+     dest: /{{cache_dir}}
+     state: directory
+
+ - name: Download binaries {{kafka_version}} for Scala {{scala_version}}
+   get_url:
+     url: "{{binary_url}}"
+     dest: /{{cache_dir}}/{{temp_tar}}
+   register: download_result
+
+ - name: Unpack binaries
+   command: sudo tar xf /{{cache_dir}}/{{temp_tar}} --exclude='server.properties' --exclude='zookeeper.properties' -C /{{install_dir}}/
+   when: download_result|changed
+   changed_when: False
+
+ - name: Link /{{install_dir}}/kafka -> /{{install_dir}}/{{install_version}}
+   file:
+     state: link
+     dest: /{{install_dir}}/kafka
+     src: /{{install_dir}}/{{install_version}}
+
+ - name: Create Zookeeper directories
+   file:
+     state: directory
+     path: "{{item}}"
+     force: yes
+     owner: zookeeper
+     group: zookeeper
+   with_items:
+    - /{{log_dir}}
+    - /{{data_dir}}
+    - /etc/zookeeper
+
+ - name: Link the Zookeeper logs folder
+   file:
+     state: link
+     force: yes
+     dest: /{{install_dir}}/kafka/logs
+     src: /{{log_dir}}
+     owner: zookeeper
+     group: zookeeper
+
+ - name: Upload Zookeeper configuration files
+   template:
+     src: "{{item}}"
+     dest: /{{item}}
+     owner: zookeeper
+     group: zookeeper
+   with_items:
+    - etc/zookeeper/zookeeper.config
+    - data1/zookeeper/data/myid
+    - etc/zookeeper/log4j.properties
+    - etc/default/zookeeper

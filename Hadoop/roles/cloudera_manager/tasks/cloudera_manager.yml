@@ -1,0 +1,44 @@
+---
+
+ - name: Create manager directories
+   file:
+     name: "{{item}}"
+     state: directory
+     owner: cloudera-scm
+     group: cloudera-scm
+   with_items:
+    - /{{log_dir}}
+    - /{{log_dir}}/cloudera-scm-server
+    - /data1/cloudera/run/
+
+ - name: Install Cloudera Manager
+   yum: name={{item}}
+   with_items:
+    - cloudera-manager-daemons
+    - cloudera-manager-server
+
+ - name: Remove embedded DB config file
+   file:
+     name: /etc/cloudera-scm-server/db.mgmt.properties
+     state: absent
+
+ - name: Configure manager DB properties
+   template:
+     src: etc/cloudera-scm-server/db.properties
+     dest: /etc/cloudera-scm-server/db.properties
+
+ - name: Configure logging
+   lineinfile:
+     dest: /etc/default/cloudera-scm-server
+     line: export CMF_VAR=/data1/cloudera/
+     state: present
+
+ - name: Configure log4j
+   copy:
+     src: etc/cloudera-scm-server/log4j.properties
+     dest: /etc/cloudera-scm-server/log4j.properties
+
+ - name: Start Cloudera Manager
+   service:
+     name: cloudera-scm-server
+     state: started

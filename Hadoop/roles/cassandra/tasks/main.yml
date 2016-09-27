@@ -1,0 +1,107 @@
+---
+
+- name: Create cache directory
+  file:
+    dest: /{{cache_dir}}
+    state: directory
+
+- name: Download Cassandra
+  get_url:
+    url: "http://apache.mirrors.ionfish.org/cassandra/3.5/apache-cassandra-3.5-bin.tar.gz"
+    dest: /{{cache_dir}}/cassandra.tar.gz
+
+- name: Unpack binaries
+  command: tar xf /{{cache_dir}}/cassandra.tar.gz
+  args:
+    chdir: /{{cache_dir}}
+
+- name: Move to install dir
+  shell: mv /{{cache_dir}}/apache-cassandra-3.5 /{{install_dir}}/
+
+- name: Create a link from install dir
+  file:
+    state: link
+    force: yes
+    src: /{{install_dir}}/apache-cassandra-3.5
+    dest: /{{install_dir}}/cassandra
+    owner: cassandra
+    group: cassandra
+
+- name: Remove conf
+  file:
+    state: absent
+    path: /{{install_dir}}/cassandra/conf
+
+- name: Create data and log directories
+  file:
+    state: directory
+    src: "{{item}}"
+    path: /{{item}}
+    owner: cassandra
+    group: cassandra
+    mode: 0755
+  with_items:
+   - "{{conf_dir}}"
+   - "{{data_dir}}/commitlog"
+   - "{{data_dir}}/data"
+   - "{{data_dir}}/hints"
+   - "{{data_dir}}/log"
+   - "{{data_dir}}/saved_caches"
+   - "{{data_dir}}/triggers"
+   - usr/share/cassandra/logs
+
+- name: Set OS limits
+  copy:
+    src: "{{item}}"
+    dest: /{{item}}
+  with_items:
+   - etc/security/limits.d/cassandra.conf
+
+- name: Template config files
+  template:
+    src: "{{item}}"
+    dest: /{{item}}
+    owner: cassandra
+    group: cassandra
+    mode: 0644
+  with_items:
+   - "{{conf_dir}}/cassandra.yaml"
+   - "{{conf_dir}}/cassandra-env.sh"
+   - "{{conf_dir}}/cassandra-rackdc.properties"
+   - "{{conf_dir}}/cassandra-topology.properties"
+   - "{{conf_dir}}/jvm.options"
+   - "{{conf_dir}}/cassandra.in.sh"
+   - etc/default/cassandra
+
+- name: Upload raw config files
+  copy:
+    src: "{{item}}"
+    dest: /{{item}}
+    owner: cassandra
+    group: cassandra
+    mode: 0644
+  with_items:
+   - "{{conf_dir}}/commitlog_archiving.properties"
+   - "{{conf_dir}}/cqlshrc.sample"
+   - "{{conf_dir}}/hotspot_compiler"
+   - "{{conf_dir}}/logback.xml"
+   - "{{conf_dir}}/logback-tools.xml"
+   - "{{conf_dir}}/metrics-reporter-config-sample.yaml"
+   - "{{conf_dir}}/README.txt"
+
+- name: Set environment variables
+  template:
+    src: etc/profile.d/cassandra.sh
+    dest: /etc/profile.d/cassandra.sh
+    owner: cassandra
+    group: cassandra
+    mode: 0755
+
+- name: Create a link for logs
+  file:
+    state: link
+    force: yes
+    src: /{{install_dir}}/cassandra/logs
+    dest: /{{data_dir}}/log
+    owner: cassandra
+    group: cassandra

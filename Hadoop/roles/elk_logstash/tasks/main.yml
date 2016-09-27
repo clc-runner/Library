@@ -1,0 +1,17 @@
+---
+
+ # Add logstash config to point to elasticsearch
+
+ - name: Copy basic configuration file
+   template:
+     src: "{{item}}"
+     dest: /{{item}}
+     owner: logstash
+     group: logstash
+   with_items:
+    - etc/logstash/conf.d/basic.conf
+
+ - name: Start logstash
+   service:
+     name: logstash
+     state: started

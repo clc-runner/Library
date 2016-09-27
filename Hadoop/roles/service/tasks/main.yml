@@ -1,0 +1,31 @@
+---
+
+# Expects the following variables:
+#   service_owner: the user which will run the service
+#   service_name: the name of the service
+#
+# NOTE: Only tested on CentOS
+
+
+ - name: Create service lock directory
+   file:
+     state: directory
+     path: /var/lock/{{service_name}}
+     owner: "{{service_owner}}"
+     group: "{{service_owner}}"
+
+ - name: Install service init.d script
+   copy:
+     src: etc/init.d/service
+     dest: /etc/init.d/{{service_name}}
+     mode: 0755
+
+ - name: Set service to autostart
+   command: /sbin/chkconfig {{service_name}} on
+
+ - name: Start service
+   become: yes
+   become_user: "{{service_owner}}"
+   service:
+     name: "{{service_name}}"
+     state: started

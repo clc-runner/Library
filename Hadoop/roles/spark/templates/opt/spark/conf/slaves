@@ -1,0 +1,4 @@
+# Spark slaves list
+{% for host in groups['New_Spark_Cluster'] %}
+{{ hostvars[host]['ansible_ssh_host'] }}
+{% endfor %}

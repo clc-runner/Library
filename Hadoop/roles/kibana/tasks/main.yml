@@ -1,0 +1,45 @@
+---
+
+ - name: Create cache directory
+   file:
+     path: "{{cache_dir}}"
+     state: directory
+
+ - name: Download binaries for version {{kibana_version}}
+   get_url: url=https://download.elastic.co/kibana/kibana/kibana-{{kibana_version}}-linux-x64.tar.gz dest={{cache_dir}}/
+
+ - name: Unpack {{kibana_version}} binaries
+   command: tar xf {{cache_dir}}/kibana-{{kibana_version}}-linux-x64.tar.gz -C {{install_dir}}/
+   changed_when: False
+
+ - name: Link kibana4 -> kibana-{{kibana_version}}
+   file:
+     dest: /usr/bin/kibana4
+     src: "{{install_dir}}/kibana-{{kibana_version}}-linux-x64"
+     state: link
+     force: yes
+     owner: kibana
+     group: kibana
+
+ - name: Create application directories
+   file:
+     path: "{{item}}"
+     state: directory
+     recurse: yes
+     owner: kibana
+     group: kibana
+   with_items:
+    - "{{log_dir}}"
+    - /etc/kibana
+    - "{{install_dir}}/kibana-{{kibana_version}}-linux-x64"  #apply permissions
+
+ - name: Update configuration
+   template:
+     src: "{{item}}"
+     dest: /{{item}}
+     owner: kibana
+     group: kibana
+   with_items:
+    - etc/default/kibana
+    - etc/kibana/kibana.yml
+    - etc/logrotate.d/kibana

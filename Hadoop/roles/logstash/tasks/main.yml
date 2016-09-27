@@ -1,0 +1,78 @@
+---
+
+ - name: Import GPG key
+   shell: rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+ - name: Add Logstash repo
+   copy:
+     src: "{{item}}"
+     dest: /{{item}}
+     owner: logstash
+     group: logstash
+   with_items:
+    - etc/yum.repos.d/logstash.repo
+
+ - name: Install Logstash version {logstash_version}
+   yum:
+     name: logstash
+
+ - name: Create directories
+   file:
+     state: directory
+     path: "{{item}}"
+     owner: logstash
+     group: logstash
+   with_items:
+    - "{{log_dir}}"
+    - /etc/logstash/conf.d
+
+ - name: Copy test configuration file
+   copy:
+     src: "{{item}}"
+     dest: /{{item}}
+     owner: logstash
+     group: logstash
+   with_items:
+    - etc/logstash/conf.d/test.conf
+
+ - name: Template service file
+   template:
+     src: "{{item}}"
+     dest: /{{item}}
+     owner: logstash
+     group: logstash
+   with_items:
+    - etc/default/logstash
+
+ - name: Install logrotate configuration
+   template:
+     src: "{{item}}"
+     dest: /{{item}}
+     mode: 0644
+   with_items:
+    - etc/logrotate.d/logstash
+
+ - name: Ensure service is running and auto starts
+   service:
+     name: logstash
+     state: started
+     enabled: yes
+   register: service_result
+
+ - name: Validate with test configuration
+   shell: tail -1 {{log_dir}}/logstash.stdout
+   register: log_result
+   until: log_result.stdout.find("Logstash started OK.") != -1
+   retries: 30
+   delay: 3
+   changed_when: False
+   failed_when: False
+   when: service_result|changed
+
+ - name: Remove test configuration file
+   file:
+     src: "{{item}}"
+     dest: /{{item}}
+     state: absent
+   with_items:
+    - etc/logstash/conf.d/test.conf

@@ -1,0 +1,91 @@
+---
+
+ - name: Give elasticsearch user unlimited memlock, more file handles and dump
+   lineinfile:
+     dest: /etc/security/limits.conf
+     insertafter: EOF
+     line: "{{item}}"
+     create: yes
+   with_items:
+    - "elasticsearch - memlock unlimited"
+    - "elasticsearch - core unlimited"
+
+ - name: Give elasticsearch service unlimited memlock
+   lineinfile:
+     dest: /usr/lib/systemd/system/elasticsearch.service
+     insertafter: EOF
+     line: "{{item}}"
+     create: yes
+   with_items:
+    - "LimitMEMLOCK=infinity"
+
+ - name: Download repo GPG key
+   shell: rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+ - name: Update yum repos
+   copy:
+     src: "{{item}}"
+     dest: /{{item}}
+   with_items:
+    - etc/yum.repos.d/elasticsearch.repo
+
+ - name: Install elasticsearch package version {{elasticsearch_version}}
+   yum:
+     name: elasticsearch-{{elasticsearch_version}}
+     state: present
+
+ - name: Create directories
+   file:
+     state: directory
+     path: "{{item}}"
+     owner: elasticsearch
+     group: elasticsearch
+   with_items:
+    - /{{data_dir}}/data
+    - /{{data_dir}}/tmp
+    - /{{data_dir}}/logs
+
+ - name: Link /var/log/elasticsearch -> /{{data_dir}}/elasticsearch/logs
+   file:
+     state: link
+     force: yes
+     dest: /var/log/elasticsearch
+     src: /{{data_dir}}/logs
+
+ - name: Update configuration files
+   template:
+     src: "{{item}}"
+     dest: /{{item}}
+     owner: elasticsearch
+     group: elasticsearch
+     mode: 0644
+   with_items:
+    - etc/elasticsearch/elasticsearch.yml
+    - etc/elasticsearch/logging.yml
+    - etc/sysconfig/elasticsearch
+
+ - name: Ensure service is running and auto starts
+   service:
+     name: elasticsearch
+     state: started
+     enabled: yes
+
+ - name: Configure cron job to clean up log files
+   cron:
+     name: "elasticsearch_log_cleanup"
+     minute: "5"
+     job: 'find /{{data_dir}}/logs -name \"*.log.*\"  -type f \( -mmin +{{24 * 60}} -o \( -mmin +{{4 * 60}} -a -size +{{1000 * 10}}M \) \) -delete > /dev/null 2>&1'
+
+ - name: Validate cluster
+   uri:
+     url: http://{{ansible_ssh_host}}:9200/_cluster/health
+     return_content: yes
+   register: http_result
+   until: >
+    ( http_result is defined and "{{http_result.status}}" == "200" ) and
+    ( "{{http_result.json.status}}" == "green" ) and
+    ( "{{http_result.json.unassigned_shards|default(1)}}" == "0" )
+   retries: 15
+   delay: 10
+   changed_when: False
+   run_once: True

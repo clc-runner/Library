@@ -1,0 +1,7 @@
+---
+
+datacenter: 'CA3'
+srv_os: 'centos-6-64'
+srv_password: 'BadPass1!'
+use_hyperscale: False
+use_aa: "{{use_hyperscale}}"

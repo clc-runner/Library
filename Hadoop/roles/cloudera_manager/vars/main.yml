@@ -1,0 +1,13 @@
+---
+
+log_dir: data1/cloudera/log
+mysql_data_dir: data1/mysql/data
+mysql_log_dir: data1/mysql/log
+
+mysql_databases:
+ - { database: 'amon',      user: 'amon',   password: '{{cloudera_amon_password}}' }   # Activity Monitor
+ - { database: 'rman',      user: 'rman',   password: '{{cloudera_rman_password}}' }
+ - { database: 'metastore', user: 'hive',   password: '{{cloudera_hive_password}}' }   # Hive
+ - { database: 'cmf',       user: 'cmf',    password: '{{cloudera_cmf_password}}' }
+ - { database: 'oozie',     user: 'oozie',  password: '{{cloudera_oozie_password}}' }  # Oozie
+ - { database: 'hue',       user: 'hue',    password: '{{cloudera_hue_password}}' }

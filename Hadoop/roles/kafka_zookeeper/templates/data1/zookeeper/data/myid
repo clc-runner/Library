@@ -1,0 +1,1 @@
+{% for thishost in play_hosts %}{% if inventory_hostname == thishost %}{{ server_id }}{% endif %}{% endfor %}

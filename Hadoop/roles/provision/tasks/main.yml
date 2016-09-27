@@ -1,0 +1,99 @@
+---
+
+# Expects a dict named 'config' with the following attributes:
+#
+# config:
+#   bare_metal_id: "{{bare_metal_small_configuration_id}}"  (bareMetal only)
+#   srv_count: 1
+#   srv_type: (standard, hyperscale, bareMetal) 
+#   cores: 1
+#   disk: 50
+#   mem: 2
+#
+# It also expects the following to be defined:
+#
+# tmp_group  (the group name to use in the following plays)
+# srv_name_prefix  (string, 1-5 characters)
+# network_name  (string, id of network to create server on)
+# aa_policy  (string, hyperscale only)
+# bare_metal_size (string, small medium or large, bareMetal only)
+# bare_metal_os_type  (string, bareMetal only)
+
+
+ - name: Environment setup
+   set_fact:
+     is_runner: "{{ lookup('env', 'IS_ON_RUNNER') | default(True, true) | bool }}"
+     hyperscale: "{{config.srv_type == 'hyperscale'}}"
+     bare_metal: "{{config.srv_type == 'bareMetal'}}"
+
+ - name: Get group name (if not provided)
+   clc_group_fact:
+     group_id: "{{srv_group_id}}"
+   register: group_facts
+   when: srv_group_id is defined
+
+ - name: Set server group (if not provided)
+   set_fact:
+     srv_group: "{{group_facts.group.name}}"
+   when: srv_group_id is defined
+
+ - name: Create server group if needed
+   clc_group:
+     name: "{{srv_group}}"
+     location: "{{datacenter}}"
+     state: present
+     parent: 'Default Group'
+   when: srv_group_id is not defined
+
+ - name: Create AA Policy if needed
+   clc_aa_policy:
+     name: "{{aa_policy}}"
+     location: "{{datacenter}}"
+     state: present
+   when: hyperscale|bool == true
+
+ - name: Create server(s)
+   clc_server:
+     location: "{{datacenter}}"
+     group: "{{srv_group}}"
+     name: "{{srv_name_prefix}}"
+     template: "{{srv_os}}"
+     count: "{{config.srv_count}}"
+     password: "{{srv_password}}"
+     additional_disks:
+      - { path: /data1, sizeGB: "{{config.disk}}", type: partitioned }
+     memory: "{{config.mem}}"
+     cpu: "{{config.cores}}"
+     type: "{{config.srv_type}}"
+     storage_type: "{% if hyperscale|bool %}hyperscale{% else %}standard{% endif %}"
+     network_id: "{% if network_name is defined %}{{network_name}}{% endif %}"
+     anti_affinity_policy_name: "{% if hyperscale|bool %}{{aa_policy}}{% endif %}"
+     configuration_id: "{% if bare_metal|bool %}{% if bare_metal_size == 'large' %}{{bare_metal_large_configuration_id}}{% elif bare_metal_size == 'medium' %}{{bare_metal_medium_configuration_id}}{% else %}{{bare_metal_small_configuration_id}}{% endif %}{% endif %}"
+     os_type: "{{bare_metal_default_os_type}}"
+     wait: True
+   register: clc
+
+ - name: Wait for SSH to come up
+   wait_for:
+     host: "{{item.ipaddress}}"
+     port: 22
+     delay: 5
+     timeout: 750
+   with_items: clc.servers
+
+ # Remove IPs for newly created servers from known hosts so that SSH does not refuse to connect to them
+
+ - name: Remove IPs from local known hosts
+   local_action: command ssh-keygen -f "~/.ssh/known_hosts" -R {{item.ipaddress}}
+   with_items: clc.servers
+   when: is_runner | bool == False
+
+ - name: Add server(s) to group
+   add_host:
+     name: "{{item.name}}"
+     ansible_ssh_host: "{{item.ipaddress}}"
+     ansible_ssh_user: "root"
+     ansible_ssh_pass: "{{srv_password}}"
+     groupname: "{{tmp_group}}" # Follow-up plays shouldn't affect existing VMs
+     server_id: "{% for h in clc.servers %}{% if item.name == h.name %}{{loop.index}}{% endif %}{% endfor %}"
+   with_items: clc.servers

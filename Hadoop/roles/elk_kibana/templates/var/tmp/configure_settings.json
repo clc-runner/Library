@@ -1,0 +1,2 @@
+{ "index": { "_index": ".kibana", "_type": "config", "_id": "{{kibana_version}}" } }
+{ "buildNum": "{{kibana_build}}", "defaultIndex": "logstash-*" }

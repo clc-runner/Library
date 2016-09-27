@@ -1,0 +1,4 @@
+---
+
+# change this to work on an actual server during testing
+elasticsearch_url: 'http://localhost:9200'

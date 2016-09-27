@@ -1,0 +1,33 @@
+---
+
+ - name: Create Kafka directories
+   file:
+     state: directory
+     path: "{{item}}"
+     force: yes
+     owner: kafka
+     group: kafka
+   with_items:
+    - /{{log_dir}}
+    - /{{data_dir}}
+    - /etc/kafka
+
+ - name: Link the Kafka logs folder to the one on the data disk
+   file:
+     state: link
+     force: yes
+     dest: /{{install_dir}}/kafka/logs
+     src: /{{log_dir}}"
+     owner: kafka
+     group: kafka
+
+ - name: Expand Kafka configuration files
+   template:
+     src: "{{item}}"
+     dest: /{{item}}
+     owner: kafka
+     group: kafka
+   with_items:
+    - etc/kafka/kafka.config
+    - etc/kafka/log4j.properties
+    - etc/default/kafka

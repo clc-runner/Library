@@ -1,0 +1,8 @@
+---
+
+# IMPORTANT: If you change the version you must also change it in the kibana role!
+kibana_version: "4.5.4"
+
+kibana_build:  "10000"
+
+cache_dir: data1/download_cache

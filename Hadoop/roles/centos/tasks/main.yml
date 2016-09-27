@@ -1,0 +1,69 @@
+---
+
+# If needed, you can pass in extra user file limits settings in the following format:
+#
+# user_file_limits:
+#  - { user: "kafka", limit: 256000 }
+#  - { user: "zookeeper", limit: 64000 }
+
+ - name: Update hosts file
+   template:
+     src: etc/hosts
+     dest: /etc/hosts
+
+ - name: Install Java
+   yum:
+     name: java-1.8.0-openjdk.x86_64
+     state: present
+
+ - name: Give users more file handles
+   lineinfile:
+     dest: /etc/security/limits.conf
+     insertafter: EOF
+     line: "{{item.user}} - nofile {{item.limit}}"
+     create: yes
+   with_items: user_file_limits
+   when: user_file_limits is defined
+
+ - name: Disable swap
+   shell: sudo swapoff -a
+
+ - name: Disable swap permanently
+   lineinfile:
+     dest: /etc/fstab
+     regexp: swap
+     state: absent
+
+ - name: Update sysctl settings
+   sysctl:
+     name: "{{item.name}}"
+     value: "{{item.value}}"
+     reload: yes
+     ignoreerrors: yes
+   with_items:
+    - { name: "vm.swappiness",    value: 1 }
+    - { name: "vm.max_map_count", value: 262144 }
+    - { name: "fs.file-max",      value: 256000 }
+    - { name: "net.ipv4.tcp_keepalive_time",    value: 60 }
+    - { name: "net.ipv4.tcp_keepalive_probes",  value: 6 }
+    - { name: "net.ipv4.tcp_keepalive_intvl",   value: 10 }
+
+ - name: Install default logrotate configuration
+   copy:
+     src: "{{item}}"
+     dest: /{{item}}
+     mode: 0644
+   with_items:
+    - etc/logrotate.conf
+
+ - name: Ensure logrotate configuration directory exists
+   file:
+     state: directory
+     path: /etc/logrotate.d
+
+ - name: Run logrotate every hour
+   cron:
+     name: logrotate
+     minute: "5"
+     job: "/etc/cron.daily/logrotate >> /var/log/logrotate_hourly.log 2>&1"
+     state: present

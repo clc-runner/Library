@@ -1,0 +1,14 @@
+
+# Logrotate configuration.
+#
+# Use defaults from /etc/logrotate/logrotate.conf (deployed by centos role) unless there is a good reason not to.
+
+{{log_dir}}/*.err        {}
+{{log_dir}}/*.stdout     {}
+
+# These files can get really big really fast if there are logs of schema errors reported. Clean them up aggressively.
+
+{{log_dir}}/logstash.log {
+    nodelaycompress
+    rotate 3
+}

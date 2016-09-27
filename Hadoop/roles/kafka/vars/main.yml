@@ -1,0 +1,4 @@
+---
+
+log_dir: data1/kafka/logs
+data_dir: data1/kafka/data

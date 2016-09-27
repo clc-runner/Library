@@ -1,0 +1,6 @@
+---
+
+cache_dir: data1/download_cache
+install_dir: usr/share
+data_dir: data1/cassandra
+conf_dir: etc/cassandra

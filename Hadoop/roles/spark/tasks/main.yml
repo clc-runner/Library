@@ -1,0 +1,65 @@
+---
+
+ - name: Download Spark
+   get_url:
+     url: "{{download_url}}"
+     dest: /tmp/spark-{{spark_version}}.tgz
+
+ - name: Extract Spark archive
+   command: sudo tar zxvf /tmp/spark-{{spark_version}}.tgz -C /opt/
+
+ - name: Create link to Spark directory
+   file:
+     src: /opt/spark-{{spark_version}}-bin-{{hadoop_version}}
+     dest: /{{install_dir}}
+     state: link
+
+ - name: Create link to Spark directory
+   file:
+     path: /{{item}}
+     state: directory
+   with_items:
+    - "{{data_dir}}/local"
+    - "{{data_dir}}/work"
+
+ - name: Upload configuration
+   template:
+     src: "{{item}}"
+     dest: /{{item}}
+   with_items:
+    - opt/spark/conf/spark-env.sh
+    - opt/spark/conf/slaves
+    - opt/spark/conf/spark-defaults.conf
+
+ - name: Create logging directories
+   file:
+     path: /{{item}}
+     state: directory
+   with_items:
+    -
+
+ - name: Create logging directory
+   file:
+     path: "{{install_dir}}/logs"
+     state: directory
+
+ - name: Start Spark master
+   shell: /{{install_dir}}/sbin/start-master.sh
+   when: server_id|int == 1
+   run_once: True
+
+ - name: Start Spark slave
+   shell: /{{install_dir}}/sbin/start-slave.sh {{spark_master}}
+
+ - name: Ensure Spark is running
+   uri:
+     url: http://{{master_host}}:8080
+     return_content: no
+     validate_certs: no
+   when: server_id|int == 1
+   register: http_result
+   until: ( http_result is defined and http_result.status == 200 )
+   retries: 30
+   delay: 2
+   changed_when: False
+   run_once: True

@@ -1,0 +1,56 @@
+---
+
+- name: Remove python-pip yum package
+  yum: name=python-pip state=absent
+
+- name: Copy get-pip.py
+  copy:
+    src: var/tmp/get-pip.py
+    dest: /{{cache_dir}}/
+
+- name: Install pip
+  command: /usr/bin/python /{{cache_dir}}/get-pip.py
+  register: pip_result
+  changed_when: False
+
+- name: Install packages
+  pip: name={{item}} extra_args="--quiet"
+  with_items:
+   - pip==8.1.2
+   - elasticsearch==2.3.0
+   - requests==2.10.0
+   - argparse==1.4.0
+   - httplib2==0.9.2
+
+- name: Install six package with easy_install
+  command: easy_install six==1.10.0
+  changed_when: ( "Adding six 1.10.0 to easy-install.pth file" in pip_result.stdout )
+
+- name: Install dashboard app
+  copy:
+    src: "{{item}}"
+    dest: /{{item}}
+    mode: 0755
+  with_items:
+   - var/tmp/kibana_dashboard_loader.py
+   - var/tmp/basic_dashboard.json
+   - var/tmp/index_pattern.json
+
+- name: Upload settings file
+  template:
+    src: "{{item}}"
+    dest: /{{item}}
+    mode: 0755
+  with_items:
+   - var/tmp/configure_settings.json
+
+- name: Push settings configuration
+  command: curl -XPOST '{{elasticsearch_url}}/_bulk' --data-binary "@/var/tmp/configure_settings.json"
+  changed_when: False
+
+- name: Push index pattern
+  command: curl -XPOST '{{elasticsearch_url}}/_bulk' --data-binary "@/var/tmp/index_pattern.json"
+  changed_when: False
+
+- name: Create basic dashboard
+  command: /var/tmp/kibana_dashboard_loader.py -f /var/tmp/basic_dashboard.json -e {{elasticsearch_url}}

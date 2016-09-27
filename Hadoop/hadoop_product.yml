@@ -1,0 +1,51 @@
+---
+
+- name: Build Hadoop Service VMs
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+   - hadoop_product/config_vars.yml
+  vars:
+    srv_name_prefix: 'HDPMGR'
+    tmp_group: 'New_Hadoop_Masters'
+    config: "{{masters_config}}"
+  roles:
+   - provision
+
+- name: Build Hadoop Workers
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars_files:
+   - hadoop_product/config_vars.yml
+  vars:
+    srv_name_prefix: 'HDPWRK'
+    tmp_group: 'New_Hadoop_Workers'
+    config: "{{workers_config}}"
+  roles:
+   - provision
+
+- name: Setup CentOS
+  hosts: New_Hadoop_Masters:New_Hadoop_Workers
+  user: root
+  roles:
+   - centos
+
+- name: Setup Cloudera Agent
+  hosts: New_Hadoop_Masters:New_Hadoop_Workers
+  user: root
+  vars_files:
+   - hadoop_product/config_vars.yml
+  roles:
+   - { role: user, user_name: cloudera-scm, group_name: cloudera-scm }
+   - cloudera_agent
+
+- name: Setup Cloudera Manager
+  hosts: 'New_Hadoop_Masters'
+  user: root
+  vars_files:
+   - hadoop_product/config_vars.yml
+  roles:
+   - { role: user, when: ( ansible_ssh_host == cloudera_manager_ip ), user_name: mysql, group_name: mysql }
+   - { role: cloudera_manager, when: ( ansible_ssh_host == cloudera_manager_ip ) }

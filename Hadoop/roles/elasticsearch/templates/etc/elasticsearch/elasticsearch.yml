@@ -1,0 +1,138 @@
+{% if srv_count|int < 3 %}{% set num_masters = 1 %}{% else %}{% set num_masters = 3 %}{% endif %}
+
+# ======================== Elasticsearch Configuration =========================
+#
+# NOTE: Elasticsearch comes with reasonable defaults for most settings.
+#       Before you set out to tweak and tune the configuration, make sure you
+#       understand what are you trying to accomplish and the consequences.
+#
+# The primary way of configuring a node is via this file. This template lists
+# the most important settings you may want to configure for a production cluster.
+#
+# Please see the documentation for further information on configuration options:
+# <http://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html>
+#
+# ---------------------------------- Cluster -----------------------------------
+#
+# Use a descriptive name for your cluster:
+
+cluster.name: {{cluster_name}}
+
+# ------------------------------------ Node ------------------------------------
+#
+# Use a descriptive name for the node:
+
+node.name: {{cluster_name}}_node_{{server_id}}
+
+# Add custom attributes to the node:
+#
+# node.rack: r1
+
+node.master: {% if (server_id|int) <= (num_masters|int) %}true{% else %}false{% endif %}
+
+node.data: true
+
+# ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data (separate multiple locations by comma):
+
+path.data: /{{data_dir}}/data
+
+# Path to log files:
+
+path.logs: /{{data_dir}}/logs
+
+path.work: /{{data_dir}}/tmp
+
+# ----------------------------------- Memory -----------------------------------
+#
+# Lock the memory on startup:
+
+bootstrap.mlockall: true
+
+indices.fielddata.cache.size: "55%"
+
+# Make sure that the `ES_HEAP_SIZE` environment variable is set to about half the memory
+# available on the system and that the owner of the process is allowed to use this limit.
+#
+# Elasticsearch performs poorly when the system is swapping the memory.
+#
+# ---------------------------------- Network -----------------------------------
+#
+# Set the bind address to a specific IP (IPv4 or IPv6):
+
+network.host: {{ansible_ssh_host}}
+
+http.port:                      9200
+http.enabled:                   true
+http.compression:               true
+http.max_content_length:        200mb
+network.tcp.keep_alive:         60s
+transport.tcp.compress:         true
+transport.tcp.connect_timeout:  60s
+
+# For more information, see the documentation at:
+# <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>
+
+# --------------------------------- Discovery ----------------------------------
+#
+# Pass an initial list of hosts to perform discovery when new node is started:
+# The default list of hosts is ["127.0.0.1", "[::1]"]
+
+discovery.zen.ping.unicast.hosts: [
+{%- for server in groups['New_Elasticsearch_Cluster'] %}
+"{{hostvars[server]['ansible_ssh_host']}}"{% if not loop.last %}, {% endif %}
+{% endfor %}
+]
+
+# Prevent the "split brain" by configuring the majority of nodes (total number of nodes / 2 + 1):
+
+discovery.zen.minimum_master_nodes:     {{ (num_masters|int // 2) + 1 }}
+
+discovery.zen.ping.timeout:             60s
+discovery.zen.ping.multicast.enabled:   false
+discovery.zen.fd.ping_interval:         1s
+discovery.zen.fd.ping_timeout:          60s
+discovery.zen.fd.ping_retries:          5
+
+# For more information, see the documentation at:
+# <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-discovery.html>
+
+# ---------------------------------- Gateway -----------------------------------
+#
+# Block initial recovery after a full cluster restart until N nodes are started:
+
+gateway.recover_after_nodes:  {{ (config.srv_count|int * 3) // 4 }}
+
+gateway.expected_nodes:       {{config.srv_count}}
+gateway.recover_after_time:   5m
+
+# For more information, see the documentation at:
+# <http://www.elastic.co/guide/en/elasticsearch/reference/current/modules-gateway.html>
+
+# ---------------------------------- Index -------------------------------------
+
+index.number_of_shards:    {{config.num_shards}}
+index.number_of_replicas:  {{num_replicas}}
+
+# ---------------------------------- Recovery ----------------------------------
+
+cluster.routing.allocation.node_initial_primaries_recoveries:   4
+cluster.routing.allocation.node_concurrent_recoveries:          2
+cluster.routing.allocation.cluster_concurrent_rebalance:        2
+cluster.routing.allocation.balance.threshold:                   1.5
+indices.recovery.max_bytes_per_sec:                             "40mb"
+indices.recovery.concurrent_streams:                            2
+
+# ---------------------------------- Various -----------------------------------
+#
+# Disable starting multiple nodes on a single system:
+#
+# node.max_local_storage_nodes: 1
+#
+# Require explicit names when deleting indices:
+
+action.destructive_requires_name: true
+action.disable_delete_all_indices:  true
+
+threadpool.bulk.queue_size:   50

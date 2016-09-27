@@ -1,0 +1,252 @@
+#!/bin/bash
+
+# /etc/init.d/
+# chkconfig: 345 99 01
+# description: Generic service wrapper
+
+# Replaces remaining Centos functions library with local functions. This will run on Centos and Ubuntu.
+
+MOVE_TO_COL="\\033[70G"
+SETCOLOR_SUCCESS="\\033[1;32m"
+SETCOLOR_FAILURE="\\033[1;31m"
+SETCOLOR_NORMAL="\\033[0;39m"
+
+BOOTUP='color'
+if [[ "${TERM}" != "xterm-color" ]]; then
+	MOVE_TO_COL=
+	BOOTUP='serial'
+	SETCOLOR_SUCCESS=
+	SETCOLOR_FAILURE=
+	SETCOLOR_NORMAL=
+fi
+
+# When the service is started at boot time it is run from /etc/rc.d/rc5.d/S99service, which is a link
+# to the real /etc/init.d/service file. Follow links to get the correct name so that the /etc/default/service
+# settings file can be correctly resolved.
+
+DAEMON_NAME="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
+
+if [ -f /etc/default/${DAEMON_NAME} ]; then
+    . /etc/default/${DAEMON_NAME}
+fi
+
+# DAEMON_ARGS is optional
+
+if [ -z "${DAEMON_PROG}" ]; then
+    echo "DAEMON_PROG not defined. This should be exported from /etc/default/${DAEMON_NAME}."
+    exit 1
+fi
+
+if [ -z "${DAEMON_PROCNAME}" ]; then
+    echo "DAEMON_PROCNAME not defined. This should be exported from /etc/default/${DAEMON_NAME}."
+    exit 1
+fi
+
+if [ -z "${DAEMON_LOGFILE}" ]; then
+    DAEMON_LOGFILE=/var/log/${DAEMON_NAME}.log
+fi
+
+if [ -z "${DAEMON_LOCK}" ]; then
+    DAEMON_LOCK=/var/lock/${DAEMON_NAME}/${DAEMON_NAME}
+fi
+
+# Time to wait after stop for process to terminate.
+
+WAIT_SECONDS=30
+WAIT_STEP_SECONDS=3
+
+PATH=$PATH:$(dirname "${DAEMON_PATH}")
+
+# =================================================================================================
+
+echo_success() {
+	echo -e "${MOVE_TO_COL}[${SETCOLOR_SUCCESS}  OK  ${SETCOLOR_NORMAL}]"
+	return
+}
+
+# =================================================================================================
+
+echo_failure() {
+	echo -e "${MOVE_TO_COL}[${SETCOLOR_FAILURE}FAILED${SETCOLOR_NORMAL}]"
+	return 1
+}
+
+# =================================================================================================
+
+start()
+{
+    PID=$(pgrep -d '' -f ${DAEMON_PROCNAME})
+    if [ ! -z "${PID}" ]; then
+        printf "${DAEMON_NAME} is already running ( PID: %-5s ).\n" ${PID}
+        return 0
+    fi
+    if [ ! -z "${DAEMON_SHELL}" ]; then
+        cd $(dirname ${DAEMON_PROG})
+        echo "Starting ${DAEMON_NAME} as shell script..."
+        mkdir -p $(dirname "${DAEMON_LOGFILE}")
+        setsid ${DAEMON_PROG} ${DAEMON_ARGS} >> ${DAEMON_LOGFILE} 2>&1 < /dev/null &
+    else
+        echo -n "Starting ${DAEMON_NAME}: "
+        ${DAEMON_PROG} ${DAEMON_ARGS}
+	fi
+	RETVAL=$?
+
+    if [[ ${RETVAL} == 0 ]]; then
+        touch ${DAEMON_LOCK}
+        if [ ! -z "${POST_STARTUP}" ]; then
+            echo "Running '$POST_STARTUP'..."
+            # Wait! The post-startup command probably assumes that the service is now running.
+            sleep 5
+            $POST_STARTUP
+        fi
+        echo_success
+    else
+        echo_failure
+    fi
+    return ${RETVAL}
+}
+
+# =================================================================================================
+
+stop()
+{
+    local FORCE=${1}
+
+    # Check if already stopped
+
+    PID=$(pgrep -d '' -f ${DAEMON_PROCNAME})
+
+    if [ -z "${PID}" ]; then
+        echo "${DAEMON_NAME} is already stopped."
+        return 0
+    fi
+
+    # Try and stop safely and wait for
+    # process to stop
+
+    if [ ! -z "${DAEMON_BEFORESTOP}" ]; then
+        echo "Sending ${DAEMON_BEFORESTOP} signal to ${PID} ..."
+        kill -s ${DAEMON_BEFORESTOP} ${PID}
+        sleep 5.0s
+    fi
+    RETVAL=0
+    echo -n "Stopping ${DAEMON_NAME}: "
+    if $(pkill -f ${DAEMON_PROCNAME})
+    then
+        echo_success
+        wait
+        if [[ -z "$(pgrep -d '' -f ${DAEMON_PROCNAME})" ]]; then
+            rm -f ${DAEMON_LOCK}
+        else
+            RETVAL=1
+        fi
+    else
+        RETVAL=1
+        echo_failure
+    fi
+
+    if [[ "${FORCE}" == true ]]; then
+        kill_service
+        wait
+        if [[ -z "$(pgrep -d '' -f ${DAEMON_PROCNAME})" ]]; then
+            rm -f ${DAEMON_LOCK}
+            RETVAL=0
+        else
+            RETVAL=1
+        fi
+    fi
+    return ${RETVAL}
+}
+
+# =================================================================================================
+
+status()
+{
+    PID=$(pgrep -d '' -f ${DAEMON_PROCNAME})
+    if [ ! -z "${PID}" ]; then
+        echo "${DAEMON_NAME} is running ( PID: ${PID})."
+        exit 0
+    else
+        echo "${DAEMON_NAME} is stopped."
+        exit 1
+    fi
+}
+
+# =================================================================================================
+# Some services take a while to stop. Wait for them.
+
+wait()
+{
+    if [[ -z "$(pgrep -d '' -f ${DAEMON_PROCNAME})" ]]; then
+        return
+    fi
+
+    echo -n "Waiting for '${DAEMON_PROCNAME}' to stop."
+    I=${WAIT_SECONDS}
+    while [[ ! -z "$(pgrep -d '' -f ${DAEMON_PROCNAME})" ]] && [[ ${I} -gt 0 ]]
+    do
+        I=$((I-WAIT_STEP_SECONDS))
+        echo -n "."
+        sleep ${WAIT_STEP_SECONDS}.0s
+    done
+
+    if [ ${I} == 0 ]; then
+        echo_failure
+    else
+        echo_success
+    fi
+}
+
+# =================================================================================================
+
+kill_service()
+{
+    if [[ ! -z "$(pgrep -d '' -f ${DAEMON_PROCNAME})" ]]; then
+        echo -n "Killing '${DAEMON_PROCNAME}'..."
+        if $(pkill -KILL -f ${DAEMON_PROCNAME}); then
+            rm -f ${DAEMON_LOCK}
+            echo_success
+        else
+            echo_failure
+        fi
+    fi
+}
+
+# =================================================================================================
+
+FORCE=false
+case "${2}" in
+    --force)
+        FORCE=true
+        ;;
+esac
+
+case "${1}" in
+
+    start)
+        start
+        exit
+        ;;
+    stop)
+        stop ${FORCE}
+        exit
+        ;;
+    restart)
+        if stop "${FORCE}"; then
+            start
+            exit
+        else
+            exit 1
+        fi
+        ;;
+    status)
+        status
+        exit
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status} [--force]"
+        exit 1
+
+esac
+
+exit 0

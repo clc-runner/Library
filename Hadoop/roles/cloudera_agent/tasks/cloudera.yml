@@ -1,0 +1,41 @@
+---
+
+ - name: Create CDH repo
+   get_url:
+     url: "{{cdh_repo}}"
+     dest: /etc/yum.repos.d/cdh.repo
+
+ - name: Create CDH repo directory
+   file:
+     dest: /data1/cloudera/parcel-repo
+     state: directory
+     owner: cloudera-scm
+
+ - name: Prevent unexpected version changes by locking to 5.8.0
+   ini_file:
+     dest: /etc/yum.repos.d/cdh.repo
+     section: cloudera-manager
+     option: baseurl
+     value: https://archive.cloudera.com/cm5/redhat/6/x86_64/cm/5.8.0/
+   changed_when: False
+
+ - name: Create cache directory
+   file:
+     dest: /{{cache_dir}}
+     state: directory
+
+ - name: Download JDBC connector
+   get_url:
+     url: "{{mysql_jdbc_link}}.tar.gz"
+     dest: /{{cache_dir}}/{{mysql_jdbc_file}}.tar.gz
+   register: download_result
+
+ - name: Untar JDBC connector
+   shell: tar zxvf /{{cache_dir}}/{{mysql_jdbc_file}}.tar.gz
+   args:
+     chdir: /{{cache_dir}}
+   when: download_result|changed
+
+ - name: Move JDBC connector to share dir
+   shell: mv /{{cache_dir}}/{{mysql_jdbc_file}}/*.jar /usr/share/java/mysql-connector-java.jar
+   when: download_result|changed

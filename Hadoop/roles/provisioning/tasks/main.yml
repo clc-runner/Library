@@ -1,0 +1,97 @@
+---
+
+# Expects a dict named 'config' with the following attributes:
+#
+# config:
+#   srv_count: 1
+#   hdd: 50
+#   mem: 2
+#   cpu: 1
+#
+# It also expects the following to be defined:
+#
+# tmp_group  (the group name to use in the following plays)
+# srv_name_prefix  (string, 1-5 characters)
+# use_hyperscale  (boolean, defaults to False)
+# use_aa  (boolean, defaults to use_hyperscale)
+# aa_policy  (string, only needed if use_aa is True)
+
+
+ - name: Environment check
+   set_fact:
+     is_runner: "{{ lookup('env', 'IS_ON_RUNNER') | default(True, true) | bool }}"
+
+ - name: Get group name (if not provided)
+   clc_group_fact:
+     group_id: "{{srv_group_id}}"
+   when: srv_group_id is defined
+   register: group_facts
+
+ - name: Set server group (if not provided)
+   set_fact:
+     srv_group: "{{group_facts.group.name}}"
+   when: srv_group_id is defined
+
+ - name: Create server group if needed
+   clc_group:
+     name: "{{srv_group}}"
+     location: "{{datacenter}}"
+     state: present
+     parent: 'Default Group'
+   when: srv_group_id is not defined
+
+ - name: Create AA Policy
+   clc_aa_policy:
+     name: "{{aa_policy}}"
+     location: "{{datacenter}}"
+     state: present
+   when: use_aa == true
+
+ - name: Create server(s)
+   clc_server:
+     location: "{{datacenter}}"
+     group: "{{srv_group}}"
+     name: "{{srv_name_prefix}}"
+     template: "{{srv_os}}"
+     count: "{{config.srv_count}}"
+     password: "{{srv_password}}"
+     additional_disks:
+      - { path: /data1, sizeGB: "{{config.hdd}}", type: partitioned }
+     memory: "{{config.mem}}"
+     cpu: "{{config.cores}}"
+     type: "{% if use_hyperscale == true %}hyperscale{% else %}standard{% endif %}"
+     storage_type: "{% if use_hyperscale == true %}hyperscale{% else %}standard{% endif %}"
+     network_id: "{% if network_name is defined %}{{network_name}}{% endif %}"
+     anti_affinity_policy_name: "{% if use_aa == true %}{{aa_policy}}{% endif %}"
+     wait: True
+   register: clc
+
+ - name: Wait for SSH to come up
+   wait_for:
+     host: "{{item.ipaddress}}"
+     port: 22
+     delay: 5
+     timeout: 320
+   with_items: clc.servers
+   when: is_runner | bool == False
+
+ - name: Pause to ensure SSH is available
+   pause: minutes=2
+   when: is_runner | bool
+
+ # Remove IPs for newly created servers from known hosts so that SSH does not refuse to connect to them
+
+ - name: Remove IPs from local known hosts
+   local_action: command ssh-keygen -f "~/.ssh/known_hosts" -R {{item.ipaddress}}
+   with_items: clc.servers
+   when: is_runner | bool == False
+
+ - name: Add server(s) to group
+   add_host:
+     name: "{{item.name}}"
+     ansible_ssh_host: "{{item.ipaddress}}"
+     ansible_ssh_user: "root"
+     ansible_ssh_pass: "{{srv_password}}"
+     groupname: "{{tmp_group}}" # Follow-up plays shouldn't affect existing VMs
+     server_id: "{% for h in clc.servers %}{% if item.name == h.name %}{{loop.index}}{% endif %}{% endfor %}"
+   with_items: clc.servers

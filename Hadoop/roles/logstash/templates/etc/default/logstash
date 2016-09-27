@@ -1,0 +1,5 @@
+
+export LS_HEAP_SIZE={{config.logstash_heapsize}}
+export LS_LOG_DIR={{log_dir}}
+export LS_LOG_FILE={{log_dir}}/logstash.log
+export LS_OPTS="-w {{ config.cores * 4 }} -b 125"

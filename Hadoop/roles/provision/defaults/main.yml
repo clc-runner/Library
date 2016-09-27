@@ -1,0 +1,11 @@
+---
+
+datacenter: 'CA3'
+network_name: '4f7bd805805c4f57951f096930d9bb94'
+
+srv_os: 'centos-6-64'
+srv_password: 'BadPass1!'
+srv_count: 1
+
+bare_metal_size: 'small'
+bare_metal_default_os_type: 'centOS6_64Bit'
