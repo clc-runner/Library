@@ -34,6 +34,7 @@ fields:
     displayName: Group Picker
     type: groups
     parent: datacenter
+    multiple: true
     required: false
 
  # Text Block Info
