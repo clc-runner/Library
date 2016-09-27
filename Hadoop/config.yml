@@ -5,7 +5,7 @@ imagePath: http://hadoop.apache.org/images/hadoop-logo.jpg
 version: 1.0.0
 updateDate: Aug 3, 2016
 public: true
-defaultPlaybook: ../hadoop_product.yml
+defaultPlaybook: hadoop_product.yml
 author: Analytics Team
 organization: CenturyLink
 organizationUrl: http://runner.ctl.io
