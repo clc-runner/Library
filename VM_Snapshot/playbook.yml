@@ -19,8 +19,10 @@
   gather_facts: false
   vars:
     expiration_days: 1
+    ignore_failures: "false"
 
   tasks:
+
     - name: Get group servers
       clc_group_fact:
         group_id: "{{server_group}}"
@@ -40,8 +42,10 @@
         server_ids: "{{server_group_list.group.servers}}"
         expiration_days: "{{slider_ttl}}"
         wait: True
+        ignore_failures: true
         state: present
       when: "{{ server_list_toggle }} == false"
+      register: failures_group
 
     - name: Remove server snapshot if present
       clc_server_snapshot:
@@ -56,5 +60,23 @@
         server_ids: "{{servers_multiple}}"
         expiration_days: "{{slider_ttl}}"
         wait: True
+        ignore_failures: true
         state: present
       when: "{{ server_list_toggle }}"
+      register: failures_servers
+
+    - name: Print Failed Servers if applicable
+      debug: msg="These servers failed to snapshot {{ failures_servers.failed_server_ids }}"
+      when: failures_servers.failed_server_ids is defined and ignore_failures == "true"
+
+    - name: Print Failed Servers if applicable
+      debug: msg="These servers failed to snapshot {{ failures_group.failed_server_ids }}"
+      when: failures_group.failed_server_ids is defined and ignore_failures == "true"
+
+    - name: Fail Execution if applicable
+      fail: msg="These servers failed to snapshot {{ failures_servers.failed_server_ids }}"
+      when: failure_servers.failed_server_ids is defined and ignore_failures == "false"
+
+    - name: Fail Execution if applicable
+      fail: msg="These servers failed to snapshot {{ failures_group.failed_server_ids }}"
+      when: failures_group.failed_server_ids is defined and ignore_failures == "false"

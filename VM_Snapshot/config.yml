@@ -2,8 +2,8 @@ name: VM Snapshot
 description: Create a snapshot of your VMs with ease.
 imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/snapshot.jpg
 shortDescription: Create a snapshot of your VMs.  Schedule them to automate it!
-version: 1.0.2
-updateDate: August 22, 2016
+version: 1.1.0
+updateDate: October 4, 2016
 public: true
 defaultPlaybook: playbook.yml
 author: Chris Kent
@@ -78,6 +78,18 @@ fields:
     min: 1
     max: 10
     default: 5
+
+  - name: ignore_failures
+    displayName: Ignore Failures?
+    type: toggle
+    default: false
+    required: false
+
+  - name: text_block_warning
+    type: textblock
+    level: warning
+    title: "Ignore Failures"
+    text: "Setting ignore failures to yes will allow your job to continue if one or more servers fails to snapshot. A list of failed servers will be printed at the end of your job regardless."
 
 
 tags:
