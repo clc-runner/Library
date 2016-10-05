@@ -1,5 +1,5 @@
 name: Super Cool Product Name
-description: This is the description of the super cool product
+description: This is the description of the super cool product [title](http://runner.ctl.io)
 shortDescription: This is the short description of the super cool product
 imagePath: https://i.imgur.com/x2KufBj.png
 version: 1.2.3
