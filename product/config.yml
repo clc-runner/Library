@@ -64,6 +64,7 @@ fields:
     helpText: Help Text for networks
     parent: datacenter
     required: true
+    detail: true
 
   # Groups field.
   - name: group
