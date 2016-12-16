@@ -64,6 +64,14 @@ fields:
     helpText: Help Text for networks
     parent: datacenter
     required: true
+    
+  # Networks field (with detail).
+  - name: networks_detail
+    displayName: Network Picker (detail)
+    type: networks
+    helpText: Help Text for networks
+    parent: datacenter
+    required: true
     detail: true
 
   # Groups field.
