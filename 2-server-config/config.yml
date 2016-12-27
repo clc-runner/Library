@@ -18,14 +18,14 @@ fields:
     type: servers
     parent: datacenter
     required: true
-    multiple: false
+    multiple: true
 
   - name: server_2
     displayName: Server 2
     type: servers
     parent: datacenter
     required: true
-    multiple: false
+    multiple: true
 
 tags:
   - example
