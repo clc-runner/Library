@@ -1,0 +1,34 @@
+name: 2 Server Config Test
+description: Testing dual server selection via config.yml
+shortDescription: Testing dual server selection via config.yml
+version: 1.2.3
+updateDate: Dec 27, 2016
+
+fields:
+
+  # Data Center field.
+  - name: datacenter
+    displayName: Datacenter
+    type: datacenters
+    helpText: Select data center.
+    required: true
+
+  - name: server_1
+    displayName: Server 1
+    type: servers
+    parent: datacenter
+    required: true
+    multiple: false
+    inventory: true
+
+  - name: server_2
+    displayName: Server 2
+    type: servers
+    parent: datacenter
+    required: true
+    multiple: false
+    inventory: true
+
+tags:
+  - example
+  - test
