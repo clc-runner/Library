@@ -19,7 +19,6 @@ fields:
     parent: datacenter
     required: true
     multiple: false
-    inventory: true
 
   - name: server_2
     displayName: Server 2
@@ -27,7 +26,6 @@ fields:
     parent: datacenter
     required: true
     multiple: false
-    inventory: true
 
 tags:
   - example
