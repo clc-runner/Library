@@ -27,7 +27,7 @@ fields:
     parent: datacenter
     required: true
     multiple: true
-    inventory: true
+    inventory: false
 
 tags:
   - example
