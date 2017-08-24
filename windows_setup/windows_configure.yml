@@ -3,15 +3,15 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: run the Winrm BP
-      clc_blueprint_package:
-        server_ids: "{{ server }}"
-        package_id: 5e824098-2366-48af-8e88-63512d17938f
-        package_params: {}
     - name: apply powershell upgrade
       clc_blueprint_package:
         server_ids: "{{ server }}"
         package_id: 37510ad0-cf2b-4f4b-a1bc-a0394f15e8cf
+        package_params: {}
+    - name: run the Winrm BP
+      clc_blueprint_package:
+        server_ids: "{{ server }}"
+        package_id: 5e824098-2366-48af-8e88-63512d17938f
         package_params: {}
     - name: apply hotfix
       clc_blueprint_package:
