@@ -67,16 +67,16 @@
 
     - name: Print Failed Servers if applicable
       debug: msg="These servers failed to snapshot {{ failures_servers.failed_server_ids }}"
-      when: failures_servers.failed_server_ids is defined and ignore_failures == "true"
+      when: failures_servers.failed_server_ids is defined and failures_servers.failed_server_ids|length > 0 and ignore_failures == "true"
 
     - name: Print Failed Servers if applicable
       debug: msg="These servers failed to snapshot {{ failures_group.failed_server_ids }}"
-      when: failures_group.failed_server_ids is defined and ignore_failures == "true"
+      when: failures_group.failed_server_ids is defined and failures_group.failed_server_ids|length > 0 and ignore_failures == "true"
 
     - name: Fail Execution if applicable
       fail: msg="These servers failed to snapshot {{ failures_servers.failed_server_ids }}"
-      when: failure_servers.failed_server_ids is defined and ignore_failures == "false"
+      when: failures_servers.failed_server_ids is defined and failures_servers.failed_server_ids|length > 0 and ignore_failures == "false"
 
     - name: Fail Execution if applicable
       fail: msg="These servers failed to snapshot {{ failures_group.failed_server_ids }}"
-      when: failures_group.failed_server_ids is defined and ignore_failures == "false"
+      when: failures_group.failed_server_ids is defined and failures_group.failed_server_ids|length > 0 and ignore_failures == "false"
