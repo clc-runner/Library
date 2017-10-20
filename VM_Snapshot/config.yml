@@ -2,11 +2,11 @@ name: VM Snapshot
 description: Create a snapshot of your VMs with ease.
 imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/snapshot.jpg
 shortDescription: Create a snapshot of your VMs.  Schedule them to automate it!
-version: 1.1.0
-updateDate: October 4, 2016
+version: 1.1.1
+updateDate: October 20, 2017
 public: true
 defaultPlaybook: playbook.yml
-author: Chris Kent
+author: Runner Team
 organization: CenturyLink
 organizationUrl: http://ctl.io/runner
 schedulable: true
