@@ -30,6 +30,7 @@
     - name: Provision RHEL5 Server
       clc_server:
         name: "{{server_name}}"
+        network_id: "{{networks}}"
         group: "{{server_group}}"
         template: "{{server_template}}"
         password: "{{pswd}}"
