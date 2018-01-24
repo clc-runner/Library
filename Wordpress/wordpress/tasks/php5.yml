@@ -1,7 +1,7 @@
 ---
 - name: Install the PHP5 Repository 
   apt_repository: 
-    repo: "ppa:ondrej/php5"
+    repo: "ppa:ondrej/php"
     state: present
  
 - name: Update the Repositories 
