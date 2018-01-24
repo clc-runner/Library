@@ -74,10 +74,11 @@ fields:
   # Server Password
   - name: pswd
     displayName: server password
-    type: password
+    type: passwordStrength
+    validationMsg: A password must be at least 9 characters and contain at least 3 of the following (uppercase letters, lowercase letters, numbers, symbols)
+    requiredStrength: 3
+    disallowedCharacters: "/"
     required: true
-    minLength: 1
-    maxLength: 35
 
 
   # CPU Count
