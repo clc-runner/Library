@@ -3,10 +3,10 @@ description: Most popular blogging software WordPress can be built in your Centu
 imagePath: https://raw.githubusercontent.com/clc-runner/Assets/master/wordpress-logo.png
 shortDescription: Install and Configure WordPress on a New Ubuntu Server
 version: 1.2.3
-updateDate: Jan 1, 2016
+updateDate: Jan 24, 2018
 public: true
 defaultPlaybook: playbook.yml
-author: Chris Kent
+author: Runner Team
 organization: CenturyLink
 organizationUrl: http://ctl.io/runner
 

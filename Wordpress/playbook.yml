@@ -34,6 +34,8 @@
         password: "{{pswd}}"
         count: "{{server_count}}"
         location: "{{datacenter_name}}"
+        group: "{{server_group}}"
+        network_id: "{{networks}}"
         cpu: "{{def_cpu}}" # Default -- not necessary
         memory: "{{def_mem}}" # Default -- not necessary
         #ttl: 3700
